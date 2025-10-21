@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="40bdc3e986c844b2980fc288452a2770" Name="Diagram1">
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Categoria" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Cliente" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Empleado" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Producto" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Usuario" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Venta" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.VentaDetalle" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="LabHamburgueseriaModel.FK_Producto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.FK_Venta_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.FK_VentaDetalle_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.FK_Venta_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.FK_VentaDetalle_Venta" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

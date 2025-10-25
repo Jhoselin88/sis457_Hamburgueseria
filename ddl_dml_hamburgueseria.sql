@@ -243,8 +243,8 @@ INSERT INTO Cliente (Documento, NombreCompleto, Correo, Telefono) VALUES
 ('20003', 'Carlos Gomez', 'carlos.gomez@example.com', '73456789');
 
 -- Usuario (clave ya encriptada o hash según tu lógica)
-INSERT INTO Usuario (usuario, clave)
-VALUES ('dioni', 'i0hcoO/nssY6WOs9pOp5Xw==');
+INSERT INTO Usuario (idEmpleado,usuario, clave)
+VALUES ('jairox', 'i0hcoO/nssY6WOs9pOp5Xw==');
 
 -- Productos (evité duplicar Código P001)
 INSERT INTO Producto (Codigo, Nombre, Descripcion, IdCategoria, Stock, PrecioVenta) VALUES

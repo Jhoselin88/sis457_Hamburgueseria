@@ -322,7 +322,6 @@
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
-            this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.pnMenu.ResumeLayout(false);
             this.pnContenedor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

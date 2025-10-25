@@ -8,27 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Drawing.Text;
 
 namespace CpHamburgueseria
 {
     public partial class FrmPrincipal : Form
     {
         private Form activeForm;
-        public FrmPrincipal()
+        private FrmAutenticacion frmAutenticacion;
+        public FrmPrincipal(FrmAutenticacion frmAutenticacion)
         {
             InitializeComponent();
-            paBarraTitulo.BackColor = Color.PapayaWhip;
+            this.frmAutenticacion = frmAutenticacion;
         }
 
-        private void FrmPrincipal_Load(object sender, EventArgs e)
+        public FrmPrincipal()
         {
-
         }
+
         [DllImport("user32.Dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.Dll", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
+
+        private void AbrirFormulario(Form formulario)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+            }
+            activeForm = formulario;
+            formulario.TopLevel = false;
+            formulario.FormBorderStyle = FormBorderStyle.None;
+            formulario.Dock = DockStyle.Fill;
+            this.pnContenedor.Controls.Add(formulario);
+            this.pnContenedor.Tag = formulario;
+            formulario.BringToFront();
+            formulario.Show();
+        }
 
         private void btnCerrar_Click(object sender, EventArgs e)
         {

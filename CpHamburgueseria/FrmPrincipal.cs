@@ -15,14 +15,18 @@ namespace CpHamburgueseria
     {
         private Form activeForm;
         private FrmAutenticacion frmAutenticacion;
-        public FrmPrincipal(FrmAutenticacion frmAutenticacion)
+        public FrmPrincipal (FrmAutenticacion frmAutenticacion)
         {
             InitializeComponent();
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += Timer_Tick;
             this.frmAutenticacion = frmAutenticacion;
         }
 
-        public FrmPrincipal()
+        private void Timer_Tick(object sender, EventArgs e)
         {
+            lblReloj.Text = DateTime.Now.ToString("hh:mm:ss tt");
         }
 
         [DllImport("user32.Dll", EntryPoint = "ReleaseCapture")]
@@ -77,7 +81,9 @@ namespace CpHamburgueseria
                 pnMenu.Width = 70;
             }
             else
+            {
                 pnMenu.Width = 236;
+            }
         }
 
         private void paBarraTitulo_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -102,6 +108,14 @@ namespace CpHamburgueseria
             {
                 ReleaseCapture();
                 SendMessage(this.Handle, 0x112, 0xf012, 0);
+            }
+        }
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+            {
+                activeForm.Close();
+                activeForm = null;
             }
         }
     }

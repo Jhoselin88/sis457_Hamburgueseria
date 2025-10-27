@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClnHamburgueseria;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ClnHamburgueseria;
 
 namespace CpHamburgueseria
 {
@@ -28,17 +28,58 @@ namespace CpHamburgueseria
             Application.Exit(); 
         }
 
+        private bool validar()
+        {
+            bool esValido = true;
+            erpUsuario.SetError(txtUsuario, "");
+            erpClave.SetError(txtClave, "");
+            if (string.IsNullOrEmpty(txtUsuario.Text))
+            {
+                erpUsuario.SetError(txtUsuario, "El usuario es obligatorio");
+                esValido = false;
+            }
+            if (string.IsNullOrEmpty(txtClave.Text))
+            {
+                erpClave.SetError(txtClave, "La contraseña es obligatoria");
+                esValido = false;
+            }
+            return esValido;
+        }
+
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            var usuario = UsuarioCln.validar(txtUsuario.Text, txtClave.Text);
-            if (usuario != null) 
+            if (validar())
             {
-                new FrmPrincipal(this).Show();
+                var usuario = UsuarioCln.validar(txtUsuario.Text, Util.Encrypt(txtClave.Text));
+                if (usuario != null)
+                {
+                    Util.usuario = usuario;
+                    txtClave.Clear();
+                    txtUsuario.Focus();
+                    txtUsuario.SelectAll();
+                    Hide();
+                    new FrmPrincipal(this).ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario y/o contraseña incorrecto", "::: Hamburgueseria - Mensaje :::",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+        }
+
+        private void pnAutenticacion_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Clicks == 1)
             {
-                MessageBox.Show("Usuario o clave incorrecta", "Error de autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ReleaseCapture();
+                SendMessage(this.Handle, 0x112, 0xf012, 0);
             }
+        }
+
+        private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) btnIngresar.PerformClick();
         }
     }
 }

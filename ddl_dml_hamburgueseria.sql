@@ -9,6 +9,8 @@ GO
 USE [LabHamburgueseria];
 GO
 
+drop database LabHamburgueseria;
+
 -- Crear login y usuario sólo si no existen
 IF NOT EXISTS (SELECT 1 FROM sys.server_principals WHERE name = N'usrhambu')
 BEGIN
@@ -243,8 +245,9 @@ INSERT INTO Cliente (Documento, NombreCompleto, Correo, Telefono) VALUES
 ('20003', 'Carlos Gomez', 'carlos.gomez@example.com', '73456789');
 
 -- Usuario (clave ya encriptada o hash según tu lógica)
-INSERT INTO Usuario (idEmpleado,usuario, clave)
-VALUES ('jairox', 'i0hcoO/nssY6WOs9pOp5Xw==');
+INSERT INTO Usuario (usuario, clave)
+VALUES ('jhoselin', 'S9I36R5QgtGwtxnpM0iiV8pkjX30McRyxpPOCEyDUQk=');
+select * from Usuario;
 
 -- Productos (evité duplicar Código P001)
 INSERT INTO Producto (Codigo, Nombre, Descripcion, IdCategoria, Stock, PrecioVenta) VALUES

@@ -246,7 +246,7 @@ INSERT INTO Cliente (Documento, NombreCompleto, Correo, Telefono) VALUES
 
 -- Usuario (clave ya encriptada o hash según tu lógica)
 INSERT INTO Usuario (usuario, clave)
-VALUES ('jhoselin', 'S9I36R5QgtGwtxnpM0iiV8pkjX30McRyxpPOCEyDUQk=');
+VALUES ('jairox', 'S9I36R5QgtGwtxnpM0iiV8pkjX30McRyxpPOCEyDUQk=');
 select * from Usuario;
 
 -- Productos (evité duplicar Código P001)

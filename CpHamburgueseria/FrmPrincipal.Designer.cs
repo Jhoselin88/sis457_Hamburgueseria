@@ -37,13 +37,11 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnReportePedidos = new System.Windows.Forms.Button();
-            this.btnPedidos = new System.Windows.Forms.Button();
+            this.btnDetalleVenta = new System.Windows.Forms.Button();
+            this.btnVentas = new System.Windows.Forms.Button();
             this.btnClientes = new System.Windows.Forms.Button();
             this.btnEmpleados = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
-            this.pnContenedor = new System.Windows.Forms.Panel();
-            this.lblReloj = new System.Windows.Forms.Label();
             this.paBarraTitulo = new System.Windows.Forms.Panel();
             this.btnDeslizar = new System.Windows.Forms.Button();
             this.btnMaximizar = new System.Windows.Forms.Button();
@@ -51,10 +49,12 @@
             this.btnMinimizar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pnContenedor = new System.Windows.Forms.Panel();
+            this.lblReloj = new System.Windows.Forms.Label();
             this.pnMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
-            this.pnContenedor.SuspendLayout();
             this.paBarraTitulo.SuspendLayout();
+            this.pnContenedor.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnMenu
@@ -66,8 +66,8 @@
             this.pnMenu.Controls.Add(this.panel8);
             this.pnMenu.Controls.Add(this.panel5);
             this.pnMenu.Controls.Add(this.panel1);
-            this.pnMenu.Controls.Add(this.btnReportePedidos);
-            this.pnMenu.Controls.Add(this.btnPedidos);
+            this.pnMenu.Controls.Add(this.btnDetalleVenta);
+            this.pnMenu.Controls.Add(this.btnVentas);
             this.pnMenu.Controls.Add(this.btnClientes);
             this.pnMenu.Controls.Add(this.btnEmpleados);
             this.pnMenu.Controls.Add(this.btnProductos);
@@ -129,39 +129,41 @@
             this.panel1.Size = new System.Drawing.Size(8, 40);
             this.panel1.TabIndex = 32;
             // 
-            // btnReportePedidos
+            // btnDetalleVenta
             // 
-            this.btnReportePedidos.FlatAppearance.BorderSize = 0;
-            this.btnReportePedidos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.btnReportePedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReportePedidos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReportePedidos.ForeColor = System.Drawing.Color.PapayaWhip;
-            this.btnReportePedidos.Image = ((System.Drawing.Image)(resources.GetObject("btnReportePedidos.Image")));
-            this.btnReportePedidos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReportePedidos.Location = new System.Drawing.Point(2, 301);
-            this.btnReportePedidos.Name = "btnReportePedidos";
-            this.btnReportePedidos.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnReportePedidos.Size = new System.Drawing.Size(250, 40);
-            this.btnReportePedidos.TabIndex = 31;
-            this.btnReportePedidos.Text = "   Detalle de Ventas";
-            this.btnReportePedidos.UseVisualStyleBackColor = true;
+            this.btnDetalleVenta.FlatAppearance.BorderSize = 0;
+            this.btnDetalleVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btnDetalleVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDetalleVenta.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDetalleVenta.ForeColor = System.Drawing.Color.PapayaWhip;
+            this.btnDetalleVenta.Image = ((System.Drawing.Image)(resources.GetObject("btnDetalleVenta.Image")));
+            this.btnDetalleVenta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDetalleVenta.Location = new System.Drawing.Point(2, 301);
+            this.btnDetalleVenta.Name = "btnDetalleVenta";
+            this.btnDetalleVenta.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnDetalleVenta.Size = new System.Drawing.Size(250, 40);
+            this.btnDetalleVenta.TabIndex = 31;
+            this.btnDetalleVenta.Text = "   Detalle de Ventas";
+            this.btnDetalleVenta.UseVisualStyleBackColor = true;
+            this.btnDetalleVenta.Click += new System.EventHandler(this.btnDetalleVenta_Click);
             // 
-            // btnPedidos
+            // btnVentas
             // 
-            this.btnPedidos.FlatAppearance.BorderSize = 0;
-            this.btnPedidos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.btnPedidos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPedidos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPedidos.ForeColor = System.Drawing.Color.PapayaWhip;
-            this.btnPedidos.Image = ((System.Drawing.Image)(resources.GetObject("btnPedidos.Image")));
-            this.btnPedidos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPedidos.Location = new System.Drawing.Point(2, 242);
-            this.btnPedidos.Name = "btnPedidos";
-            this.btnPedidos.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.btnPedidos.Size = new System.Drawing.Size(250, 40);
-            this.btnPedidos.TabIndex = 30;
-            this.btnPedidos.Text = "Ventas";
-            this.btnPedidos.UseVisualStyleBackColor = true;
+            this.btnVentas.FlatAppearance.BorderSize = 0;
+            this.btnVentas.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.btnVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVentas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVentas.ForeColor = System.Drawing.Color.PapayaWhip;
+            this.btnVentas.Image = ((System.Drawing.Image)(resources.GetObject("btnVentas.Image")));
+            this.btnVentas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVentas.Location = new System.Drawing.Point(2, 242);
+            this.btnVentas.Name = "btnVentas";
+            this.btnVentas.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
+            this.btnVentas.Size = new System.Drawing.Size(250, 40);
+            this.btnVentas.TabIndex = 30;
+            this.btnVentas.Text = "Ventas";
+            this.btnVentas.UseVisualStyleBackColor = true;
+            this.btnVentas.Click += new System.EventHandler(this.btnVentas_Click);
             // 
             // btnClientes
             // 
@@ -196,6 +198,7 @@
             this.btnEmpleados.TabIndex = 28;
             this.btnEmpleados.Text = "Empleados";
             this.btnEmpleados.UseVisualStyleBackColor = true;
+            this.btnEmpleados.Click += new System.EventHandler(this.btnEmpleados_Click);
             // 
             // btnProductos
             // 
@@ -213,30 +216,7 @@
             this.btnProductos.TabIndex = 27;
             this.btnProductos.Text = "Productos";
             this.btnProductos.UseVisualStyleBackColor = true;
-            // 
-            // pnContenedor
-            // 
-            this.pnContenedor.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pnContenedor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnContenedor.BackgroundImage")));
-            this.pnContenedor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnContenedor.Controls.Add(this.lblReloj);
-            this.pnContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnContenedor.Location = new System.Drawing.Point(236, 0);
-            this.pnContenedor.Name = "pnContenedor";
-            this.pnContenedor.Size = new System.Drawing.Size(1064, 650);
-            this.pnContenedor.TabIndex = 4;
-            // 
-            // lblReloj
-            // 
-            this.lblReloj.BackColor = System.Drawing.Color.Transparent;
-            this.lblReloj.Font = new System.Drawing.Font("Century Gothic", 50.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReloj.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.lblReloj.Location = new System.Drawing.Point(0, 38);
-            this.lblReloj.Name = "lblReloj";
-            this.lblReloj.Size = new System.Drawing.Size(314, 74);
-            this.lblReloj.TabIndex = 1;
-            this.lblReloj.Text = "xxxx";
-            this.lblReloj.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
             // paBarraTitulo
             // 
@@ -334,6 +314,30 @@
             // 
             this.timer1.Enabled = true;
             // 
+            // pnContenedor
+            // 
+            this.pnContenedor.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pnContenedor.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pnContenedor.BackgroundImage")));
+            this.pnContenedor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnContenedor.Controls.Add(this.lblReloj);
+            this.pnContenedor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnContenedor.Location = new System.Drawing.Point(236, 0);
+            this.pnContenedor.Name = "pnContenedor";
+            this.pnContenedor.Size = new System.Drawing.Size(1064, 650);
+            this.pnContenedor.TabIndex = 4;
+            // 
+            // lblReloj
+            // 
+            this.lblReloj.BackColor = System.Drawing.Color.Transparent;
+            this.lblReloj.Font = new System.Drawing.Font("Century Gothic", 50.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReloj.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblReloj.Location = new System.Drawing.Point(0, 38);
+            this.lblReloj.Name = "lblReloj";
+            this.lblReloj.Size = new System.Drawing.Size(314, 74);
+            this.lblReloj.TabIndex = 1;
+            this.lblReloj.Text = "xxxx";
+            this.lblReloj.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,8 +353,8 @@
             this.Text = "Principal";
             this.pnMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).EndInit();
-            this.pnContenedor.ResumeLayout(false);
             this.paBarraTitulo.ResumeLayout(false);
+            this.pnContenedor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -365,8 +369,8 @@
         private System.Windows.Forms.Button btnRestaurar;
         private System.Windows.Forms.Button btnMinimizar;
         private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.Button btnReportePedidos;
-        private System.Windows.Forms.Button btnPedidos;
+        private System.Windows.Forms.Button btnDetalleVenta;
+        private System.Windows.Forms.Button btnVentas;
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Button btnEmpleados;
         private System.Windows.Forms.Button btnProductos;

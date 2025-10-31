@@ -118,5 +118,29 @@ namespace CpHamburgueseria
                 activeForm = null;
             }
         }
+
+        private void btnProductos_Click(object sender, EventArgs e)
+        {
+            paBarraTitulo.BackColor = Color.Maroon;
+            AbrirFormulario(new FrmProductos());
+        }
+
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            paBarraTitulo.BackColor = Color.Maroon;
+            AbrirFormulario(new FrmVentas());
+        }
+
+        private void btnDetalleVenta_Click(object sender, EventArgs e)
+        {
+            paBarraTitulo.BackColor= Color.Maroon;
+            AbrirFormulario(new FrmVentaDetalle());
+        }
+
+        private void btnEmpleados_Click(object sender, EventArgs e)
+        {
+            paBarraTitulo.BackColor = Color.Maroon;
+            AbrirFormulario(new FrmEmpleado());
+        }
     }
 }

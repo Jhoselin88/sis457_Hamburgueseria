@@ -13,34 +13,25 @@ namespace CadHamburgueseria
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class VentaDetalle
+public partial class paClienteListar_Result
 {
 
-    public int IdDetalleVenta { get; set; }
+    public int id { get; set; }
 
-    public int IdVenta { get; set; }
+    public string documento { get; set; }
 
-    public int IdProducto { get; set; }
+    public string nombreCompleto { get; set; }
 
-    public decimal PrecioVenta { get; set; }
+    public string correo { get; set; }
 
-    public decimal Cantidad { get; set; }
-
-    public decimal SubTotal { get; set; }
+    public string telefono { get; set; }
 
     public string UsuarioRegistro { get; set; }
 
     public System.DateTime fechaRegistro { get; set; }
 
     public short estado { get; set; }
-
-
-
-    public virtual Producto Producto { get; set; }
-
-    public virtual Venta Venta { get; set; }
 
 }
 

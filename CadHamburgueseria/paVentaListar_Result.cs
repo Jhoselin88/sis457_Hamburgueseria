@@ -13,19 +13,9 @@ namespace CadHamburgueseria
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Venta
+public partial class paVentaListar_Result
 {
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Venta()
-    {
-
-        this.VentaDetalle = new HashSet<VentaDetalle>();
-
-    }
-
 
     public int IdVenta { get; set; }
 
@@ -45,21 +35,9 @@ public partial class Venta
 
     public decimal MontoTotal { get; set; }
 
-    public string UsuarioRegistro { get; set; }
-
     public System.DateTime fechaRegistro { get; set; }
 
     public short estado { get; set; }
-
-
-
-    public virtual Empleado Empleado { get; set; }
-
-    public virtual Usuario Usuario { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<VentaDetalle> VentaDetalle { get; set; }
 
 }
 

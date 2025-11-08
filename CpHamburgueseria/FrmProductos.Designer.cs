@@ -447,6 +447,7 @@
             this.Name = "FrmProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Productos";
+            this.Load += new System.EventHandler(this.FrmProductos_Load);
             this.pnlAgregar.ResumeLayout(false);
             this.pnlAgregar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecioVenta)).EndInit();

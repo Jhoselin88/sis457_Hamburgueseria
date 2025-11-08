@@ -13,22 +13,27 @@ namespace CadHamburgueseria
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class Cliente
+public partial class paEmpleadoListar_Result
 {
 
-    public int id { get; set; }
+    public int idEmpleado { get; set; }
 
-    public string documento { get; set; }
+    public string cedulaIdentidad { get; set; }
 
-    public string nombreCompleto { get; set; }
+    public string nombres { get; set; }
 
-    public string correo { get; set; }
+    public string primerApellido { get; set; }
 
-    public string telefono { get; set; }
+    public string segundoApellido { get; set; }
 
-    public string UsuarioRegistro { get; set; }
+    public string direccion { get; set; }
+
+    public long celular { get; set; }
+
+    public string cargo { get; set; }
+
+    public string usuarioRegistro { get; set; }
 
     public System.DateTime fechaRegistro { get; set; }
 

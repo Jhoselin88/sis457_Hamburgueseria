@@ -4,19 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="40bdc3e986c844b2980fc288452a2770" Name="Diagram1">
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.Categoria" Width="1.5" PointX="0.75" PointY="9.875" />
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.Cliente" Width="1.5" PointX="2.75" PointY="5.75" />
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.Empleado" Width="1.5" PointX="0.75" PointY="1.25" />
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.Producto" Width="1.5" PointX="3" PointY="9.25" />
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.Usuario" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.Venta" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="LabHamburgueseriaModel.VentaDetalle" Width="1.5" PointX="5.25" PointY="1.375" />
-        <AssociationConnector Association="LabHamburgueseriaModel.FK_Producto_Categoria" />
-        <AssociationConnector Association="LabHamburgueseriaModel.FK_Venta_Empleado" />
-        <AssociationConnector Association="LabHamburgueseriaModel.FK_VentaDetalle_Producto" />
-        <AssociationConnector Association="LabHamburgueseriaModel.FK_Venta_Usuario" />
-        <AssociationConnector Association="LabHamburgueseriaModel.FK_VentaDetalle_Venta" />
+      <Diagram DiagramId="532078cd6bfa48e2b238ef598f78f80b" Name="Diagram1">
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Categoria" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Cliente" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.DetalleVentas" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Empleado" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Producto" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Usuario" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabHamburgueseriaModel.Ventas" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="LabHamburgueseriaModel.FK_Producto_Categoria" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.fk_Venta_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.fk_DetalleVenta_Producto" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.fk_DetalleVenta_Venta" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.fk_Usuario_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="LabHamburgueseriaModel.fk_Venta_Usuario" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

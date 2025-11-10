@@ -1,298 +1,242 @@
-﻿-- Usar LabHamburgueseria como la base de datos principal.
--- Si prefieres LabBenditaBurger, cambia el nombre en CREATE DATABASE y en USE.
-IF DB_ID('LabHamburgueseria') IS NULL
-BEGIN
-    CREATE DATABASE LabHamburgueseria;
-END
+﻿CREATE DATABASE LabHamburgueseria;
+GO
+
+USE [master];
+GO
+drop login usrhambu;
+drop user usrhambu;
+CREATE LOGIN [usrhambu] WITH PASSWORD = N'123456',
+    DEFAULT_DATABASE = [LabHamburgueseria],
+    CHECK_EXPIRATION = OFF,
+    CHECK_POLICY = ON;
 GO
 
 USE [LabHamburgueseria];
 GO
 
-drop database LabHamburgueseria;
+drop login usrhambu;
 
--- Crear login y usuario sólo si no existen
-IF NOT EXISTS (SELECT 1 FROM sys.server_principals WHERE name = N'usrhambu')
-BEGIN
-    CREATE LOGIN [usrhambu] WITH PASSWORD = N'123456',
-        DEFAULT_DATABASE = [LabHamburgueseria],
-        CHECK_EXPIRATION = OFF,
-        CHECK_POLICY = ON;
-END
+CREATE USER [usrhambu] FOR LOGIN [usrhambu];
+GO
+ALTER ROLE [db_owner] ADD MEMBER [usrhambu];
 GO
 
-IF NOT EXISTS (SELECT 1 FROM sys.database_principals WHERE name = N'usrhambu')
-BEGIN
-    CREATE USER [usrhambu] FOR LOGIN [usrhambu];
-    ALTER ROLE [db_owner] ADD MEMBER [usrhambu];
-END
-GO
 
--- Eliminar tablas en orden correcto (dependencias FK)
-DROP TABLE IF EXISTS VentaDetalle;
-DROP TABLE IF EXISTS Venta;
-DROP TABLE IF EXISTS Producto;
-DROP TABLE IF EXISTS Categoria;
+-- ============================
+-- ELIMINAR OBJETOS EXISTENTES
+-- ============================
+DROP TABLE IF EXISTS DetalleVentas;
+DROP TABLE IF EXISTS Ventas;
 DROP TABLE IF EXISTS Usuario;
 DROP TABLE IF EXISTS Empleado;
 DROP TABLE IF EXISTS Cliente;
+DROP TABLE IF EXISTS Producto;
+DROP TABLE IF EXISTS Categoria;
+DROP PROC IF EXISTS paVentaListar;
+DROP PROC IF EXISTS paClienteListar;
+DROP PROC IF EXISTS paProductoListar;
+DROP PROC IF EXISTS paEmpleadoListar;
 GO
 
--- Crear tablas
+-- ============================
+-- TABLAS PRINCIPALES
+-- ============================
+
+CREATE TABLE Categoria (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(50) NOT NULL UNIQUE,
+    estado SMALLINT NOT NULL DEFAULT 1
+);
+
+CREATE TABLE Producto (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    idCategoria INT NOT NULL,
+    codigo VARCHAR(20) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion VARCHAR(250),
+    saldo DECIMAL NOT NULL DEFAULT 0,
+    precioVenta DECIMAL NOT NULL CHECK (precioVenta > 0),
+    usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME(),
+    fechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    estado SMALLINT NOT NULL DEFAULT 1,
+    CONSTRAINT FK_Producto_Categoria FOREIGN KEY (idCategoria) REFERENCES Categoria(id)
+);
+
 CREATE TABLE Cliente (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    documento VARCHAR(20) NOT NULL,
-    nombreCompleto VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NULL,
-    telefono VARCHAR(15) NULL
+    id INT PRIMARY KEY IDENTITY(1,1),
+    cedulaIdentidad VARCHAR(12) NOT NULL,
+    nombres VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME(),
+    fechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    estado SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE Empleado (
-    idEmpleado INT IDENTITY(1,1) PRIMARY KEY,
+    id INT PRIMARY KEY IDENTITY(1,1),
     cedulaIdentidad VARCHAR(12) NOT NULL,
     nombres VARCHAR(30) NOT NULL,
     primerApellido VARCHAR(30) NULL,
     segundoApellido VARCHAR(30) NULL,
     direccion VARCHAR(250) NOT NULL,
     celular BIGINT NOT NULL,
-    cargo VARCHAR(50) NOT NULL
+    cargo VARCHAR(50) NOT NULL,  
+    usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME(),
+    fechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    estado SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE Usuario (
-    IdUsuario INT IDENTITY(1,1) PRIMARY KEY,
-    usuario VARCHAR(50) NOT NULL,
-    clave VARCHAR(250) NOT NULL
+    id INT PRIMARY KEY IDENTITY(1,1),
+    idEmpleado INT NOT NULL, 
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    clave VARCHAR(255) NOT NULL,
+    usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME(),
+    fechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    estado SMALLINT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_Usuario_Empleado FOREIGN KEY(idEmpleado) REFERENCES Empleado(id)
 );
 
-CREATE TABLE Categoria (
-    IdCategoria INT IDENTITY(1,1) PRIMARY KEY,
-    descripcion VARCHAR(100) NOT NULL
+-- ============================
+-- TABLAS DE VENTAS
+-- ============================
+
+CREATE TABLE Ventas (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    idUsuario INT NOT NULL,
+    idCliente INT NOT NULL,
+    numeroTransaccion AS ('VEN-' + CAST(id AS VARCHAR(10))),
+    usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME(),
+    fechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    estado SMALLINT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_Venta_Usuario FOREIGN KEY(idUsuario) REFERENCES Usuario(id),
+    CONSTRAINT fk_Venta_Cliente FOREIGN KEY(idCliente) REFERENCES Cliente(id)
 );
 
-CREATE TABLE Producto (
-    IdProducto INT IDENTITY(1,1) PRIMARY KEY,
-    Codigo VARCHAR(20) NOT NULL,
-    Nombre VARCHAR(100) NOT NULL,
-    Descripcion VARCHAR(250) NULL,
-    IdCategoria INT NOT NULL,
-    Stock DECIMAL(10,2) NOT NULL DEFAULT 0,
-    PrecioVenta DECIMAL(10,2) NOT NULL CHECK (PrecioVenta > 0),
-    CONSTRAINT FK_Producto_Categoria FOREIGN KEY (IdCategoria) REFERENCES Categoria(IdCategoria),
-    CONSTRAINT UQ_Producto_Codigo UNIQUE (Codigo)
+CREATE TABLE DetalleVentas (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    idVenta INT NOT NULL,
+    idProducto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precioUnitario DECIMAL NOT NULL,
+    total AS (cantidad * precioUnitario) PERSISTED,
+    usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_NAME(),
+    fechaRegistro DATETIME NOT NULL DEFAULT GETDATE(),
+    estado SMALLINT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_DetalleVenta_Venta FOREIGN KEY(idVenta) REFERENCES Ventas(id),
+    CONSTRAINT fk_DetalleVenta_Producto FOREIGN KEY(idProducto) REFERENCES Producto(id)
 );
-
--- Tabla Venta: agregué IdEmpleado por si quieres rastrear qué empleado atendió.
-CREATE TABLE Venta (
-    IdVenta INT IDENTITY(1,1) PRIMARY KEY,
-    IdUsuario INT NOT NULL,
-    IdEmpleado INT NULL, -- NULL si no aplica
-    TipoDocumento VARCHAR(20) NOT NULL,
-    DocumentoCliente VARCHAR(20) NOT NULL,
-    NombreCliente VARCHAR(100) NOT NULL,
-    MontoPago DECIMAL(18,2) NOT NULL CHECK (MontoPago >= 0),
-    MontoCambio DECIMAL(18,2) NOT NULL CHECK (MontoCambio >= 0),
-    MontoTotal DECIMAL(18,2) NOT NULL CHECK (MontoTotal > 0),
-    CONSTRAINT FK_Venta_Usuario FOREIGN KEY (IdUsuario) REFERENCES Usuario(IdUsuario),
-    CONSTRAINT FK_Venta_Empleado FOREIGN KEY (IdEmpleado) REFERENCES Empleado(idEmpleado)
-);
-
-CREATE TABLE VentaDetalle (
-    IdDetalleVenta INT IDENTITY(1,1) PRIMARY KEY,
-    IdVenta INT NOT NULL,
-    IdProducto INT NOT NULL,
-    PrecioVenta DECIMAL(18,2) NOT NULL CHECK (PrecioVenta > 0),
-    Cantidad DECIMAL(10,2) NOT NULL CHECK (Cantidad > 0),
-    SubTotal DECIMAL(18,2) NOT NULL CHECK (SubTotal > 0),
-    CONSTRAINT FK_VentaDetalle_Venta FOREIGN KEY (IdVenta) REFERENCES Venta(IdVenta),
-    CONSTRAINT FK_VentaDetalle_Producto FOREIGN KEY (IdProducto) REFERENCES Producto(IdProducto)
-);
-
--- Campos de auditoría y estado (valores por defecto)
-ALTER TABLE Cliente ADD UsuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE Cliente ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE Cliente ADD estado SMALLINT NOT NULL DEFAULT 1;
-
-ALTER TABLE Usuario ADD UsuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE Usuario ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE Usuario ADD estado SMALLINT NOT NULL DEFAULT 1;
-
-ALTER TABLE Empleado ADD usuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE Empleado ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE Empleado ADD estado SMALLINT NOT NULL DEFAULT 1;
-
-ALTER TABLE Categoria ADD UsuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE Categoria ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE Categoria ADD estado SMALLINT NOT NULL DEFAULT 1;
-
-ALTER TABLE Producto ADD UsuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE Producto ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE Producto ADD estado SMALLINT NOT NULL DEFAULT 1;
-
-ALTER TABLE Venta ADD UsuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE Venta ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE Venta ADD estado SMALLINT NOT NULL DEFAULT 1;
-
-ALTER TABLE VentaDetalle ADD UsuarioRegistro VARCHAR(50) NOT NULL DEFAULT SUSER_SNAME();
-ALTER TABLE VentaDetalle ADD fechaRegistro DATETIME NOT NULL DEFAULT GETDATE();
-ALTER TABLE VentaDetalle ADD estado SMALLINT NOT NULL DEFAULT 1;
 GO
 
--- PROCEDIMIENTOS
+-- ============================
+-- PROCEDIMIENTOS ALMACENADOS
+-- ============================
 
--- paCategoriaListar
-CREATE OR ALTER PROC paCategoriaListar @parametro VARCHAR(100)
+CREATE PROC paVentaListar @parametro VARCHAR(100)
 AS
-BEGIN
-    SET NOCOUNT ON;
-    SELECT * 
-    FROM Categoria
-    WHERE estado <> -1 
-      AND descripcion LIKE '%' + REPLACE(@parametro, ' ', '%') + '%';
-END
+  SELECT v.id, v.numeroTransaccion, 
+         c.nombres + ' ' + c.apellidos AS Cliente, 
+         u.usuario AS Usuario, 
+         v.fechaRegistro, v.estado
+  FROM Ventas v
+  INNER JOIN Cliente c ON c.id = v.idCliente
+  INNER JOIN Usuario u ON u.id = v.idUsuario
+  WHERE v.estado<>-1 
+    AND (c.nombres + c.apellidos + u.usuario + v.numeroTransaccion) LIKE '%'+REPLACE(@parametro,' ','%')+'%'
+  ORDER BY v.fechaRegistro DESC;
 GO
 
--- paProductoListar (soporta búsqueda por Código exacto o por Nombre)
-CREATE OR ALTER PROCEDURE paProductoListar
-    @parametro NVARCHAR(100)
+CREATE PROC paClienteListar @parametro VARCHAR(100)
 AS
-BEGIN
-    SET NOCOUNT ON;
-
-    IF EXISTS (
-        SELECT 1 
-        FROM Producto
-        WHERE estado != -1 AND Codigo = @parametro
-    )
-    BEGIN
-        SELECT * 
-        FROM Producto
-        WHERE estado != -1 AND Codigo = @parametro;
-    END
-    ELSE
-    BEGIN
-        SELECT * 
-        FROM Producto
-        WHERE estado != -1 AND Nombre LIKE '%' + @parametro + '%';
-    END
-END
+  SELECT c.id, c.cedulaIdentidad, c.nombres, c.apellidos, 
+         c.usuarioRegistro, c.fechaRegistro, c.estado
+  FROM Cliente c
+  WHERE c.estado<>-1 
+    AND (c.cedulaIdentidad + c.nombres + c.apellidos) LIKE '%' + REPLACE(@parametro, ' ', '%') + '%'
+  ORDER BY c.nombres, c.apellidos;
 GO
 
--- paClienteListar
-CREATE OR ALTER PROC paClienteListar
-    @parametro VARCHAR(100)
+CREATE PROC paProductoListar @parametro VARCHAR(100)
 AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT * 
-    FROM Cliente
-    WHERE estado <> -1 
-      AND (documento LIKE '%' + REPLACE(@parametro, ' ', '%') + '%' 
-           OR nombreCompleto LIKE '%' + REPLACE(@parametro, ' ', '%') + '%');
-END
+  SELECT p.id, p.codigo,p.nombre, p.descripcion, ca.nombre AS Categoria, 
+         p.saldo, p.precioVenta, p.usuarioRegistro, p.fechaRegistro, 
+         p.estado, p.idCategoria
+  FROM Producto p
+  INNER JOIN Categoria ca ON ca.id = p.idCategoria
+  WHERE p.estado<>-1 
+    AND (p.nombre+p.codigo+p.descripcion+ca.nombre) LIKE '%'+REPLACE(@parametro,' ','%')+'%'
+  ORDER BY p.estado DESC, p.nombre ASC;
 GO
 
--- paEmpleadoListar
-CREATE OR ALTER PROC paEmpleadoListar
-    @parametro VARCHAR(100)
+CREATE PROC paEmpleadoListar @parametro VARCHAR(50)
 AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT *
-    FROM Empleado
-    WHERE cedulaIdentidad LIKE '%' + REPLACE(@parametro, ' ', '%') + '%'
-       OR nombres LIKE '%' + REPLACE(@parametro, ' ', '%') + '%'
-       OR primerApellido LIKE '%' + REPLACE(@parametro, ' ', '%') + '%'
-       OR segundoApellido LIKE '%' + REPLACE(@parametro, ' ', '%') + '%';
-END
+  SELECT e.id, e.cedulaIdentidad, e.nombres, ISNULL(e.primerApellido,'') AS primerApellido, 
+		 ISNULL(e.segundoApellido, '') AS segundoApellido, e.direccion, e.celular, e.cargo,
+		 ISNULL(e.usuarioRegistro, '') AS usuarioRegistro, ISNULL(e.fechaRegistro,GETDATE()) AS fechaRegistro, 
+		 ISNULL(u.id,0) as idUsuario, ISNULL(u.usuario, '') as usuario,
+         e.estado
+  FROM Empleado e
+  LEFT JOIN Usuario u ON e.id = u.idEmpleado
+  WHERE e.estado<>-1 
+		AND (e.cedulaIdentidad+e.nombres+e.primerApellido+e.segundoApellido) LIKE '%'+REPLACE(@parametro, ' ', '%')+'%'
+  ORDER BY e.nombres,e.primerApellido;
 GO
 
--- paVentaListar: ya no referencia IdEmpleado si es NULL; mostramos IdEmpleado si existe.
-CREATE OR ALTER PROC paVentaListar
-    @parametro NVARCHAR(100)
-AS
-BEGIN
-    SET NOCOUNT ON;
+-- ============================
+-- DATOS DE PRUEBA
+-- ============================
 
-    SELECT v.IdVenta, v.IdUsuario, v.IdEmpleado, v.TipoDocumento, v.DocumentoCliente, 
-           v.NombreCliente, v.MontoPago, v.MontoCambio, v.MontoTotal, 
-           v.fechaRegistro, v.estado
-    FROM Venta v
-    WHERE v.estado != -1
-      AND (v.DocumentoCliente LIKE '%' + @parametro + '%'
-           OR v.NombreCliente LIKE '%' + @parametro + '%'
-           OR v.TipoDocumento LIKE '%' + @parametro + '%');
-END
-GO
+-- Categorías
+INSERT INTO Categoria(nombre) VALUES ('Hamburguesas');
+INSERT INTO Categoria(nombre) VALUES ('Bebidas');
+INSERT INTO Categoria(nombre) VALUES ('Acompañamientos');
+INSERT INTO Categoria(nombre) VALUES ('Postres');
 
--- Datos de prueba
-INSERT INTO Categoria (Descripcion) VALUES
-('Bebidas'),
-('Hamburguesas'),
-('Postres'),
-('Snacks');
+select * from Categoria;
+
+-- Productos
+INSERT INTO Producto(idCategoria,codigo,nombre,descripcion,saldo,precioVenta)
+VALUES (1,'HB-CL', 'Hamburguesa Clásica', 'Carne, queso, tomate, lechuga y salsa especial', 30, 18);
+
+INSERT INTO Producto(idCategoria,codigo,nombre,descripcion,saldo,precioVenta)
+VALUES (1,'HB-DLX', 'Hamburguesa Deluxe', 'Doble carne con queso cheddar, tocino y cebolla caramelizada', 20, 25);
+
+INSERT INTO Producto(idCategoria,codigo,nombre,descripcion,saldo,precioVenta)
+VALUES (2,'BB-CO', 'Bebida Cola', 'Bebida gaseosa 500ml', 50, 5);
+
+INSERT INTO Producto(idCategoria,codigo,nombre,descripcion,saldo,precioVenta)
+VALUES (3,'AC-PF', 'Papas Fritas', 'Porción mediana de papas fritas', 40, 8);
+
+INSERT INTO Producto(idCategoria,codigo,nombre,descripcion,saldo,precioVenta)
+VALUES (4,'PS-CH', 'Cheesecake', 'Porción de cheesecake casero', 15, 10);
+
+select * from Producto;
 
 -- Empleados
-INSERT INTO Empleado (cedulaIdentidad, nombres, primerApellido, segundoApellido, direccion, celular, cargo) VALUES
-('1234567890', 'Pedro', 'Gómez', 'Martínez', 'Calle del Sabor 10, Ciudad', 9876543210, 'Cocinero'),
-('0987654321', 'Lucía', 'Fernández', 'Pérez', 'Avenida del Hambre 20, Ciudad', 9123456789, 'Atención al Cliente');
+INSERT INTO Empleado(cedulaIdentidad, nombres, primerApellido, segundoApellido, direccion, celular, cargo)
+VALUES ('1234567', 'Lucas', 'Rojas', 'Fernández', 'Av. Principal 123', 71717171, 'Cajero');
 
 -- Clientes
-INSERT INTO Cliente (Documento, NombreCompleto, Correo, Telefono) VALUES
-('20001', 'Juan Perez', 'juan.perez@example.com', '71234567'),
-('20002', 'Maria Lopez', 'maria.lopez@example.com', '72345678'),
-('20003', 'Carlos Gomez', 'carlos.gomez@example.com', '73456789');
+INSERT INTO Cliente(cedulaIdentidad,nombres,apellidos)
+VALUES ('765421', 'Andrea', 'López');
 
--- Usuario (clave ya encriptada o hash según tu lógica)
-INSERT INTO Usuario (usuario, clave)
-VALUES ('jairox', 'S9I36R5QgtGwtxnpM0iiV8pkjX30McRyxpPOCEyDUQk=');
+-- Usuarios
+INSERT INTO Usuario(idEmpleado,usuario,clave)
+VALUES (1, 'jairox', 'I0HCOO/NSSY6WOS9POP5XW==');
+
 select * from Usuario;
+-- Venta de ejemplo
+INSERT INTO Ventas (idUsuario, idCliente)
+VALUES (1, 1);
 
--- Productos (evité duplicar Código P001)
-INSERT INTO Producto (Codigo, Nombre, Descripcion, IdCategoria, Stock, PrecioVenta) VALUES
-('P001', 'Coca-Cola 500ml', 'Bebida gaseosa', 1, 50, 7.50),
-('P002', 'Hamburguesa Clásica', 'Hamburguesa con queso y vegetales', 2, 30, 25.00),
-('P003', 'Brownie de Chocolate', 'Postre de chocolate', 3, 20, 12.00),
-('P004', 'Papas Fritas', 'Papas fritas crocantes', 4, 40, 5.00),
-('P005', 'Hamburguesa Simple', 'Hamburguesa de res con pan', 2, 50, 5.50);
-
--- Venta ejemplo (IdUsuario = 1 existe)
-INSERT INTO Venta (IdUsuario, IdEmpleado, TipoDocumento, DocumentoCliente, NombreCliente, MontoPago, MontoCambio, MontoTotal)
-VALUES (1, 1, 'Boleta', '101010', 'Juan Perez', 100.00, 10.00, 90.00);
-GO
-
--- Consultas de verificación
+-- ============================
+-- CONSULTAS DE PRUEBA
+-- ============================
 SELECT * FROM Categoria;
-SELECT * FROM Cliente;
-SELECT * FROM Empleado;
-SELECT * FROM Usuario;
 SELECT * FROM Producto;
-SELECT * FROM Venta;
-SELECT * FROM VentaDetalle;
+SELECT * FROM Empleado;
+SELECT * FROM Cliente;
+SELECT * FROM Usuario;
+SELECT * FROM Ventas;
 
--- Procedimientos de prueba
-EXEC paCategoriaListar 'Bebidas';
-EXEC paVentaListar 'juan';
-EXEC paProductoListar 'P002';
-GO
-
--- Vista ejemplo
-CREATE OR ALTER VIEW VistaEmpleado AS
-SELECT idEmpleado, nombres, cedulaIdentidad FROM Empleado;
-GO
-
--- Chequeos: filas huérfanas en VentaDetalle
-SELECT * 
-FROM VentaDetalle vd
-LEFT JOIN Venta v ON vd.IdVenta = v.IdVenta
-WHERE v.IdVenta IS NULL;
-
-SELECT * 
-FROM VentaDetalle vd
-LEFT JOIN Producto p ON vd.IdProducto = p.IdProducto
-WHERE p.IdProducto IS NULL;
-
--- Buscar producto por código
-SELECT * FROM Producto WHERE Codigo = 'P001';
-GO
+EXEC paProductoListar '';

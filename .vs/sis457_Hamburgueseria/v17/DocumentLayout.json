@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\cphamburgueseria\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\cphamburgueseria\\frmproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|solutionrelative:cphamburgueseria\\frmproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\cphamburgueseria\\frmproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|solutionrelative:cphamburgueseria\\frmproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\cphamburgueseria\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|solutionrelative:cphamburgueseria\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C31F7716-963D-4ADE-8A9A-BDC498198A67}|ClnHamburgueseria\\ClnHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\clnhamburgueseria\\productocln.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C31F7716-963D-4ADE-8A9A-BDC498198A67}|ClnHamburgueseria\\ClnHamburgueseria.csproj|solutionrelative:clnhamburgueseria\\productocln.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\cphamburgueseria\\frmcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|solutionrelative:cphamburgueseria\\frmcategorias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\cphamburgueseria\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|solutionrelative:cphamburgueseria\\frmprincipal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\cphamburgueseria\\frmproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{10C3A874-2024-461D-A843-4F9DAA2156EB}|CpHamburgueseria\\CpHamburgueseria.csproj|solutionrelative:cphamburgueseria\\frmproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C31F7716-963D-4ADE-8A9A-BDC498198A67}|ClnHamburgueseria\\ClnHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\clnhamburgueseria\\usuariocln.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C31F7716-963D-4ADE-8A9A-BDC498198A67}|ClnHamburgueseria\\ClnHamburgueseria.csproj|solutionrelative:clnhamburgueseria\\usuariocln.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C31F7716-963D-4ADE-8A9A-BDC498198A67}|ClnHamburgueseria\\ClnHamburgueseria.csproj|C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\clnhamburgueseria\\categoriascln.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C31F7716-963D-4ADE-8A9A-BDC498198A67}|ClnHamburgueseria\\ClnHamburgueseria.csproj|solutionrelative:clnhamburgueseria\\categoriascln.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,65 +34,78 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UsuarioCln.cs",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\ClnHamburgueseria\\UsuarioCln.cs",
-              "RelativeDocumentMoniker": "ClnHamburgueseria\\UsuarioCln.cs",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\ClnHamburgueseria\\UsuarioCln.cs",
-              "RelativeToolTip": "ClnHamburgueseria\\UsuarioCln.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAANAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "FrmCategorias.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmCategorias.cs",
+              "RelativeDocumentMoniker": "CpHamburgueseria\\FrmCategorias.cs",
+              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmCategorias.cs [Dise\u00F1o]",
+              "RelativeToolTip": "CpHamburgueseria\\FrmCategorias.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-10T06:42:55.979Z"
+              "WhenOpened": "2025-11-13T20:31:50.994Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "FrmProductos.cs",
+              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmProductos.cs",
+              "RelativeDocumentMoniker": "CpHamburgueseria\\FrmProductos.cs",
+              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmProductos.cs",
+              "RelativeToolTip": "CpHamburgueseria\\FrmProductos.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAuwBgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-12T06:28:46.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "FrmProductos.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmProductos.cs",
               "RelativeDocumentMoniker": "CpHamburgueseria\\FrmProductos.cs",
               "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmProductos.cs [Dise\u00F1o]",
               "RelativeToolTip": "CpHamburgueseria\\FrmProductos.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T21:02:59.299Z"
+              "WhenOpened": "2025-11-09T21:02:59.299Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductoCln.cs",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\ClnHamburgueseria\\ProductoCln.cs",
-              "RelativeDocumentMoniker": "ClnHamburgueseria\\ProductoCln.cs",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\ClnHamburgueseria\\ProductoCln.cs",
-              "RelativeToolTip": "ClnHamburgueseria\\ProductoCln.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBkAAABDAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "CategoriasCln.cs",
+              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\ClnHamburgueseria\\CategoriasCln.cs",
+              "RelativeDocumentMoniker": "ClnHamburgueseria\\CategoriasCln.cs",
+              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\ClnHamburgueseria\\CategoriasCln.cs",
+              "RelativeToolTip": "ClnHamburgueseria\\CategoriasCln.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAIAwwDcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-08T03:43:06.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-12T07:05:21.213Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "FrmPrincipal.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmPrincipal.cs",
               "RelativeDocumentMoniker": "CpHamburgueseria\\FrmPrincipal.cs",
               "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmPrincipal.cs [Dise\u00F1o]",
               "RelativeToolTip": "CpHamburgueseria\\FrmPrincipal.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-09T21:02:54.903Z",
+              "WhenOpened": "2025-11-11T00:23:27.935Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "FrmPrincipal.cs",
               "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmPrincipal.cs",
               "RelativeDocumentMoniker": "CpHamburgueseria\\FrmPrincipal.cs",
               "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\CpHamburgueseria\\FrmPrincipal.cs",
               "RelativeToolTip": "CpHamburgueseria\\FrmPrincipal.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAxwIkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-10T07:05:05.262Z",
               "EditorCaption": ""

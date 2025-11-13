@@ -34,7 +34,7 @@ namespace ClnHamburgueseria
                 return context.SaveChanges();
             }
         }
-        public static int eliminar(int idProducto)
+        public static int eliminar(int idProducto, string usuario1)
         {
             using (var context = new LabHamburgueseriaEntities1())
             {

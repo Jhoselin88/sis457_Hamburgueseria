@@ -74,18 +74,6 @@ namespace CpHamburgueseria
             btnMaximizar.Visible = false;
         }
 
-        private void btnDeslizar_Click(object sender, EventArgs e)
-        {
-            if (pnMenu.Width == 236)
-            {
-                pnMenu.Width = 70;
-            }
-            else
-            {
-                pnMenu.Width = 236;
-            }
-        }
-
         private void paBarraTitulo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (this.WindowState == FormWindowState.Normal)
@@ -141,6 +129,12 @@ namespace CpHamburgueseria
         {
             paBarraTitulo.BackColor = Color.Maroon;
             AbrirFormulario(new FrmEmpleado());
+        }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmAutenticacion.Show();
         }
     }
 }

@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProductos));
             this.pnlAgregar = new System.Windows.Forms.Panel();
+            this.btnCerrarAgregar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.cbxCategoria = new System.Windows.Forms.ComboBox();
             this.nudPrecioVenta = new System.Windows.Forms.NumericUpDown();
             this.nudSaldo = new System.Windows.Forms.NumericUpDown();
@@ -44,6 +46,7 @@
             this.txtCodigo = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.pnListaProductos = new System.Windows.Forms.Panel();
             this.lblProductos = new System.Windows.Forms.Label();
@@ -54,9 +57,6 @@
             this.erpCategoria = new System.Windows.Forms.ErrorProvider(this.components);
             this.erpSaldo = new System.Windows.Forms.ErrorProvider(this.components);
             this.erpPrecioVenta = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnCerrarAgregar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
@@ -97,10 +97,47 @@
             this.pnlAgregar.Controls.Add(this.txtNombre);
             this.pnlAgregar.Controls.Add(this.txtDescripcion);
             this.pnlAgregar.Controls.Add(this.btnGuardar);
-            this.pnlAgregar.Location = new System.Drawing.Point(302, 59);
+            this.pnlAgregar.Location = new System.Drawing.Point(322, 128);
             this.pnlAgregar.Name = "pnlAgregar";
             this.pnlAgregar.Size = new System.Drawing.Size(432, 496);
             this.pnlAgregar.TabIndex = 23;
+            // 
+            // btnCerrarAgregar
+            // 
+            this.btnCerrarAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCerrarAgregar.BackColor = System.Drawing.Color.Tomato;
+            this.btnCerrarAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCerrarAgregar.FlatAppearance.BorderSize = 0;
+            this.btnCerrarAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
+            this.btnCerrarAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrarAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarAgregar.Image")));
+            this.btnCerrarAgregar.Location = new System.Drawing.Point(397, 9);
+            this.btnCerrarAgregar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCerrarAgregar.Name = "btnCerrarAgregar";
+            this.btnCerrarAgregar.Size = new System.Drawing.Size(25, 25);
+            this.btnCerrarAgregar.TabIndex = 24;
+            this.btnCerrarAgregar.UseVisualStyleBackColor = false;
+            this.btnCerrarAgregar.Click += new System.EventHandler(this.btnCerrarAgregar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.BackColor = System.Drawing.Color.Tomato;
+            this.btnCancelar.FlatAppearance.BorderSize = 0;
+            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(242, 419);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(110, 30);
+            this.btnCancelar.TabIndex = 34;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.UseVisualStyleBackColor = false;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // cbxCategoria
             // 
@@ -245,6 +282,26 @@
             this.txtDescripcion.Size = new System.Drawing.Size(208, 20);
             this.txtDescripcion.TabIndex = 20;
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnGuardar.FlatAppearance.BorderSize = 0;
+            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(97, 419);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(110, 30);
+            this.btnGuardar.TabIndex = 11;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // txtBuscar
             // 
             this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -319,63 +376,6 @@
             // erpPrecioVenta
             // 
             this.erpPrecioVenta.ContainerControl = this;
-            // 
-            // btnCerrarAgregar
-            // 
-            this.btnCerrarAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerrarAgregar.BackColor = System.Drawing.Color.Tomato;
-            this.btnCerrarAgregar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCerrarAgregar.FlatAppearance.BorderSize = 0;
-            this.btnCerrarAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
-            this.btnCerrarAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCerrarAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarAgregar.Image")));
-            this.btnCerrarAgregar.Location = new System.Drawing.Point(397, 9);
-            this.btnCerrarAgregar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCerrarAgregar.Name = "btnCerrarAgregar";
-            this.btnCerrarAgregar.Size = new System.Drawing.Size(25, 25);
-            this.btnCerrarAgregar.TabIndex = 24;
-            this.btnCerrarAgregar.UseVisualStyleBackColor = false;
-            this.btnCerrarAgregar.Click += new System.EventHandler(this.btnCerrarAgregar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.Tomato;
-            this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(242, 419);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(110, 30);
-            this.btnCancelar.TabIndex = 34;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnGuardar.FlatAppearance.BorderSize = 0;
-            this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ScrollBar;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(97, 419);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(110, 30);
-            this.btnGuardar.TabIndex = 11;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGuardar.UseVisualStyleBackColor = false;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnAgregarCategoria
             // 

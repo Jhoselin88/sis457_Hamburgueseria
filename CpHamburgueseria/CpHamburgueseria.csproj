@@ -127,6 +127,12 @@
     <EmbeddedResource Include="FrmProductos.resx">
       <DependentUpon>FrmProductos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmVentaDetalle.resx">
+      <DependentUpon>FrmVentaDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmVentas.resx">
+      <DependentUpon>FrmVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

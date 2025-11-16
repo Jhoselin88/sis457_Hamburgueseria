@@ -117,4 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnAgregarProducto.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAP5JREFUSEvV
+        lS0OAkEMhSs5AhKJRCKRHIEbYHFYHJIjcAQkEonkGEgkEvKSKWleprMti1i+5GWTdjr9yeyMyAA5iMir
+        fNMgUHVjp+FnSSCPXkmUe9nkZGzojItoda72Fdk/jCrdZJLsK/FVHmVRbSRd49IEE3YwWOBV00pyKT4U
+        GUKT7MjeSqIxGHmImdPNVEQW5WvREV/J3okmcU9JYewUFGJpgjEeT3ZNmrnZIKKv0OBzpXqrLQdGWfet
+        MIImwBHGacooDO4unnlUKY7l/Gc1LOwP9mQnAb+u7bwYLTawFWwvUyg1LtxBNti79Oz7A/ED1om+kht2
+        EPCnu/hP3kBnn77hbnILAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnCerrarAgregar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAHhJREFUOE+tkjEKgDAMRXO2/MM6Ojo6eiTHSsVfQkxoBN9SiXlPhIqIiKru/ayi
+        qhsfDgANwOmXIp7dNgIczAJmr2UvwkAqkiwwFYkPlEVihU8i+UW0vzDFf7Ec8GIwjwOZSNLATCSvQL+j
+        FZGYwHIPxiUvAmDt5wVjuoaHBCndeQAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

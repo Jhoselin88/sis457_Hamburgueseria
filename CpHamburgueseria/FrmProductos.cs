@@ -233,7 +233,7 @@ namespace CpHamburgueseria
                 ocultarPanelAgregar();
                 limpiar();
                 listar();
-                MessageBox.Show("Producto guardado correctamente", "::: Cafeteria :::",
+                MessageBox.Show("Producto guardado correctamente", "::: Hamburgueseria :::",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }        
@@ -254,19 +254,19 @@ namespace CpHamburgueseria
             int id = Convert.ToInt32(dgvProductos.Rows[index].Cells["id"].Value);
             string nombre = dgvProductos.Rows[index].Cells["nombre"].Value.ToString();
             DialogResult dialog = MessageBox.Show($"¿Está seguro de eliminar el Producto {nombre}?",
-                "::: Cafeteria - Mensaje :::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                "::: Hamburgueseria - Mensaje :::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialog == DialogResult.Yes)
             {
                 ProductoCln.eliminar(id, Util.usuario.usuario1);
                 listar();
-                MessageBox.Show("El Producto se ha eliminado correctamente", "::: Cafeteria - Mensaje :::",
+                MessageBox.Show("El Producto se ha eliminado correctamente", "::: Hamburgueseria - Mensaje :::",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void btnAgregarCategoria_Click(object sender, EventArgs e)
         {
-            new FrmCategorias().ShowDialog();
+            new FrmCategoria().ShowDialog();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ClnHamburgueseria
     {
         public static List<Categoria> listar()
         {
-            using (var context = new CadHamburgueseria.LabHamburgueseriaEntities1())
+            using (var context = new CadHamburgueseria.LabHamburgueseriaEntities())
             {
                 return context.Categoria.Where(x => x.estado != -1).ToList();
             }
@@ -19,7 +19,7 @@ namespace ClnHamburgueseria
 
         public static int insertar(Categoria categoria)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 var existente = context.Categoria.FirstOrDefault(c => c.nombre.ToLower() == categoria.nombre.ToLower());
                 if (existente != null)
@@ -39,7 +39,7 @@ namespace ClnHamburgueseria
 
         public static int eliminar(int id)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 var categoria = context.Categoria.Find(id);
                 categoria.estado = -1;
@@ -49,7 +49,7 @@ namespace ClnHamburgueseria
 
         public static Categoria obtenerUno(int id)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 return context.Categoria.Find(id);
             }

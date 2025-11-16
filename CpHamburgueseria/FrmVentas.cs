@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CadHamburgueseria;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace CpHamburgueseria
         public FrmVentas()
         {
             InitializeComponent();
+        }
+
+
+        private void FrmVentas_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -3,8 +3,13 @@ GO
 
 USE [master];
 GO
+
+drop database LabHamburgueseria;
+
 drop login usrhambu;
+
 drop user usrhambu;
+
 CREATE LOGIN [usrhambu] WITH PASSWORD = N'123456',
     DEFAULT_DATABASE = [LabHamburgueseria],
     CHECK_EXPIRATION = OFF,
@@ -112,7 +117,6 @@ CREATE TABLE Ventas (
     CONSTRAINT fk_Venta_Usuario FOREIGN KEY(idUsuario) REFERENCES Usuario(id),
     CONSTRAINT fk_Venta_Cliente FOREIGN KEY(idCliente) REFERENCES Cliente(id)
 );
-
 CREATE TABLE DetalleVentas (
     id INT PRIMARY KEY IDENTITY(1,1),
     idVenta INT NOT NULL,
@@ -144,6 +148,36 @@ AS
   WHERE v.estado<>-1 
     AND (c.nombres + c.apellidos + u.usuario + v.numeroTransaccion) LIKE '%'+REPLACE(@parametro,' ','%')+'%'
   ORDER BY v.fechaRegistro DESC;
+GO
+
+CREATE PROC paDetalleVentaListar @parametro VARCHAR(100)
+AS
+BEGIN
+    SELECT
+        dv.id,
+        dv.idVenta,
+        v.numeroTransaccion,
+        p.codigo,
+        p.nombre AS producto,
+        dv.cantidad,
+        dv.precioUnitario,
+        dv.total,
+        dv.usuarioRegistro,
+        dv.fechaRegistro,
+        dv.estado
+    FROM DetalleVentas dv
+    INNER JOIN Ventas v ON v.id = dv.idVenta
+    INNER JOIN Producto p ON p.id = dv.idProducto
+    WHERE dv.estado <> -1
+      AND (
+            p.nombre
+            + p.codigo
+            + v.numeroTransaccion
+            + dv.usuarioRegistro
+            + CONVERT(VARCHAR(20), dv.fechaRegistro, 120)
+          ) LIKE '%' + REPLACE(@parametro, ' ', '%') + '%'
+    ORDER BY dv.id ASC;
+END
 GO
 
 CREATE PROC paClienteListar @parametro VARCHAR(100)

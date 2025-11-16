@@ -12,7 +12,7 @@ namespace ClnHamburgueseria
     {
         public static int insertar(Producto producto)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             { 
                 context.Producto.Add(producto);
                 context.SaveChanges();
@@ -21,7 +21,7 @@ namespace ClnHamburgueseria
         }
         public static int actualizar(Producto producto)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 var existente = context.Producto.Find(producto.id);
                 existente.id = producto.id;
@@ -36,7 +36,7 @@ namespace ClnHamburgueseria
         }
         public static int eliminar(int idProducto, string usuario1)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 var producto = context.Producto.Find(idProducto);
                 context.Producto.Remove(producto);
@@ -45,21 +45,21 @@ namespace ClnHamburgueseria
         }
         public static Producto obtenerUno(int idProducto)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 return context.Producto.Find(idProducto);
             }
         }
         public static List<Producto> listar()
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 return context.Producto.Where(x => x.estado != -1).ToList();
             }
         }
         public static List<paProductoListar_Result> listarPa(string parametro)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 return context.paProductoListar(parametro).ToList();
             }

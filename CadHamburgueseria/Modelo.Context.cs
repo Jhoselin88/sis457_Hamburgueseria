@@ -15,10 +15,10 @@ namespace CadHamburgueseria
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class LabHamburgueseriaEntities1 : DbContext
+    public partial class LabHamburgueseriaEntities : DbContext
     {
-        public LabHamburgueseriaEntities1()
-            : base("name=LabHamburgueseriaEntities1")
+        public LabHamburgueseriaEntities()
+            : base("name=LabHamburgueseriaEntities")
         {
         }
     
@@ -42,6 +42,15 @@ namespace CadHamburgueseria
                 new ObjectParameter("parametro", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<paClienteListar_Result>("paClienteListar", parametroParameter);
+        }
+    
+        public virtual ObjectResult<paDetalleVentaListar_Result> paDetalleVentaListar(string parametro)
+        {
+            var parametroParameter = parametro != null ?
+                new ObjectParameter("parametro", parametro) :
+                new ObjectParameter("parametro", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<paDetalleVentaListar_Result>("paDetalleVentaListar", parametroParameter);
         }
     
         public virtual ObjectResult<paEmpleadoListar_Result> paEmpleadoListar(string parametro)

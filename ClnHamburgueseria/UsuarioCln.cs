@@ -11,7 +11,7 @@ namespace ClnHamburgueseria
     {
         public static Usuario validar(string usuario, string clave)
         {
-            using (var context = new LabHamburgueseriaEntities1())
+            using (var context = new LabHamburgueseriaEntities())
             {
                 return context.Usuario.Where(u => u.usuario1 == usuario && u.clave == clave ).FirstOrDefault();
             }

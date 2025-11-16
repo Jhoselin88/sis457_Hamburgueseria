@@ -55,9 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriasCln.cs" />
+    <Compile Include="ClientesCln.cs" />
+    <Compile Include="DetalleVentasCln.cs" />
+    <Compile Include="EmpleadoCln.cs" />
     <Compile Include="ProductoCln.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsuarioCln.cs" />
+    <Compile Include="VentasCln.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

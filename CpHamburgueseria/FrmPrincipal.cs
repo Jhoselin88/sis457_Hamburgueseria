@@ -136,5 +136,11 @@ namespace CpHamburgueseria
             this.Hide();
             frmAutenticacion.Show();
         }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            paBarraTitulo.BackColor = Color.Maroon;
+            AbrirFormulario(new FrmClientes());
+        }
     }
 }

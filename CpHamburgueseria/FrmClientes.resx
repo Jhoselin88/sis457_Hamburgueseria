@@ -631,6 +631,24 @@
         FZGYwHIPxiUvAmDt5wVjuoaHBCndeQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnCancelar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAALBJREFUSEvt
+        kjEOAjEMBP0ESv7/MUpKSkpQEIv2LK8dJ5Q3UqSLs/Youpid/JmHmb2SdfMNXSrBtogFF3/45bojmhGA
+        JVFHAFoiJXjSN8P1aVEkQM2LojqLJCrgB2KfZSVZgAfP5CRVoBIMqvM04G/h/xHIZnxQAX+DTKRm/EDA
+        P9+oEbXx7MHoi7IHxvtWogius+BO9RAlymgJQEe0JAAzoi0BYFG2lgWgEm0LTg68AXagmvz0ztytAAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnGuardar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAL5JREFUSEvt
+        lbsNwkAQRKcUQkpwCWQug5DQpRBSAiGhS3EJDglBi/Bptbr93K3kyE+awN7ZGeuCM3CQZAXw6VCY3oKm
+        oiYz492yy43yK2ua2W64KFNChIqyJXxPZfeSMaBB7BNNJb24GZ7hBGACcJYDhpdhGhY2J9FzDSvjh2a4
+        iIJN9F6iZRQ0w6tSQHpKo5FR0Ay3SgHpKo1GRsEyyALPp+IZHv+r4y4HDC/DNwRwM7L/k02UY5ItouM8
+        6OcL0MDIRkLToAQAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="erpCedulaIdentidad.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>81, 23</value>
   </metadata>

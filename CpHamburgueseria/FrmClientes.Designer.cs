@@ -139,9 +139,9 @@
             this.lblProductos.ForeColor = System.Drawing.Color.Black;
             this.lblProductos.Location = new System.Drawing.Point(3, 2);
             this.lblProductos.Name = "lblProductos";
-            this.lblProductos.Size = new System.Drawing.Size(295, 38);
+            this.lblProductos.Size = new System.Drawing.Size(267, 38);
             this.lblProductos.TabIndex = 5;
-            this.lblProductos.Text = "Lista de Productos";
+            this.lblProductos.Text = "Lista de Clientes";
             // 
             // btnAgregar
             // 
@@ -182,7 +182,7 @@
             // pnlAgregar
             // 
             this.pnlAgregar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pnlAgregar.BackColor = System.Drawing.Color.Moccasin;
+            this.pnlAgregar.BackColor = System.Drawing.Color.Brown;
             this.pnlAgregar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlAgregar.Controls.Add(this.btnCerrarAgregar);
             this.pnlAgregar.Controls.Add(this.btnCancelar);
@@ -222,8 +222,9 @@
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelar.Location = new System.Drawing.Point(226, 270);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(0);
@@ -237,10 +238,10 @@
             // 
             // lblAgregarClientes
             // 
-            this.lblAgregarClientes.BackColor = System.Drawing.Color.Moccasin;
+            this.lblAgregarClientes.BackColor = System.Drawing.Color.Brown;
             this.lblAgregarClientes.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblAgregarClientes.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAgregarClientes.ForeColor = System.Drawing.Color.SaddleBrown;
+            this.lblAgregarClientes.ForeColor = System.Drawing.Color.Black;
             this.lblAgregarClientes.Location = new System.Drawing.Point(0, 0);
             this.lblAgregarClientes.Name = "lblAgregarClientes";
             this.lblAgregarClientes.Size = new System.Drawing.Size(403, 76);
@@ -251,36 +252,36 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.BackColor = System.Drawing.Color.Moccasin;
-            this.lblDescripcion.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescripcion.BackColor = System.Drawing.Color.Crimson;
+            this.lblDescripcion.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescripcion.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblDescripcion.Location = new System.Drawing.Point(98, 207);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(79, 20);
+            this.lblDescripcion.Size = new System.Drawing.Size(81, 18);
             this.lblDescripcion.TabIndex = 26;
             this.lblDescripcion.Text = "Apellidos:";
             // 
             // lblNombres
             // 
             this.lblNombres.AutoSize = true;
-            this.lblNombres.BackColor = System.Drawing.Color.Moccasin;
-            this.lblNombres.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombres.BackColor = System.Drawing.Color.Crimson;
+            this.lblNombres.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombres.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblNombres.Location = new System.Drawing.Point(98, 159);
             this.lblNombres.Name = "lblNombres";
-            this.lblNombres.Size = new System.Drawing.Size(78, 20);
+            this.lblNombres.Size = new System.Drawing.Size(78, 18);
             this.lblNombres.TabIndex = 25;
             this.lblNombres.Text = "Nombres:";
             // 
             // lblCodigo
             // 
             this.lblCodigo.AutoSize = true;
-            this.lblCodigo.BackColor = System.Drawing.Color.Moccasin;
-            this.lblCodigo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigo.BackColor = System.Drawing.Color.Crimson;
+            this.lblCodigo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCodigo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCodigo.Location = new System.Drawing.Point(9, 105);
             this.lblCodigo.Name = "lblCodigo";
-            this.lblCodigo.Size = new System.Drawing.Size(167, 20);
+            this.lblCodigo.Size = new System.Drawing.Size(166, 18);
             this.lblCodigo.TabIndex = 23;
             this.lblCodigo.Text = "Cedula de Identidad:";
             // 
@@ -315,8 +316,9 @@
             this.btnGuardar.FlatAppearance.BorderSize = 0;
             this.btnGuardar.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ScrollBar;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardar.Location = new System.Drawing.Point(81, 270);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);

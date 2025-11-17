@@ -62,18 +62,11 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.pctBuscar = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.btnQuitarImagen = new System.Windows.Forms.Button();
+            this.btnSeleccionarImagen = new System.Windows.Forms.Button();
+            this.pbImagenProducto = new System.Windows.Forms.PictureBox();
+            this.ofdImagen = new System.Windows.Forms.OpenFileDialog();
+            this.lblImagenInfo = new System.Windows.Forms.Label();
             this.pnlAgregar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPrecioVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSaldo)).BeginInit();
@@ -86,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.erpSaldo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpPrecioVenta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctBuscar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagenProducto)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlAgregar
@@ -93,6 +87,10 @@
             this.pnlAgregar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pnlAgregar.BackColor = System.Drawing.Color.Brown;
             this.pnlAgregar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlAgregar.Controls.Add(this.lblImagenInfo);
+            this.pnlAgregar.Controls.Add(this.btnQuitarImagen);
+            this.pnlAgregar.Controls.Add(this.btnSeleccionarImagen);
+            this.pnlAgregar.Controls.Add(this.pbImagenProducto);
             this.pnlAgregar.Controls.Add(this.btnCerrarAgregar);
             this.pnlAgregar.Controls.Add(this.btnCancelar);
             this.pnlAgregar.Controls.Add(this.cbxCategoria);
@@ -109,9 +107,9 @@
             this.pnlAgregar.Controls.Add(this.txtNombre);
             this.pnlAgregar.Controls.Add(this.txtDescripcion);
             this.pnlAgregar.Controls.Add(this.btnGuardar);
-            this.pnlAgregar.Location = new System.Drawing.Point(312, 87);
+            this.pnlAgregar.Location = new System.Drawing.Point(343, 51);
             this.pnlAgregar.Name = "pnlAgregar";
-            this.pnlAgregar.Size = new System.Drawing.Size(432, 496);
+            this.pnlAgregar.Size = new System.Drawing.Size(451, 556);
             this.pnlAgregar.TabIndex = 23;
             // 
             // btnCerrarAgregar
@@ -123,7 +121,7 @@
             this.btnCerrarAgregar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(75)))), ((int)(((byte)(75)))));
             this.btnCerrarAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrarAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrarAgregar.Image")));
-            this.btnCerrarAgregar.Location = new System.Drawing.Point(397, 9);
+            this.btnCerrarAgregar.Location = new System.Drawing.Point(416, 9);
             this.btnCerrarAgregar.Margin = new System.Windows.Forms.Padding(0);
             this.btnCerrarAgregar.Name = "btnCerrarAgregar";
             this.btnCerrarAgregar.Size = new System.Drawing.Size(25, 25);
@@ -141,7 +139,7 @@
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCancelar.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelar.Image")));
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(242, 419);
+            this.btnCancelar.Location = new System.Drawing.Point(242, 507);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(0);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(110, 30);
@@ -192,7 +190,7 @@
             this.lblAgregarProductos.ForeColor = System.Drawing.Color.Black;
             this.lblAgregarProductos.Location = new System.Drawing.Point(0, 0);
             this.lblAgregarProductos.Name = "lblAgregarProductos";
-            this.lblAgregarProductos.Size = new System.Drawing.Size(430, 76);
+            this.lblAgregarProductos.Size = new System.Drawing.Size(449, 76);
             this.lblAgregarProductos.TabIndex = 30;
             this.lblAgregarProductos.Text = "AGREGAR PRODUCTOS";
             this.lblAgregarProductos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -304,7 +302,7 @@
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(97, 419);
+            this.btnGuardar.Location = new System.Drawing.Point(97, 507);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(0);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(110, 30);
@@ -479,131 +477,63 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // button1
+            // btnQuitarImagen
             // 
-            this.button1.Location = new System.Drawing.Point(812, 131);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnQuitarImagen.BackColor = System.Drawing.Color.Red;
+            this.btnQuitarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuitarImagen.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuitarImagen.Location = new System.Drawing.Point(59, 453);
+            this.btnQuitarImagen.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuitarImagen.Name = "btnQuitarImagen";
+            this.btnQuitarImagen.Size = new System.Drawing.Size(143, 24);
+            this.btnQuitarImagen.TabIndex = 40;
+            this.btnQuitarImagen.Text = "Quitar imagen";
+            this.btnQuitarImagen.UseVisualStyleBackColor = false;
+            this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
             // 
-            // button2
+            // btnSeleccionarImagen
             // 
-            this.button2.Location = new System.Drawing.Point(121, 245);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 25;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnSeleccionarImagen.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.btnSeleccionarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSeleccionarImagen.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSeleccionarImagen.Location = new System.Drawing.Point(59, 423);
+            this.btnSeleccionarImagen.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSeleccionarImagen.Name = "btnSeleccionarImagen";
+            this.btnSeleccionarImagen.Size = new System.Drawing.Size(143, 24);
+            this.btnSeleccionarImagen.TabIndex = 39;
+            this.btnSeleccionarImagen.Text = "Seleccionar imagen";
+            this.btnSeleccionarImagen.UseVisualStyleBackColor = false;
+            this.btnSeleccionarImagen.Click += new System.EventHandler(this.btnSeleccionarImagen_Click);
             // 
-            // button3
+            // pbImagenProducto
             // 
-            this.button3.Location = new System.Drawing.Point(169, 332);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 26;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.pbImagenProducto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbImagenProducto.Location = new System.Drawing.Point(242, 423);
+            this.pbImagenProducto.Margin = new System.Windows.Forms.Padding(2);
+            this.pbImagenProducto.Name = "pbImagenProducto";
+            this.pbImagenProducto.Size = new System.Drawing.Size(88, 54);
+            this.pbImagenProducto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbImagenProducto.TabIndex = 38;
+            this.pbImagenProducto.TabStop = false;
             // 
-            // button4
+            // ofdImagen
             // 
-            this.button4.Location = new System.Drawing.Point(192, 390);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 27;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.ofdImagen.FileName = "openFileDialog1";
+            this.ofdImagen.Filter = "Imágenes|.jpg;.jpeg;*.png";
             // 
-            // button5
+            // lblImagenInfo
             // 
-            this.button5.Location = new System.Drawing.Point(82, 333);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 28;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(53, 273);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 29;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(85, 403);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 30;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(162, 460);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 31;
-            this.button8.Text = "button8";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(41, 184);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 32;
-            this.button9.Text = "button9";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(229, 219);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(75, 23);
-            this.button10.TabIndex = 33;
-            this.button10.Text = "button10";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(836, 259);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 34;
-            this.button11.Text = "button11";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(883, 350);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
-            this.button12.TabIndex = 35;
-            this.button12.Text = "button12";
-            this.button12.UseVisualStyleBackColor = true;
+            this.lblImagenInfo.AutoSize = true;
+            this.lblImagenInfo.Location = new System.Drawing.Point(286, 485);
+            this.lblImagenInfo.Name = "lblImagenInfo";
+            this.lblImagenInfo.Size = new System.Drawing.Size(0, 13);
+            this.lblImagenInfo.TabIndex = 41;
             // 
             // FrmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 600);
-            this.Controls.Add(this.button12);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlAgregar);
             this.Controls.Add(this.btnAgregarCategoria);
             this.Controls.Add(this.btnEditar);
@@ -618,6 +548,7 @@
             this.Name = "FrmProductos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "x";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmProductos_FormClosing);
             this.Load += new System.EventHandler(this.FrmProductos_Load);
             this.pnlAgregar.ResumeLayout(false);
             this.pnlAgregar.PerformLayout();
@@ -633,6 +564,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.erpSaldo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.erpPrecioVenta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctBuscar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImagenProducto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -672,17 +604,10 @@
         private System.Windows.Forms.ErrorProvider erpCategoria;
         private System.Windows.Forms.ErrorProvider erpSaldo;
         private System.Windows.Forms.ErrorProvider erpPrecioVenta;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btnQuitarImagen;
+        private System.Windows.Forms.Button btnSeleccionarImagen;
+        private System.Windows.Forms.PictureBox pbImagenProducto;
+        private System.Windows.Forms.OpenFileDialog ofdImagen;
+        private System.Windows.Forms.Label lblImagenInfo;
     }
 }

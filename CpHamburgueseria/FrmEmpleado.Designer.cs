@@ -108,12 +108,12 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.BackColor = System.Drawing.Color.Moccasin;
-            this.lblUsuario.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.BackColor = System.Drawing.Color.Crimson;
+            this.lblUsuario.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsuario.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblUsuario.Location = new System.Drawing.Point(117, 318);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(67, 20);
+            this.lblUsuario.Size = new System.Drawing.Size(66, 18);
             this.lblUsuario.TabIndex = 41;
             this.lblUsuario.Text = "Usuario:";
             // 
@@ -135,12 +135,12 @@
             // lblCargo
             // 
             this.lblCargo.AutoSize = true;
-            this.lblCargo.BackColor = System.Drawing.Color.Moccasin;
-            this.lblCargo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCargo.BackColor = System.Drawing.Color.Crimson;
+            this.lblCargo.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCargo.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCargo.Location = new System.Drawing.Point(124, 275);
             this.lblCargo.Name = "lblCargo";
-            this.lblCargo.Size = new System.Drawing.Size(60, 20);
+            this.lblCargo.Size = new System.Drawing.Size(59, 18);
             this.lblCargo.TabIndex = 39;
             this.lblCargo.Text = "Cargo:";
             // 
@@ -155,12 +155,12 @@
             // lblCelular
             // 
             this.lblCelular.AutoSize = true;
-            this.lblCelular.BackColor = System.Drawing.Color.Moccasin;
-            this.lblCelular.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCelular.BackColor = System.Drawing.Color.Crimson;
+            this.lblCelular.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCelular.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCelular.Location = new System.Drawing.Point(119, 237);
             this.lblCelular.Name = "lblCelular";
-            this.lblCelular.Size = new System.Drawing.Size(65, 20);
+            this.lblCelular.Size = new System.Drawing.Size(66, 18);
             this.lblCelular.TabIndex = 37;
             this.lblCelular.Text = "Celular:";
             // 
@@ -217,12 +217,12 @@
             // lblDireccion
             // 
             this.lblDireccion.AutoSize = true;
-            this.lblDireccion.BackColor = System.Drawing.Color.Moccasin;
-            this.lblDireccion.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDireccion.BackColor = System.Drawing.Color.Crimson;
+            this.lblDireccion.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDireccion.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblDireccion.Location = new System.Drawing.Point(100, 356);
             this.lblDireccion.Name = "lblDireccion";
-            this.lblDireccion.Size = new System.Drawing.Size(84, 20);
+            this.lblDireccion.Size = new System.Drawing.Size(85, 18);
             this.lblDireccion.TabIndex = 28;
             this.lblDireccion.Text = "Direccion:";
             // 
@@ -272,48 +272,48 @@
             // lblSegundoApellido
             // 
             this.lblSegundoApellido.AutoSize = true;
-            this.lblSegundoApellido.BackColor = System.Drawing.Color.Moccasin;
-            this.lblSegundoApellido.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSegundoApellido.BackColor = System.Drawing.Color.Crimson;
+            this.lblSegundoApellido.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSegundoApellido.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblSegundoApellido.Location = new System.Drawing.Point(42, 199);
             this.lblSegundoApellido.Name = "lblSegundoApellido";
-            this.lblSegundoApellido.Size = new System.Drawing.Size(142, 20);
+            this.lblSegundoApellido.Size = new System.Drawing.Size(145, 18);
             this.lblSegundoApellido.TabIndex = 27;
             this.lblSegundoApellido.Text = "Segundo Apellido:";
             // 
             // lblPrimerApellido
             // 
             this.lblPrimerApellido.AutoSize = true;
-            this.lblPrimerApellido.BackColor = System.Drawing.Color.Moccasin;
-            this.lblPrimerApellido.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrimerApellido.BackColor = System.Drawing.Color.Crimson;
+            this.lblPrimerApellido.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrimerApellido.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblPrimerApellido.Location = new System.Drawing.Point(62, 165);
             this.lblPrimerApellido.Name = "lblPrimerApellido";
-            this.lblPrimerApellido.Size = new System.Drawing.Size(122, 20);
+            this.lblPrimerApellido.Size = new System.Drawing.Size(125, 18);
             this.lblPrimerApellido.TabIndex = 26;
             this.lblPrimerApellido.Text = "Primer Apellido:";
             // 
             // lblNombres
             // 
             this.lblNombres.AutoSize = true;
-            this.lblNombres.BackColor = System.Drawing.Color.Moccasin;
-            this.lblNombres.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNombres.BackColor = System.Drawing.Color.Crimson;
+            this.lblNombres.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNombres.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblNombres.Location = new System.Drawing.Point(106, 127);
             this.lblNombres.Name = "lblNombres";
-            this.lblNombres.Size = new System.Drawing.Size(78, 20);
+            this.lblNombres.Size = new System.Drawing.Size(78, 18);
             this.lblNombres.TabIndex = 25;
             this.lblNombres.Text = "Nombres:";
             // 
             // lblCedulaIdentidad
             // 
             this.lblCedulaIdentidad.AutoSize = true;
-            this.lblCedulaIdentidad.BackColor = System.Drawing.Color.Moccasin;
-            this.lblCedulaIdentidad.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCedulaIdentidad.BackColor = System.Drawing.Color.Crimson;
+            this.lblCedulaIdentidad.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCedulaIdentidad.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCedulaIdentidad.Location = new System.Drawing.Point(17, 89);
             this.lblCedulaIdentidad.Name = "lblCedulaIdentidad";
-            this.lblCedulaIdentidad.Size = new System.Drawing.Size(167, 20);
+            this.lblCedulaIdentidad.Size = new System.Drawing.Size(166, 18);
             this.lblCedulaIdentidad.TabIndex = 23;
             this.lblCedulaIdentidad.Text = "Cedula de Identidad:";
             // 

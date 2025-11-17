@@ -47,7 +47,7 @@ namespace ClnHamburgueseria
                 return context.Cliente.Find(id);
             }
         }
-        public static List<Cliente> obtenerTodos()
+        public static List<Cliente> listar()
         {
             using (var context = new LabHamburgueseriaEntities())
             {

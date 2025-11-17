@@ -18,11 +18,18 @@ namespace ClnHamburgueseria
                 return detalle.id;
             }
         }
-        public static List<DetalleVentas> obtenerPorVenta(int idVenta)
+        public static List<DetalleVentas> listarPorPedido(int idVenta)
         {
             using (var context = new LabHamburgueseriaEntities())
             {
-                return context.DetalleVentas.Where(x => x.idVenta == idVenta).ToList();
+                return context.DetalleVentas.Where(x => x.idVenta == idVenta && x.estado != -1).ToList();
+            }
+        }
+        public static List<paDetalleVentaListar_Result> listarPa(string parametro)
+        {
+            using (var context = new LabHamburgueseriaEntities())
+            {
+                return context.paDetalleVentaListar(parametro).ToList();
             }
         }
     }

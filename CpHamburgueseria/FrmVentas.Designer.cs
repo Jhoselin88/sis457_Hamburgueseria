@@ -34,8 +34,8 @@
             this.lblFecha = new System.Windows.Forms.Label();
             this.pnListaProductos = new System.Windows.Forms.Panel();
             this.lblPedidos = new System.Windows.Forms.Label();
+            this.btnAgregarProducto = new System.Windows.Forms.Button();
             this.pnlAgregar = new System.Windows.Forms.Panel();
-            this.lblAgregarProductos = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblPrecioUnitario = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
@@ -47,7 +47,14 @@
             this.nudCantidad = new System.Windows.Forms.NumericUpDown();
             this.cbxProducto = new System.Windows.Forms.ComboBox();
             this.btnCerrarAgregar = new System.Windows.Forms.Button();
-            this.btnAgregarProducto = new System.Windows.Forms.Button();
+            this.lblAgregarProductos = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallePedido)).BeginInit();
             this.pnListaProductos.SuspendLayout();
             this.pnlAgregar.SuspendLayout();
@@ -112,6 +119,25 @@
             this.lblPedidos.TabIndex = 5;
             this.lblPedidos.Text = "Gestion de Ventas";
             // 
+            // btnAgregarProducto
+            // 
+            this.btnAgregarProducto.BackColor = System.Drawing.Color.Yellow;
+            this.btnAgregarProducto.FlatAppearance.BorderSize = 0;
+            this.btnAgregarProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gold;
+            this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregarProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarProducto.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnAgregarProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarProducto.Image")));
+            this.btnAgregarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregarProducto.Location = new System.Drawing.Point(879, 6);
+            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(0);
+            this.btnAgregarProducto.Name = "btnAgregarProducto";
+            this.btnAgregarProducto.Size = new System.Drawing.Size(155, 30);
+            this.btnAgregarProducto.TabIndex = 40;
+            this.btnAgregarProducto.Text = "Agregar Venta";
+            this.btnAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregarProducto.UseVisualStyleBackColor = false;
+            // 
             // pnlAgregar
             // 
             this.pnlAgregar.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -135,19 +161,6 @@
             this.pnlAgregar.Name = "pnlAgregar";
             this.pnlAgregar.Size = new System.Drawing.Size(432, 496);
             this.pnlAgregar.TabIndex = 50;
-            // 
-            // lblAgregarProductos
-            // 
-            this.lblAgregarProductos.BackColor = System.Drawing.Color.Crimson;
-            this.lblAgregarProductos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblAgregarProductos.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAgregarProductos.ForeColor = System.Drawing.Color.Black;
-            this.lblAgregarProductos.Location = new System.Drawing.Point(0, 0);
-            this.lblAgregarProductos.Name = "lblAgregarProductos";
-            this.lblAgregarProductos.Size = new System.Drawing.Size(430, 76);
-            this.lblAgregarProductos.TabIndex = 30;
-            this.lblAgregarProductos.Text = "VENTA";
-            this.lblAgregarProductos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTotal
             // 
@@ -266,30 +279,94 @@
             this.btnCerrarAgregar.TabIndex = 24;
             this.btnCerrarAgregar.UseVisualStyleBackColor = false;
             // 
-            // btnAgregarProducto
+            // lblAgregarProductos
             // 
-            this.btnAgregarProducto.BackColor = System.Drawing.Color.Yellow;
-            this.btnAgregarProducto.FlatAppearance.BorderSize = 0;
-            this.btnAgregarProducto.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gold;
-            this.btnAgregarProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregarProducto.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregarProducto.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnAgregarProducto.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarProducto.Image")));
-            this.btnAgregarProducto.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarProducto.Location = new System.Drawing.Point(879, 6);
-            this.btnAgregarProducto.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAgregarProducto.Name = "btnAgregarProducto";
-            this.btnAgregarProducto.Size = new System.Drawing.Size(155, 30);
-            this.btnAgregarProducto.TabIndex = 40;
-            this.btnAgregarProducto.Text = "Agregar Venta";
-            this.btnAgregarProducto.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregarProducto.UseVisualStyleBackColor = false;
+            this.lblAgregarProductos.BackColor = System.Drawing.Color.Crimson;
+            this.lblAgregarProductos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblAgregarProductos.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAgregarProductos.ForeColor = System.Drawing.Color.Black;
+            this.lblAgregarProductos.Location = new System.Drawing.Point(0, 0);
+            this.lblAgregarProductos.Name = "lblAgregarProductos";
+            this.lblAgregarProductos.Size = new System.Drawing.Size(430, 76);
+            this.lblAgregarProductos.TabIndex = 30;
+            this.lblAgregarProductos.Text = "VENTA";
+            this.lblAgregarProductos.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(869, 185);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 51;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(899, 257);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 52;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(902, 116);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 53;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(852, 339);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 54;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(288, 200);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 55;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(303, 144);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 56;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(818, 249);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 57;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // FrmVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 600);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlAgregar);
             this.Controls.Add(this.pnListaProductos);
             this.Controls.Add(this.dgvDetallePedido);
@@ -327,5 +404,12 @@
         private System.Windows.Forms.ComboBox cbxProducto;
         private System.Windows.Forms.Button btnCerrarAgregar;
         private System.Windows.Forms.Label lblAgregarProductos;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }

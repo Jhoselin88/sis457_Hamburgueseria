@@ -1,0 +1,205 @@
+﻿@model IEnumerable<WebHamburgueseria.Models.Producto>
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<div class="modal fade" id="modalAgregarCategoria" tabindex="-1" aria-labelledby="modalAgregarCategoriaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: #ffefd5; border-radius: 24px; border: 2px solid var(--accent-color); font-family: var(--nav-font); color: var(--nav-color);">
+
+            <form id="formAgregarCategoria" asp-controller="Categorias" asp-action="Create" method="post">
+
+                <div class="modal-header" style="background: #9C5D3B; border-top-left-radius: 22px; border-top-right-radius: 22px;">
+                    <h5 class="modal-title" id="modalAgregarCategoriaLabel" style="color: var(--nav-hover-color); font-weight: 600;">
+                        <i class="bi bi-tags me-2" style="color: var(--accent-color);"></i> Administrar Categorías
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="Nombre" class="form-label" style="color: #b8860b;">Nueva Categoría</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="Nombre" name="Nombre" required maxlength="50" placeholder="Nombre de la categoría" style="border-radius: 50px 0 0 50px; border: 1.5px solid var(--accent-color); font-weight: 500;" />
+                            <button type="submit" class="btn btn-animado" style="background: #ff9e03; color: var(--nav-hover-color); border: 1.5px solid var(--accent-color); border-radius: 0 50px 50px 0; font-weight: 500;">
+                                <i class="bi bi-plus-circle me-1"></i> Agregar
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                    <h6 style="color: #b8860b;">Categorías existentes</h6>
+                    <div id="lista-categorias">
+                        <table class="table table-sm table-bordered align-middle mb-0" style="background: #fffbe9; border-radius: 12px;">
+                            <thead>
+                                <tr>
+                                    <th style="background: #ffefd5; color: #b8860b;">Nombre</th>
+                                    <th style="width: 40px; background: #ffefd5;"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="categorias-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background: #ffefd5; border-bottom-left-radius: 22px; border-bottom-right-radius: 22px;">
+                    <button type="button" class="btn btn-animado" data-bs-dismiss="modal" style="background: #b8860b; color: var(--nav-hover-color); border: 1.5px solid var(--accent-color); border-radius: 50px; font-weight: 500;">
+                        <i class="bi bi-x-circle me-1"></i> Cerrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="dark-background min-vh-100 py-4" style="background: #9C5D3B; font-family: var(--nav-font); color: var(--nav-color);">
+    <div class="container">
+        @if (TempData["Mensaje"] != null)
+        {
+            <div id="toast-mensaje" class="toast-mensaje position-fixed">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                @TempData["Mensaje"]
+            </div>
+        }
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0" style="color: var(--nav-hover-color); font-family: var(--nav-font);">
+                <i class="bi bi-box-seam me-2" style="color: var(--accent-color);"></i> Productos
+            </h1>
+            <button type="button"
+                    class="btn btn-animado"
+                    style="background: #198754; color: var(--nav-hover-color); border: 1.5px solid #198754; border-radius: 50px; font-weight: 500;"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalAgregarCategoria">
+                <i class="bi bi-plus-circle me-1"></i> Agregar Categoría
+            </button>
+        </div>
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <a asp-action="Create" class="btn btn-animado" style="background: #ff9e03; color: var(--nav-hover-color); border: 1.5px solid var(--accent-color); border-radius: 50px; font-weight: 500;">
+                <i class="bi bi-plus-circle me-1"></i> Nuevo Producto
+            </a>
+        </div>
+
+        <div class="mb-3 mt-3">
+            <input type="text" id="buscadorProductos" class="form-control" placeholder="Buscar por código, nombre o descripción..." />
+        </div>
+
+        <div class="table-responsive rounded-3 shadow-sm">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="background-color : #ffefd5">Código</th>
+                        <th class="text-center" style="background-color : #ffefd5">Nombre</th>
+                        <th class="text-center" style="background-color : #ffefd5">Descripción</th>
+                        <th class="text-center" style="background-color : #ffefd5">Saldo</th>
+                        <th class="text-center" style="background-color : #ffefd5">Precio de Venta</th>
+                        <th class="text-center" style=" background-color : #ffefd5">Usuario</th>
+                        <th class="text-center" style="background-color : #ffefd5">Fecha de Registro</th>
+
+                        <th class="text-center" style="background-color : #ffefd5">Categoría</th>
+                        <th class="text-center" style="background-color : #ffefd5">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.Codigo)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.Descripcion)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.Saldo)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.PrecioVenta)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.UsuarioRegistro)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.FechaRegistro)</td>
+                            <td class="text-center" style="background-color : #ffefd5">@Html.DisplayFor(modelItem => item.IdCategoriaNavigation.Nombre)</td>
+                            <td class="text-center" style="background-color : #ffefd5">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-animado btn-sm" style="background: #cd853f; color: var(--nav-hover-color); border: 1.5px solid var(--accent-color); border-radius: 50px;" title="Editar">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-animado btn-sm" style="background: #b8860b; color: var(--nav-hover-color); border: 1.5px solid var(--accent-color); border-radius: 50px;" title="Detalles">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-animado btn-sm" style="background: #ff6347; color: var(--nav-hover-color); border: 1.5px solid var(--accent-color); border-radius: 50px;" title="Eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // cargar categorias
+        $('#modalAgregarCategoria').on('show.bs.modal', function () {
+            cargarCategorias();
+        });
+
+        function cargarCategorias() {
+            $.get('@Url.Action("Listar", "Categorias")', function (data) {
+                var tbody = $('#categorias-body');
+                tbody.empty();
+                if (data.length === 0) {
+                    tbody.append('<tr><td colspan="2" class="text-center text-muted">No hay categorías registradas.</td></tr>');
+                } else {
+                    data.forEach(function (cat) {
+                        tbody.append(
+                            `<tr>
+                                <td>${cat.nombre ?? cat.Nombre}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-danger btn-eliminar-categoria" data-id="${cat.id ?? cat.Id}" title="Eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>`
+                        );
+                    });
+                }
+            });
+        }
+
+        // eliminar categoria
+        $(document).on('click', '.btn-eliminar-categoria', function () {
+            var id = $(this).data('id');
+            if (confirm('¿Está seguro de eliminar esta categoría?')) {
+                $.post('@Url.Action("Eliminar", "Categorias")', { id: id }, function (result) {
+                    if (result.success) {
+                        cargarCategorias();
+                    }
+                    alert(result.mensaje);
+                });
+            }
+        });
+
+        // agregar categoria
+        $('#formAgregarCategoria').submit(function (e) {
+            e.preventDefault();
+            var nombre = $('#Nombre').val();
+            if (!nombre.trim()) return;
+            $.post('@Url.Action("Create", "Categorias")', { Nombre: nombre }, function (result) {
+                if (result.success) {
+                    $('#Nombre').val('');
+                    cargarCategorias();
+                }
+                alert(result.mensaje);
+            });
+        });
+
+        $(document).ready(function () {
+            $('#buscadorProductos').on('keyup', function () {
+                var filtro = $(this).val().toLowerCase();
+                $('table tbody tr').each(function () {
+                    var texto = $(this).text().toLowerCase();
+                    $(this).toggle(texto.indexOf(filtro) > -1);
+                });
+            });
+        });
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+@{
+    ViewData["OcultarFooter"] = true;
+}

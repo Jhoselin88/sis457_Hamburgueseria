@@ -31,15 +31,15 @@ public partial class LabHamburgueseriaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=LabHamburgueseria;User ID=usrhambu;Password=123456");
+        => optionsBuilder.UseSqlServer("Server=localhost;Database=LabHamburgueseria;User ID=usrhambu;Password=123456; TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Categoria>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F274DC138");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83F6C7E2226");
 
-            entity.HasIndex(e => e.Nombre, "UQ__Categori__72AFBCC63F642519").IsUnique();
+            entity.HasIndex(e => e.Nombre, "UQ__Categori__72AFBCC60F2E8CB8").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Estado)
@@ -53,7 +53,7 @@ public partial class LabHamburgueseriaContext : DbContext
 
         modelBuilder.Entity<Cliente>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Cliente__3213E83FFECE9E20");
+            entity.HasKey(e => e.Id).HasName("PK__Cliente__3213E83F69231E88");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Apellidos)
@@ -84,7 +84,7 @@ public partial class LabHamburgueseriaContext : DbContext
 
         modelBuilder.Entity<DetalleVentas>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DetalleV__3213E83FD367B4BA");
+            entity.HasKey(e => e.Id).HasName("PK__DetalleV__3213E83FD5B8F5D4");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Cantidad).HasColumnName("cantidad");
@@ -123,7 +123,7 @@ public partial class LabHamburgueseriaContext : DbContext
 
         modelBuilder.Entity<Empleado>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Empleado__3213E83FBD0D8660");
+            entity.HasKey(e => e.Id).HasName("PK__Empleado__3213E83FE078412E");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Cargo)
@@ -167,7 +167,7 @@ public partial class LabHamburgueseriaContext : DbContext
 
         modelBuilder.Entity<Producto>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Producto__3213E83FC33D74CD");
+            entity.HasKey(e => e.Id).HasName("PK__Producto__3213E83F5F3DFF37");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Codigo)
@@ -210,9 +210,9 @@ public partial class LabHamburgueseriaContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Usuario__3213E83FAEDC54E1");
+            entity.HasKey(e => e.Id).HasName("PK__Usuario__3213E83F5E7B111C");
 
-            entity.HasIndex(e => e.Usuario1, "UQ__Usuario__9AFF8FC6E408846A").IsUnique();
+            entity.HasIndex(e => e.Usuario1, "UQ__Usuario__9AFF8FC6B5F3B49D").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Clave)
@@ -245,7 +245,7 @@ public partial class LabHamburgueseriaContext : DbContext
 
         modelBuilder.Entity<Ventas>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Ventas__3213E83FFEAACEF1");
+            entity.HasKey(e => e.Id).HasName("PK__Ventas__3213E83FA68335FE");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Estado)

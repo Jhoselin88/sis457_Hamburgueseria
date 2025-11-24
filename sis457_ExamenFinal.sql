@@ -1,14 +1,13 @@
-﻿CREATE DATABASE LabHamburgueseria;
-GO
+﻿create database LabHamburgueseria;
+
 
 USE [master];
-GO
 
 drop database LabHamburgueseria;
 
 drop login usrhambu;
 
-drop user usrhambu;
+
 
 CREATE LOGIN [usrhambu] WITH PASSWORD = N'123456',
     DEFAULT_DATABASE = [LabHamburgueseria],
@@ -18,7 +17,7 @@ GO
 
 USE [LabHamburgueseria];
 GO
-
+drop user usrhambu;
 drop login usrhambu;
 
 CREATE USER [usrhambu] FOR LOGIN [usrhambu];
@@ -257,6 +256,9 @@ VALUES ('765421', 'Andrea', 'López');
 -- Usuarios
 INSERT INTO Usuario(idEmpleado,usuario,clave)
 VALUES (1, 'jairox', 'I0HCOO/NSSY6WOS9POP5XW==');
+
+INSERT INTO Usuario(idEmpleado,usuario,clave)
+VALUES (2, 'jhose', 'I0HCOO/NSSY6WOS9POP5XW==');
 
 select * from Usuario;
 -- Venta de ejemplo

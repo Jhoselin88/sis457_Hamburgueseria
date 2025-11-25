@@ -25,11 +25,11 @@
     <link href="~/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="~/css/responsive.css" rel="stylesheet" />
-
-    @await RenderSectionAsync("Styles", required: false)
+    <link rel="stylesheet" href="~/WebHamburgueseria.styles.css" asp-append-version="true" />
+    
 </head>
 
-<body class="@ViewData["BodyClass"]">
+<body>
 
     <div class="hero_area">
         <div class="bg-box">
@@ -106,7 +106,7 @@
             </div>
         </header>
         <!-- end header section -->
-        @RenderSection("HeroContent", required: false)
+       
     </div>
 
     @RenderBody()

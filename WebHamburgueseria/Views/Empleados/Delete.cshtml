@@ -1,82 +1,335 @@
 ﻿@model WebHamburgueseria.Models.Empleado
-
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Empleado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<style>
+    .btn-eliminar {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(186, 46, 17, 0.4);
+    }
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Empleado</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CedulaIdentidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CedulaIdentidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombres)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombres)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrimerApellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrimerApellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SegundoApellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SegundoApellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Direccion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Celular)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Celular)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cargo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cargo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+        .btn-eliminar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(186, 46, 17, 0.6);
+            color: white;
+        }
+
+    .btn-cancelar {
+        background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(99, 110, 114, 0.4);
+    }
+
+        .btn-cancelar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(99, 110, 114, 0.6);
+            color: white;
+        }
+
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px 25px;
+        border: none;
+    }
+
+        .card-header h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+            .card-header h4 i {
+                margin-right: 10px;
+            }
+
+    .alert-warning-custom {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+        border: 2px solid #ffc107;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+        .alert-warning-custom i {
+            font-size: 2rem;
+            color: #ff6b35;
+        }
+
+        .alert-warning-custom h5 {
+            color: #856404;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .alert-warning-custom p {
+            color: #856404;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+    .detail-row {
+        padding: 15px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        font-weight: 600;
+        color: #636e72;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+        .detail-label i {
+            color: #ff6b35;
+            margin-right: 8px;
+            width: 20px;
+        }
+
+    .detail-value {
+        font-size: 1.05rem;
+        color: #2d3436;
+        font-weight: 500;
+        padding-left: 28px;
+    }
+
+    .badge-estado {
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .badge-activo {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        color: white;
+    }
+
+    .badge-inactivo {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        color: white;
+    }
+
+    .badge-cargo {
+        background: linear-gradient(135deg, #783022, #a29bfe);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+
+    .page-title {
+        color: #2d3436;
+    }
+
+        .page-title i {
+            color: #BA2E11;
+        }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 mb-1 page-title">
+            <i class="fas fa-user-times"></i>
+            Eliminar Empleado
+        </h1>
+        <p class="text-muted mb-0">Confirme la eliminación del empleado</p>
+    </div>
+
+    <!-- Alerta de Advertencia -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="alert-warning-custom">
+                <div class="d-flex align-items-center">
+                    <div class="mr-3">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <h5>¡Atención! Esta acción es irreversible</h5>
+                        <p>¿Está seguro que desea eliminar este empleado? Esta acción no se puede deshacer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card de Detalles -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-user-tie"></i>
+                        Información del Empleado a Eliminar
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <!-- Columna Izquierda -->
+                        <div class="col-md-6">
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-id-card"></i>
+                                    Cédula de Identidad
+                                </div>
+                                <div class="detail-value">
+                                    @Model.CedulaIdentidad
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-user"></i>
+                                    Nombres
+                                </div>
+                                <div class="detail-value">
+                                    @Model.Nombres
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-user-tag"></i>
+                                    Primer Apellido
+                                </div>
+                                <div class="detail-value">
+                                    @(Model.PrimerApellido ?? "N/A")
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-user-tag"></i>
+                                    Segundo Apellido
+                                </div>
+                                <div class="detail-value">
+                                    @(Model.SegundoApellido ?? "N/A")
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-phone"></i>
+                                    Celular
+                                </div>
+                                <div class="detail-value">
+                                    @Model.Celular
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna Derecha -->
+                        <div class="col-md-6">
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-briefcase"></i>
+                                    Cargo
+                                </div>
+                                <div class="detail-value">
+                                    <span class="badge-cargo">@Model.Cargo</span>
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    Dirección
+                                </div>
+                                <div class="detail-value">
+                                    @Model.Direccion
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-toggle-on"></i>
+                                    Estado
+                                </div>
+                                <div class="detail-value">
+                                    @if (Model.Estado == 1)
+                                    {
+                                        <span class="badge badge-estado badge-activo">
+                                            <i class="fas fa-check-circle mr-1"></i> Activo
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-estado badge-inactivo">
+                                            <i class="fas fa-times-circle mr-1"></i> Inactivo
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-user-circle"></i>
+                                    Usuario de Registro
+                                </div>
+                                <div class="detail-value">
+                                    @Model.UsuarioRegistro
+                                </div>
+                            </div>
+
+                            <div class="detail-row">
+                                <div class="detail-label">
+                                    <i class="fas fa-calendar"></i>
+                                    Fecha de Registro
+                                </div>
+                                <div class="detail-value">
+                                    @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formulario y Botones -->
+                    <form asp-action="Delete" class="mt-4 pt-3 border-top">
+                        <input type="hidden" asp-for="Id" />
+                        <div class="row">
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <button type="submit" class="btn btn-eliminar btn-block">
+                                    <i class="fas fa-trash-alt mr-2"></i>
+                                    Confirmar Eliminación
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <a asp-action="Index" class="btn btn-cancelar btn-block">
+                                    <i class="fas fa-times mr-2"></i>
+                                    Cancelar
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

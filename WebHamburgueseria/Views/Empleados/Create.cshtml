@@ -1,64 +1,292 @@
 ﻿@model WebHamburgueseria.Models.Empleado
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Empleado";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<style>
+    .btn-guardar {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(25, 158, 55, 0.4);
+    }
 
-<h4>Empleado</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CedulaIdentidad" class="control-label"></label>
-                <input asp-for="CedulaIdentidad" class="form-control" />
-                <span asp-validation-for="CedulaIdentidad" class="text-danger"></span>
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(25, 158, 55, 0.6);
+            color: white;
+        }
+
+    .btn-cancelar {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(186, 46, 17, 0.4);
+    }
+
+        .btn-cancelar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(186, 46, 17, 0.6);
+            color: white;
+        }
+
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px 25px;
+        border: none;
+    }
+
+        .card-header h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+            .card-header h4 i {
+                margin-right: 10px;
+            }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        padding: 12px 15px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+            outline: none;
+        }
+
+    .page-title {
+        color: #2d3436;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 mb-1 page-title">
+            <i class="fas fa-plus-circle"></i>
+            Crear Nuevo Empleado
+        </h1>
+        <p class="text-muted mb-0">Complete el formulario para registrar un nuevo empleado</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-user-tie"></i>
+                        Información del Empleado
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="row">
+                            <!-- Cédula de Identidad -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="CedulaIdentidad" class="form-label">
+                                        <i class="fas fa-id-card text-muted mr-1"></i>
+                                        Cédula de Identidad
+                                    </label>
+                                    <input asp-for="CedulaIdentidad" class="form-control" placeholder="Ej: 1234567" />
+                                    <span asp-validation-for="CedulaIdentidad" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Celular -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Celular" class="form-label">
+                                        <i class="fas fa-phone text-muted mr-1"></i>
+                                        Celular
+                                    </label>
+                                    <input asp-for="Celular" class="form-control" type="number" placeholder="Ej: 70123456" />
+                                    <span asp-validation-for="Celular" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Nombres -->
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Nombres" class="form-label">
+                                        <i class="fas fa-user text-muted mr-1"></i>
+                                        Nombres
+                                    </label>
+                                    <input asp-for="Nombres" class="form-control" placeholder="Ingrese los nombres" />
+                                    <span asp-validation-for="Nombres" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Primer Apellido -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="PrimerApellido" class="form-label">
+                                        <i class="fas fa-user-tag text-muted mr-1"></i>
+                                        Primer Apellido
+                                    </label>
+                                    <input asp-for="PrimerApellido" class="form-control" placeholder="Primer apellido" />
+                                    <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Segundo Apellido -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="SegundoApellido" class="form-label">
+                                        <i class="fas fa-user-tag text-muted mr-1"></i>
+                                        Segundo Apellido
+                                    </label>
+                                    <input asp-for="SegundoApellido" class="form-control" placeholder="Segundo apellido" />
+                                    <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Cargo -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Cargo" class="form-label">
+                                        <i class="fas fa-briefcase text-muted mr-1"></i>
+                                        Cargo
+                                    </label>
+                                    <select asp-for="Cargo" class="form-control form-select">
+                                        <option value="">-- Seleccione un cargo --</option>
+                                        <option value="Gerente">Gerente</option>
+                                        <option value="Cajero">Cajero</option>
+                                        <option value="Cocinero">Cocinero</option>
+                                        <option value="Mesero">Mesero</option>
+                                        <option value="Limpieza">Limpieza</option>
+                                    </select>
+                                    <span asp-validation-for="Cargo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Estado -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Estado" class="form-label">
+                                        <i class="fas fa-toggle-on text-muted mr-1"></i>
+                                        Estado
+                                    </label>
+                                    <select asp-for="Estado" class="form-control form-select">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                    <span asp-validation-for="Estado" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Usuario Registro -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UsuarioRegistro" class="form-label">
+                                        <i class="fas fa-user-circle text-muted mr-1"></i>
+                                        Usuario de Registro
+                                    </label>
+                                    <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" />
+                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Fecha Registro -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FechaRegistro" class="form-label">
+                                        <i class="fas fa-calendar text-muted mr-1"></i>
+                                        Fecha de Registro
+                                    </label>
+                                    <input asp-for="FechaRegistro" class="form-control" type="datetime-local" />
+                                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dirección -->
+                        <div class="form-group">
+                            <label asp-for="Direccion" class="form-label">
+                                <i class="fas fa-map-marker-alt text-muted mr-1"></i>
+                                Dirección
+                            </label>
+                            <input asp-for="Direccion" class="form-control" placeholder="Ingrese la dirección completa" />
+                            <span asp-validation-for="Direccion" class="text-danger"></span>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="form-group mt-4 mb-0">
+                            <div class="row">
+                                <div class="col-md-6 mb-2 mb-md-0">
+                                    <button type="submit" class="btn btn-guardar btn-block">
+                                        <i class="fas fa-save mr-2"></i>
+                                        Guardar Empleado
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a asp-action="Index" class="btn btn-cancelar btn-block">
+                                        <i class="fas fa-times mr-2"></i>
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Nombres" class="control-label"></label>
-                <input asp-for="Nombres" class="form-control" />
-                <span asp-validation-for="Nombres" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrimerApellido" class="control-label"></label>
-                <input asp-for="PrimerApellido" class="form-control" />
-                <span asp-validation-for="PrimerApellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SegundoApellido" class="control-label"></label>
-                <input asp-for="SegundoApellido" class="form-control" />
-                <span asp-validation-for="SegundoApellido" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Celular" class="control-label"></label>
-                <input asp-for="Celular" class="form-control" />
-                <span asp-validation-for="Celular" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cargo" class="control-label"></label>
-                <input asp-for="Cargo" class="form-control" />
-                <span asp-validation-for="Cargo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

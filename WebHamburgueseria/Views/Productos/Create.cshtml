@@ -1,0 +1,278 @@
+﻿@model WebHamburgueseria.Models.Producto
+@{
+    ViewData["Title"] = "Crear Producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-guardar {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(25, 158, 55, 0.4);
+    }
+
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(25, 158, 55, 0.6);
+            color: white;
+        }
+
+    .btn-cancelar {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(186, 46, 17, 0.4);
+    }
+
+        .btn-cancelar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(186, 46, 17, 0.6);
+            color: white;
+        }
+
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px 25px;
+        border: none;
+    }
+
+        .card-header h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+            .card-header h4 i {
+                margin-right: 10px;
+            }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        padding: 12px 15px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+            outline: none;
+        }
+
+    .page-title {
+        color: #2d3436;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    textarea.form-control {
+        min-height: 100px;
+        resize: vertical;
+    }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 mb-1 page-title">
+            <i class="fas fa-plus-circle"></i>
+            Crear Nuevo Producto
+        </h1>
+        <p class="text-muted mb-0">Complete el formulario para registrar un nuevo producto</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-hamburger"></i>
+                        Información del Producto
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="row">
+                            <!-- Código -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Codigo" class="form-label">
+                                        <i class="fas fa-barcode text-muted mr-1"></i>
+                                        Código del Producto
+                                    </label>
+                                    <input asp-for="Codigo" class="form-control" placeholder="Ej: PROD001" />
+                                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Nombre -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Nombre" class="form-label">
+                                        <i class="fas fa-tag text-muted mr-1"></i>
+                                        Nombre del Producto
+                                    </label>
+                                    <input asp-for="Nombre" class="form-control" placeholder="Ej: Hamburguesa Clásica" />
+                                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Categoría -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="IdCategoria" class="form-label">
+                                        <i class="fas fa-tags text-muted mr-1"></i>
+                                        Categoría
+                                    </label>
+                                    <select asp-for="IdCategoria" class="form-control form-select" asp-items="ViewBag.IdCategoria">
+                                        <option value="">-- Seleccione una categoría --</option>
+                                    </select>
+                                    <span asp-validation-for="IdCategoria" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Precio de Venta -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="PrecioVenta" class="form-label">
+                                        <i class="fas fa-dollar-sign text-muted mr-1"></i>
+                                        Precio de Venta (Bs.)
+                                    </label>
+                                    <input asp-for="PrecioVenta" class="form-control" type="number" step="0.01" placeholder="0.00" />
+                                    <span asp-validation-for="PrecioVenta" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Stock/Saldo -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Saldo" class="form-label">
+                                        <i class="fas fa-boxes text-muted mr-1"></i>
+                                        Stock Inicial
+                                    </label>
+                                    <input asp-for="Saldo" class="form-control" type="number" step="0.01" placeholder="0" />
+                                    <span asp-validation-for="Saldo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Estado -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Estado" class="form-label">
+                                        <i class="fas fa-toggle-on text-muted mr-1"></i>
+                                        Estado
+                                    </label>
+                                    <select asp-for="Estado" class="form-control form-select">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                    <span asp-validation-for="Estado" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Usuario Registro -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UsuarioRegistro" class="form-label">
+                                        <i class="fas fa-user text-muted mr-1"></i>
+                                        Usuario de Registro
+                                    </label>
+                                    <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" />
+                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Fecha Registro -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FechaRegistro" class="form-label">
+                                        <i class="fas fa-calendar text-muted mr-1"></i>
+                                        Fecha de Registro
+                                    </label>
+                                    <input asp-for="FechaRegistro" class="form-control" type="datetime-local" />
+                                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="form-group">
+                            <label asp-for="Descripcion" class="form-label">
+                                <i class="fas fa-align-left text-muted mr-1"></i>
+                                Descripción
+                            </label>
+                            <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Descripción detallada del producto..."></textarea>
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="form-group mt-4 mb-0">
+                            <div class="row">
+                                <div class="col-md-6 mb-2 mb-md-0">
+                                    <button type="submit" class="btn btn-guardar btn-block">
+                                        <i class="fas fa-save mr-2"></i>
+                                        Guardar Producto
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a asp-action="Index" class="btn btn-cancelar btn-block">
+                                        <i class="fas fa-times mr-2"></i>
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

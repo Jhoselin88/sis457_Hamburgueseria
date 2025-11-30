@@ -1,0 +1,151 @@
+﻿@model WebHamburgueseria.Models.Cliente
+@{
+    ViewData["Title"] = "Editar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-actualizar {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(25, 158, 55, 0.4);
+    }
+
+    .btn-cancelar {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(186, 46, 17, 0.4);
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px 25px;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        padding: 12px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+        }
+
+    .badge-id {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container-fluid px-4 py-4">
+
+    <div class="mb-4">
+        <h1 class="h3"><i class="fas fa-edit"></i> Editar Cliente</h1>
+        <p class="text-muted">Modifique los datos del cliente</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                        <i class="fas fa-user-edit"></i>
+                        Información del Cliente
+                        <span class="badge-id float-right">ID: @Model.Id</span>
+                    </h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form asp-action="Edit">
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CedulaIdentidad" class="form-label">Cédula de Identidad</label>
+                            <input asp-for="CedulaIdentidad" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Nombres" class="form-label">Nombres</label>
+                            <input asp-for="Nombres" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Apellidos" class="form-label">Apellidos</label>
+                            <input asp-for="Apellidos" class="form-control" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="UsuarioRegistro" class="form-label">Usuario Registro</label>
+                            <input asp-for="UsuarioRegistro" class="form-control" readonly />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="FechaRegistro" class="form-label">Fecha Registro</label>
+                            <input asp-for="FechaRegistro"
+                                   class="form-control"
+                                   readonly
+                                   value="@Model.FechaRegistro.ToString("yyyy-MM-dd HH:mm")" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Estado" class="form-label">Estado</label>
+                            <input asp-for="Estado" class="form-control" readonly />
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-6 mb-2">
+                                <button type="submit" class="btn btn-actualizar btn-block">
+                                    <i class="fas fa-sync-alt mr-2"></i> Actualizar Cliente
+                                </button>
+                            </div>
+
+                            <div class="col-md-6">
+                                <a asp-action="Index" class="btn btn-cancelar btn-block">
+                                    <i class="fas fa-times mr-2"></i> Cancelar
+                                </a>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

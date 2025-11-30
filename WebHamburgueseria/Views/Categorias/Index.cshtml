@@ -1,0 +1,310 @@
+﻿@model IEnumerable<WebHamburgueseria.Models.Categoria>
+@{
+    ViewData["Title"] = "Categorías";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Estilos personalizados para la tabla de categorías */
+    .btn-crear {
+        background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(255, 107, 53, 0.4);
+    }
+
+        .btn-crear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.6);
+            color: white;
+        }
+
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    /* Estilos del panel de búsqueda */
+    .search-panel {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-input {
+        border-radius: 8px;
+        border: 2px solid #ff6b35;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        background: white;
+        cursor: text;
+    }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
+            border-color: #f7931e;
+            outline: none;
+            cursor: text;
+        }
+
+    .table-categorias {
+        font-size: 0.95rem;
+    }
+
+        .table-categorias thead {
+            background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+            color: white;
+        }
+
+            .table-categorias thead th {
+                border: none;
+                padding: 18px;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 0.85rem;
+                letter-spacing: 0.5px;
+            }
+
+        .table-categorias tbody tr {
+            transition: all 0.2s;
+            background: white;
+        }
+
+            .table-categorias tbody tr:hover {
+                background: #f8f9fa;
+                box-shadow: 0 2px 8px rgba(108, 92, 231, 0.15);
+                transform: scale(1.01);
+            }
+
+        .table-categorias tbody td {
+            padding: 18px;
+            vertical-align: middle;
+            border-top: 1px solid #e9ecef;
+        }
+
+    .badge-estado {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .badge-activo {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        color: white;
+    }
+
+    .badge-inactivo {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        color: white;
+    }
+
+    .btn-group-sm .btn {
+        border-radius: 8px;
+        margin: 0 3px;
+        padding: 8px 12px;
+        transition: all 0.3s;
+        font-weight: 500;
+    }
+
+        .btn-group-sm .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+    .btn-action-edit {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+    }
+
+        .btn-action-edit:hover {
+            background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+            color: white;
+        }
+
+    .btn-action-details {
+        background: linear-gradient(135deg, #D4D92B 0%, #909425 100%);
+        border: none;
+        color: white;
+    }
+
+        .btn-action-details:hover {
+            background: linear-gradient(135deg, #D4D92B 0%, #909425 100%);
+            color: white;
+        }
+
+    .btn-action-delete {
+        background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+        border: none;
+        color: white;
+    }
+
+        .btn-action-delete:hover {
+            background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
+            color: white;
+        }
+
+    /* ID */
+    .text-primary {
+        color: #1F1716 !important;
+    }
+
+    /* Título de la página */
+    .page-title {
+        color: #2d3436;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 mb-1 page-title">
+            <i class="fas fa-tags"></i>
+            Categorías
+        </h1>
+        <p class="text-muted mb-0">Gestión de categorías de productos</p>
+    </div>
+
+    <!-- Panel de búsqueda -->
+    <div class="search-panel">
+        <div class="row align-items-center">
+            <div class="col-md-9 mb-3 mb-md-0">
+                <input type="text"
+                       id="searchInput"
+                       class="form-control search-input"
+                       placeholder="Buscar por nombre o estado..."
+                       value="">
+            </div>
+            <div class="col-md-3 text-right">
+                <a asp-action="Create" class="btn btn-crear btn-block">
+                    <i class="fas fa-plus-circle mr-2"></i>Crear Nueva Categoría
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de categorías -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-categorias mb-0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="font-weight-bold text-primary">@item.Id</td>
+                                    <td class="font-weight-bold">@item.Nombre</td>
+                                    <td>
+                                        @if (item.Estado == 1)
+                                        {
+                                            <span class="badge badge-estado badge-activo">
+                                                <i class="fas fa-check-circle mr-1"></i>
+                                                Activo
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-estado badge-inactivo">
+                                                <i class="fas fa-times-circle mr-1"></i>
+                                                Inactivo
+                                            </span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-action="Edit"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-action-edit btn-sm"
+                                               title="Editar">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+                                            <a asp-action="Details"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-action-details btn-sm"
+                                               title="Ver detalles">
+                                                <i class="fas fa-eye"></i> Ver
+                                            </a>
+                                            <a asp-action="Delete"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-action-delete btn-sm"
+                                               title="Eliminar"
+                                               onclick="return confirm('¿Está seguro de eliminar esta categoría?')">
+                                                <i class="fas fa-trash-alt"></i> Eliminar
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center py-5">
+                                    <i class="fas fa-inbox fa-3x text-muted mb-3 d-block"></i>
+                                    <p class="text-muted mb-0">No hay categorías registradas</p>
+                                    <a asp-action="Create" class="btn btn-primary btn-sm mt-3">
+                                        <i class="fas fa-plus mr-1"></i> Crear la primera categoría
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Búsqueda automática (filtrado client-side)
+        const searchInput = document.getElementById('searchInput');
+        const tableRows = document.querySelectorAll('.table-categorias tbody tr');
+
+        searchInput.addEventListener('input', function() {
+            const searchValue = this.value.toLowerCase();
+
+            tableRows.forEach(row => {
+                const id = row.cells[0]?.textContent.toLowerCase() || '';
+                const nombre = row.cells[1]?.textContent.toLowerCase() || '';
+                const estado = row.cells[2]?.textContent.toLowerCase() || '';
+
+                if (id.includes(searchValue) || nombre.includes(searchValue) || estado.includes(searchValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Confirmar eliminación
+        document.querySelectorAll('.btn-action-delete').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (!confirm('¿Está seguro de eliminar esta categoría?')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

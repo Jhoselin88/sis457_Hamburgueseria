@@ -99,67 +99,47 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fas fa-address-card"></i>
                         Cliente: @Model.Nombres @Model.Apellidos
-                        <span class="badge-id float-right">ID: @Model.Id</span>
                     </h4>
                 </div>
 
                 <div class="card-body p-4">
 
                     <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-id-card"></i> Cédula de Identidad</div>
+                        <div class="detail-label">Cédula de Identidad</div>
                         <div class="detail-value">@Model.CedulaIdentidad</div>
                     </div>
 
                     <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-user"></i> Nombres</div>
+                        <div class="detail-label">Nombres</div>
                         <div class="detail-value">@Model.Nombres</div>
                     </div>
 
                     <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-user"></i> Apellidos</div>
+                        <div class="detail-label"> Apellidos</div>
                         <div class="detail-value">@Model.Apellidos</div>
                     </div>
 
                     <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-user-shield"></i> Usuario Registro</div>
+                        <div class="detail-label">Usuario Registro</div>
                         <div class="detail-value">@Model.UsuarioRegistro</div>
                     </div>
 
                     <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-calendar-alt"></i> Fecha Registro</div>
+                        <div class="detail-label">Fecha Registro</div>
                         <div class="detail-value">@Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")</div>
-                    </div>
-
-                    <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-toggle-on"></i> Estado</div>
-                        <div class="detail-value">
-                            @if (Model.Estado == 1)
-                            {
-                                <span class="badge badge-estado badge-activo">
-                                    <i class="fas fa-check-circle mr-1"></i> Activo
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-estado badge-inactivo">
-                                    <i class="fas fa-times-circle mr-1"></i> Inactivo
-                                </span>
-                            }
-                        </div>
                     </div>
 
                     <div class="mt-4 pt-3">
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-editar btn-block">
-                                    <i class="fas fa-edit mr-2"></i> Editar Cliente
+                                    Editar Cliente
                                 </a>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-volver btn-block">
-                                    <i class="fas fa-arrow-left mr-2"></i> Volver al Listado
+                                     Volver al Listado
                                 </a>
                             </div>
                         </div>

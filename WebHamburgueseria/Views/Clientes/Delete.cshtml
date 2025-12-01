@@ -157,7 +157,6 @@
     <!-- Encabezado -->
     <div class="mb-4">
         <h1 class="h3 mb-1 page-title">
-            <i class="fas fa-trash-alt"></i>
             Eliminar Cliente
         </h1>
         <p class="text-muted mb-0">Confirme la eliminación del cliente</p>
@@ -169,7 +168,6 @@
 
             <!-- Alerta de advertencia -->
             <div class="alert-warning-custom d-flex align-items-center">
-                <i class="fas fa-exclamation-triangle"></i>
                 <div>
                     <h5>¡Atención! Esta acción es irreversible</h5>
                     <p>¿Está seguro de que desea eliminar este cliente? Todos los datos asociados se perderán permanentemente.</p>
@@ -179,9 +177,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fas fa-users"></i>
                         Cliente: @Model.Nombres @Model.Apellidos
-                        <span class="badge-id float-right">ID: @Model.Id</span>
                     </h4>
                 </div>
                 <div class="card-body p-4">
@@ -189,7 +185,6 @@
                     <!-- ID -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-hashtag"></i>
                             ID del Cliente
                         </div>
                         <div class="detail-value">
@@ -200,7 +195,6 @@
                     <!-- Cédula de Identidad -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-id-card"></i>
                             Cédula de Identidad
                         </div>
                         <div class="detail-value">
@@ -211,7 +205,6 @@
                     <!-- Nombres -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-user"></i>
                             Nombres
                         </div>
                         <div class="detail-value">
@@ -222,7 +215,6 @@
                     <!-- Apellidos -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-user-tag"></i>
                             Apellidos
                         </div>
                         <div class="detail-value">
@@ -233,7 +225,6 @@
                     <!-- Usuario Registro -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-user-circle"></i>
                             Usuario de Registro
                         </div>
                         <div class="detail-value">
@@ -244,51 +235,23 @@
                     <!-- Fecha Registro -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-calendar"></i>
                             Fecha de Registro
                         </div>
                         <div class="detail-value">
                             @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")
                         </div>
                     </div>
-
-                    <!-- Estado -->
-                    <div class="detail-row">
-                        <div class="detail-label">
-                            <i class="fas fa-toggle-on"></i>
-                            Estado
-                        </div>
-                        <div class="detail-value">
-                            @if (Model.Estado == 1)
-                            {
-                                <span class="badge badge-estado badge-activo">
-                                    <i class="fas fa-check-circle mr-1"></i>
-                                    Activo
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-estado badge-inactivo">
-                                    <i class="fas fa-times-circle mr-1"></i>
-                                    Inactivo
-                                </span>
-                            }
-                        </div>
-                    </div>
-
                     <!-- Formulario de eliminación -->
                     <form asp-action="Delete" class="mt-4 pt-3">
                         <input type="hidden" asp-for="Id" />
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
                                 <button type="submit" class="btn btn-eliminar btn-block">
-                                    <i class="fas fa-trash-alt mr-2"></i>
-                                    Confirmar Eliminación
+                                    Eliminar
                                 </button>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-cancelar btn-block">
-                                    <i class="fas fa-times mr-2"></i>
                                     Cancelar
                                 </a>
                             </div>

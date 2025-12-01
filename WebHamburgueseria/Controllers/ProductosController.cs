@@ -10,7 +10,6 @@ using WebHamburgueseria.Models;
 
 namespace WebHamburgueseria.Controllers
 {
-    
     public class ProductosController : Controller
     {
         private readonly LabHamburgueseriaContext _context;
@@ -20,7 +19,6 @@ namespace WebHamburgueseria.Controllers
             _context = context;
         }
 
-        // GET: Productos
         // GET: Productos
         public async Task<IActionResult> Index(string search, int? categoria)
         {
@@ -64,6 +62,7 @@ namespace WebHamburgueseria.Controllers
             var producto = await _context.Producto
                 .Include(p => p.IdCategoriaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (producto == null)
             {
                 return NotFound();
@@ -75,24 +74,81 @@ namespace WebHamburgueseria.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "Id", "Id");
+            // Cargar categorías activas con Id y Nombre
+            ViewData["IdCategoria"] = new SelectList(
+                _context.Categoria.Where(c => c.Estado == 1),
+                "Id",
+                "Nombre"
+            );
+
             return View();
         }
 
         // POST: Productos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado")] Producto producto)
         {
+            // SOLUCIÓN CRÍTICA: Remover la validación de propiedades de navegación
+            ModelState.Remove("IdCategoriaNavigation");
+            ModelState.Remove("DetalleVentas");
+
+            // DEBUGGING: Ver qué errores tiene el ModelState
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(x => x.Value.Errors.Count > 0)
+                    .Select(x => new {
+                        Field = x.Key,
+                        Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    })
+                    .ToList();
+
+                // Esto mostrará los errores en la consola de Visual Studio
+                foreach (var error in errors)
+                {
+                    Console.WriteLine($"Campo: {error.Field}");
+                    foreach (var msg in error.Errors)
+                    {
+                        Console.WriteLine($"  Error: {msg}");
+                    }
+                }
+
+                // También podemos pasar los errores a la vista
+                ViewBag.ValidationErrors = errors;
+            }
+
             if (ModelState.IsValid)
             {
-                _context.Add(producto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(producto);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Producto creado exitosamente";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    // Capturar cualquier error de base de datos
+                    Console.WriteLine($"Error al guardar: {ex.Message}");
+                    if (ex.InnerException != null)
+                    {
+                        Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                    }
+
+                    ModelState.AddModelError("", "Error al guardar el producto: " + ex.Message);
+                }
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "Id", "Id", producto.IdCategoria);
+
+            // Recargar categorías si hay error
+            ViewData["IdCategoria"] = new SelectList(
+                _context.Categoria.Where(c => c.Estado == 1),
+                "Id",
+                "Nombre",
+                producto.IdCategoria
+            );
+
             return View(producto);
         }
 
@@ -109,13 +165,19 @@ namespace WebHamburgueseria.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "Id", "Id", producto.IdCategoria);
+
+            // Cargar categorías con Id y Nombre
+            ViewData["IdCategoria"] = new SelectList(
+                _context.Categoria.Where(c => c.Estado == 1),
+                "Id",
+                "Nombre",
+                producto.IdCategoria
+            );
+
             return View(producto);
         }
 
         // POST: Productos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado")] Producto producto)
@@ -125,12 +187,19 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
+            // SOLUCIÓN: Remover validación de propiedades de navegación
+            ModelState.Remove("IdCategoriaNavigation");
+            ModelState.Remove("DetalleVentas");
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(producto);
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Producto actualizado exitosamente";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -143,9 +212,21 @@ namespace WebHamburgueseria.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al actualizar: {ex.Message}");
+                    ModelState.AddModelError("", "Error al actualizar el producto: " + ex.Message);
+                }
             }
-            ViewData["IdCategoria"] = new SelectList(_context.Categoria, "Id", "Id", producto.IdCategoria);
+
+            // Recargar categorías si hay error
+            ViewData["IdCategoria"] = new SelectList(
+                _context.Categoria.Where(c => c.Estado == 1),
+                "Id",
+                "Nombre",
+                producto.IdCategoria
+            );
+
             return View(producto);
         }
 
@@ -157,9 +238,11 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
+            // Incluir la navegación de categoría
             var producto = await _context.Producto
                 .Include(p => p.IdCategoriaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (producto == null)
             {
                 return NotFound();
@@ -173,13 +256,23 @@ namespace WebHamburgueseria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var producto = await _context.Producto.FindAsync(id);
-            if (producto != null)
+            try
             {
-                _context.Producto.Remove(producto);
+                var producto = await _context.Producto.FindAsync(id);
+                if (producto != null)
+                {
+                    _context.Producto.Remove(producto);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Producto eliminado exitosamente";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar: {ex.Message}");
+                TempData["ErrorMessage"] = "Error al eliminar el producto. Puede que esté siendo usado en ventas.";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

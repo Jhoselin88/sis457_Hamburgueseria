@@ -166,7 +166,6 @@
                     <h4>
                         <i class="fas fa-hamburger"></i>
                         Producto: @Model.Nombre
-                        <span class="badge-id float-right">ID: @Model.Id</span>
                     </h4>
                 </div>
                 <div class="card-body p-4">
@@ -176,7 +175,6 @@
                             <!-- Código -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-barcode"></i>
                                     Código del Producto
                                 </div>
                                 <div class="detail-value">
@@ -187,7 +185,6 @@
                             <!-- Nombre -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-tag"></i>
                                     Nombre
                                 </div>
                                 <div class="detail-value">
@@ -198,7 +195,6 @@
                             <!-- Categoría -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-tags"></i>
                                     Categoría
                                 </div>
                                 <div class="detail-value">
@@ -211,7 +207,6 @@
                             <!-- Precio de Venta -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-dollar-sign"></i>
                                     Precio de Venta
                                 </div>
                                 <div class="detail-value">
@@ -224,7 +219,6 @@
                             <!-- Stock -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-boxes"></i>
                                     Stock Disponible
                                 </div>
                                 <div class="detail-value">
@@ -235,7 +229,6 @@
                             <!-- Usuario Registro -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user"></i>
                                     Usuario de Registro
                                 </div>
                                 <div class="detail-value">
@@ -246,7 +239,6 @@
                             <!-- Fecha Registro -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-calendar"></i>
                                     Fecha de Registro
                                 </div>
                                 <div class="detail-value">
@@ -254,36 +246,12 @@
                                 </div>
                             </div>
 
-                            <!-- Estado -->
-                            <div class="detail-row">
-                                <div class="detail-label">
-                                    <i class="fas fa-toggle-on"></i>
-                                    Estado
-                                </div>
-                                <div class="detail-value">
-                                    @if (Model.Estado == 1)
-                                    {
-                                        <span class="badge badge-estado badge-activo">
-                                            <i class="fas fa-check-circle mr-1"></i>
-                                            Activo
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-estado badge-inactivo">
-                                            <i class="fas fa-times-circle mr-1"></i>
-                                            Inactivo
-                                        </span>
-                                    }
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                     <!-- Descripción -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-align-left"></i>
                             Descripción
                         </div>
                         <div class="detail-value">
@@ -296,13 +264,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
                                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-editar btn-block">
-                                    <i class="fas fa-edit mr-2"></i>
                                     Editar Producto
                                 </a>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-volver btn-block">
-                                    <i class="fas fa-arrow-left mr-2"></i>
                                     Volver al Listado
                                 </a>
                             </div>

@@ -143,56 +143,20 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fas fa-tags"></i>
                         Categoría: @Model.Nombre
-                        <span class="badge-id float-right">ID: @Model.Id</span>
                     </h4>
                 </div>
                 <div class="card-body p-4">
 
-                    <!-- ID -->
-                    <div class="detail-row">
-                        <div class="detail-label">
-                            <i class="fas fa-hashtag"></i>
-                            ID de la Categoría
-                        </div>
-                        <div class="detail-value">
-                            @Model.Id
-                        </div>
-                    </div>
+
 
                     <!-- Nombre -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-tag"></i>
                             Nombre de la Categoría
                         </div>
                         <div class="detail-value">
                             @Model.Nombre
-                        </div>
-                    </div>
-
-                    <!-- Estado -->
-                    <div class="detail-row">
-                        <div class="detail-label">
-                            <i class="fas fa-toggle-on"></i>
-                            Estado
-                        </div>
-                        <div class="detail-value">
-                            @if (Model.Estado == 1)
-                            {
-                                <span class="badge badge-estado badge-activo">
-                                    <i class="fas fa-check-circle mr-1"></i>
-                                    Activo
-                                </span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-estado badge-inactivo">
-                                    <i class="fas fa-times-circle mr-1"></i>
-                                    Inactivo
-                                </span>
-                            }
                         </div>
                     </div>
 
@@ -201,13 +165,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
                                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-editar btn-block">
-                                    <i class="fas fa-edit mr-2"></i>
                                     Editar Categoría
                                 </a>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-volver btn-block">
-                                    <i class="fas fa-arrow-left mr-2"></i>
                                     Volver al Listado
                                 </a>
                             </div>

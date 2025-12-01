@@ -144,7 +144,6 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fas fa-user-tie"></i>
                         Información del Empleado
                     </h4>
                 </div>
@@ -154,7 +153,6 @@
                         <div class="col-md-6">
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-id-card"></i>
                                     Cédula de Identidad
                                 </div>
                                 <div class="detail-value">
@@ -164,7 +162,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user"></i>
                                     Nombres
                                 </div>
                                 <div class="detail-value">
@@ -174,7 +171,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user-tag"></i>
                                     Primer Apellido
                                 </div>
                                 <div class="detail-value">
@@ -184,7 +180,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user-tag"></i>
                                     Segundo Apellido
                                 </div>
                                 <div class="detail-value">
@@ -194,7 +189,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-phone"></i>
                                     Celular
                                 </div>
                                 <div class="detail-value">
@@ -207,7 +201,6 @@
                         <div class="col-md-6">
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-briefcase"></i>
                                     Cargo
                                 </div>
                                 <div class="detail-value">
@@ -217,7 +210,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-map-marker-alt"></i>
                                     Dirección
                                 </div>
                                 <div class="detail-value">
@@ -225,30 +217,9 @@
                                 </div>
                             </div>
 
-                            <div class="detail-row">
-                                <div class="detail-label">
-                                    <i class="fas fa-toggle-on"></i>
-                                    Estado
-                                </div>
-                                <div class="detail-value">
-                                    @if (Model.Estado == 1)
-                                    {
-                                        <span class="badge badge-estado badge-activo">
-                                            <i class="fas fa-check-circle mr-1"></i> Activo
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-estado badge-inactivo">
-                                            <i class="fas fa-times-circle mr-1"></i> Inactivo
-                                        </span>
-                                    }
-                                </div>
-                            </div>
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user-circle"></i>
                                     Usuario de Registro
                                 </div>
                                 <div class="detail-value">
@@ -258,7 +229,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-calendar"></i>
                                     Fecha de Registro
                                 </div>
                                 <div class="detail-value">
@@ -273,13 +243,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
                                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-editar btn-block">
-                                    <i class="fas fa-edit mr-2"></i>
                                     Editar Empleado
                                 </a>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-volver btn-block">
-                                    <i class="fas fa-arrow-left mr-2"></i>
                                     Volver a la Lista
                                 </a>
                             </div>

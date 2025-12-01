@@ -196,7 +196,7 @@
             </div>
             <div class="col-md-3 text-right">
                 <a asp-action="Create" class="btn btn-crear btn-block">
-                    <i class="fas fa-plus-circle mr-2"></i>Crear Nueva Venta
+                    Nueva Venta
                 </a>
             </div>
         </div>
@@ -213,7 +213,6 @@
                             <th>Cliente</th>
                             <th>Usuario</th>
                             <th>Fecha Registro</th>
-                            <th>Estado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -225,35 +224,17 @@
                                 <tr>
                                     <td>
                                         <span class="badge badge-transaccion">
-                                            <i class="fas fa-receipt mr-1"></i>
                                             @(item.NumeroTransaccion ?? "N/A")
                                         </span>
                                     </td>
                                     <td class="font-weight-bold">
-                                        <i class="fas fa-user text-muted mr-1"></i>
                                         @(item.IdClienteNavigation?.Nombres ?? "Cliente ID: " + item.IdCliente)
                                     </td>
                                     <td>
-                                        <i class="fas fa-user-circle text-muted mr-1"></i>
                                         @(item.IdUsuarioNavigation?.Usuario1 ?? "Usuario ID: " + item.IdUsuario)
                                     </td>
                                     <td>
-                                        <i class="fas fa-calendar text-muted mr-1"></i>
                                         @item.FechaRegistro.ToString("dd/MM/yyyy HH:mm")
-                                    </td>
-                                    <td>
-                                        @if (item.Estado == 1)
-                                        {
-                                            <span class="badge badge-estado badge-activo">
-                                                <i class="fas fa-check-circle mr-1"></i> Activo
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-estado badge-inactivo">
-                                                <i class="fas fa-times-circle mr-1"></i> Inactivo
-                                            </span>
-                                        }
                                     </td>
                                     <td class="text-center">
                                         <div class="btn-group btn-group-sm" role="group">
@@ -261,20 +242,19 @@
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-edit btn-sm"
                                                title="Editar">
-                                                <i class="fas fa-edit"></i> Editar
+                                                Editar
                                             </a>
                                             <a asp-action="Details"
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-details btn-sm"
                                                title="Ver detalles">
-                                                <i class="fas fa-eye"></i> Ver
+                                                Ver
                                             </a>
                                             <a asp-action="Delete"
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-delete btn-sm"
-                                               title="Eliminar"
-                                               onclick="return confirm('¿Está seguro de eliminar esta venta?')">
-                                                <i class="fas fa-trash-alt"></i> Eliminar
+                                               title="Eliminar">
+                                                Eliminar
                                             </a>
                                         </div>
                                     </td>
@@ -288,7 +268,7 @@
                                     <i class="fas fa-inbox fa-3x text-muted mb-3 d-block"></i>
                                     <p class="text-muted mb-0">No hay ventas registradas</p>
                                     <a asp-action="Create" class="btn btn-primary btn-sm mt-3">
-                                        <i class="fas fa-plus mr-1"></i> Crear la primera venta
+                                        Crear la primera venta
                                     </a>
                                 </td>
                             </tr>
@@ -319,15 +299,6 @@
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
-                }
-            });
-        });
-
-        // Confirmar eliminación
-        document.querySelectorAll('.btn-action-delete').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (!confirm('¿Está seguro de eliminar esta venta?')) {
-                    e.preventDefault();
                 }
             });
         });

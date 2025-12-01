@@ -178,7 +178,6 @@
     <!-- Encabezado -->
     <div class="mb-4">
         <h1 class="h3 mb-1 page-title">
-            <i class="fas fa-trash-alt"></i>
             Eliminar Producto
         </h1>
         <p class="text-muted mb-0">Confirme la eliminación del producto</p>
@@ -190,7 +189,6 @@
 
             <!-- Alerta de advertencia -->
             <div class="alert-warning-custom d-flex align-items-center">
-                <i class="fas fa-exclamation-triangle"></i>
                 <div>
                     <h5>¡Atención! Esta acción es irreversible</h5>
                     <p>¿Está seguro de que desea eliminar este producto? Todos los datos asociados se perderán permanentemente.</p>
@@ -202,7 +200,6 @@
                     <h4>
                         <i class="fas fa-hamburger"></i>
                         Producto: @Model.Nombre
-                        <span class="badge-id float-right">ID: @Model.Id</span>
                     </h4>
                 </div>
                 <div class="card-body p-4">
@@ -212,7 +209,6 @@
                             <!-- Código -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-barcode"></i>
                                     Código del Producto
                                 </div>
                                 <div class="detail-value">
@@ -223,7 +219,6 @@
                             <!-- Nombre -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-tag"></i>
                                     Nombre
                                 </div>
                                 <div class="detail-value">
@@ -234,7 +229,6 @@
                             <!-- Categoría -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-tags"></i>
                                     Categoría
                                 </div>
                                 <div class="detail-value">
@@ -247,7 +241,6 @@
                             <!-- Precio de Venta -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-dollar-sign"></i>
                                     Precio de Venta
                                 </div>
                                 <div class="detail-value">
@@ -260,7 +253,6 @@
                             <!-- Stock -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-boxes"></i>
                                     Stock Disponible
                                 </div>
                                 <div class="detail-value">
@@ -271,7 +263,6 @@
                             <!-- Usuario Registro -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user"></i>
                                     Usuario de Registro
                                 </div>
                                 <div class="detail-value">
@@ -282,35 +273,10 @@
                             <!-- Fecha Registro -->
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-calendar"></i>
                                     Fecha de Registro
                                 </div>
                                 <div class="detail-value">
                                     @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm")
-                                </div>
-                            </div>
-
-                            <!-- Estado -->
-                            <div class="detail-row">
-                                <div class="detail-label">
-                                    <i class="fas fa-toggle-on"></i>
-                                    Estado
-                                </div>
-                                <div class="detail-value">
-                                    @if (Model.Estado == 1)
-                                    {
-                                        <span class="badge badge-estado badge-activo">
-                                            <i class="fas fa-check-circle mr-1"></i>
-                                            Activo
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-estado badge-inactivo">
-                                            <i class="fas fa-times-circle mr-1"></i>
-                                            Inactivo
-                                        </span>
-                                    }
                                 </div>
                             </div>
                         </div>
@@ -319,7 +285,6 @@
                     <!-- Descripción -->
                     <div class="detail-row">
                         <div class="detail-label">
-                            <i class="fas fa-align-left"></i>
                             Descripción
                         </div>
                         <div class="detail-value">
@@ -333,13 +298,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
                                 <button type="submit" class="btn btn-eliminar btn-block">
-                                    <i class="fas fa-trash-alt mr-2"></i>
                                     Confirmar Eliminación
                                 </button>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-cancelar btn-block">
-                                    <i class="fas fa-times mr-2"></i>
                                     Cancelar
                                 </a>
                             </div>

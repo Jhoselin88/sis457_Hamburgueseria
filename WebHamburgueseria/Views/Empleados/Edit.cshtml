@@ -103,7 +103,6 @@
     <!-- Encabezado -->
     <div class="mb-4">
         <h1 class="h3 mb-1 page-title">
-            <i class="fas fa-edit"></i>
             Editar Empleado
         </h1>
         <p class="text-muted mb-0">Modifique la información del empleado</p>
@@ -115,7 +114,6 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fas fa-user-tie"></i>
                         Información del Empleado
                     </h4>
                 </div>
@@ -130,7 +128,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="CedulaIdentidad" class="form-label">
-                                        <i class="fas fa-id-card text-muted mr-1"></i>
                                         Cédula de Identidad
                                     </label>
                                     <input asp-for="CedulaIdentidad" class="form-control" placeholder="Ej: 1234567" />
@@ -142,7 +139,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Celular" class="form-label">
-                                        <i class="fas fa-phone text-muted mr-1"></i>
                                         Celular
                                     </label>
                                     <input asp-for="Celular" class="form-control" type="number" placeholder="Ej: 70123456" />
@@ -156,7 +152,6 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label asp-for="Nombres" class="form-label">
-                                        <i class="fas fa-user text-muted mr-1"></i>
                                         Nombres
                                     </label>
                                     <input asp-for="Nombres" class="form-control" placeholder="Ingrese los nombres" />
@@ -170,7 +165,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="PrimerApellido" class="form-label">
-                                        <i class="fas fa-user-tag text-muted mr-1"></i>
                                         Primer Apellido
                                     </label>
                                     <input asp-for="PrimerApellido" class="form-control" placeholder="Primer apellido" />
@@ -182,7 +176,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="SegundoApellido" class="form-label">
-                                        <i class="fas fa-user-tag text-muted mr-1"></i>
                                         Segundo Apellido
                                     </label>
                                     <input asp-for="SegundoApellido" class="form-control" placeholder="Segundo apellido" />
@@ -196,7 +189,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Cargo" class="form-label">
-                                        <i class="fas fa-briefcase text-muted mr-1"></i>
                                         Cargo
                                     </label>
                                     <select asp-for="Cargo" class="form-control form-select">
@@ -210,21 +202,6 @@
                                     <span asp-validation-for="Cargo" class="text-danger"></span>
                                 </div>
                             </div>
-
-                            <!-- Estado -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="Estado" class="form-label">
-                                        <i class="fas fa-toggle-on text-muted mr-1"></i>
-                                        Estado
-                                    </label>
-                                    <select asp-for="Estado" class="form-control form-select">
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                    <span asp-validation-for="Estado" class="text-danger"></span>
-                                </div>
-                            </div>
                         </div>
 
                         <div class="row">
@@ -232,7 +209,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="UsuarioRegistro" class="form-label">
-                                        <i class="fas fa-user-circle text-muted mr-1"></i>
                                         Usuario de Registro
                                     </label>
                                     <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" />
@@ -244,7 +220,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="FechaRegistro" class="form-label">
-                                        <i class="fas fa-calendar text-muted mr-1"></i>
                                         Fecha de Registro
                                     </label>
                                     <input asp-for="FechaRegistro" class="form-control" type="datetime-local" />
@@ -256,7 +231,6 @@
                         <!-- Dirección -->
                         <div class="form-group">
                             <label asp-for="Direccion" class="form-label">
-                                <i class="fas fa-map-marker-alt text-muted mr-1"></i>
                                 Dirección
                             </label>
                             <input asp-for="Direccion" class="form-control" placeholder="Ingrese la dirección completa" />
@@ -268,13 +242,11 @@
                             <div class="row">
                                 <div class="col-md-6 mb-2 mb-md-0">
                                     <button type="submit" class="btn btn-guardar btn-block">
-                                        <i class="fas fa-save mr-2"></i>
                                         Guardar Cambios
                                     </button>
                                 </div>
                                 <div class="col-md-6">
                                     <a asp-action="Index" class="btn btn-cancelar btn-block">
-                                        <i class="fas fa-times mr-2"></i>
                                         Cancelar
                                     </a>
                                 </div>

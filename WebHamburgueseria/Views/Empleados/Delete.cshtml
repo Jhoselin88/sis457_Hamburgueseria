@@ -168,9 +168,6 @@
         <div class="col-lg-10">
             <div class="alert-warning-custom">
                 <div class="d-flex align-items-center">
-                    <div class="mr-3">
-                        <i class="fas fa-exclamation-triangle"></i>
-                    </div>
                     <div>
                         <h5>¡Atención! Esta acción es irreversible</h5>
                         <p>¿Está seguro que desea eliminar este empleado? Esta acción no se puede deshacer.</p>
@@ -196,7 +193,6 @@
                         <div class="col-md-6">
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-id-card"></i>
                                     Cédula de Identidad
                                 </div>
                                 <div class="detail-value">
@@ -206,7 +202,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user"></i>
                                     Nombres
                                 </div>
                                 <div class="detail-value">
@@ -216,7 +211,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user-tag"></i>
                                     Primer Apellido
                                 </div>
                                 <div class="detail-value">
@@ -226,7 +220,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-user-tag"></i>
                                     Segundo Apellido
                                 </div>
                                 <div class="detail-value">
@@ -236,7 +229,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-phone"></i>
                                     Celular
                                 </div>
                                 <div class="detail-value">
@@ -249,7 +241,6 @@
                         <div class="col-md-6">
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-briefcase"></i>
                                     Cargo
                                 </div>
                                 <div class="detail-value">
@@ -259,7 +250,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-map-marker-alt"></i>
                                     Dirección
                                 </div>
                                 <div class="detail-value">
@@ -269,28 +259,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-toggle-on"></i>
-                                    Estado
-                                </div>
-                                <div class="detail-value">
-                                    @if (Model.Estado == 1)
-                                    {
-                                        <span class="badge badge-estado badge-activo">
-                                            <i class="fas fa-check-circle mr-1"></i> Activo
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-estado badge-inactivo">
-                                            <i class="fas fa-times-circle mr-1"></i> Inactivo
-                                        </span>
-                                    }
-                                </div>
-                            </div>
-
-                            <div class="detail-row">
-                                <div class="detail-label">
-                                    <i class="fas fa-user-circle"></i>
                                     Usuario de Registro
                                 </div>
                                 <div class="detail-value">
@@ -300,7 +268,6 @@
 
                             <div class="detail-row">
                                 <div class="detail-label">
-                                    <i class="fas fa-calendar"></i>
                                     Fecha de Registro
                                 </div>
                                 <div class="detail-value">
@@ -316,13 +283,11 @@
                         <div class="row">
                             <div class="col-md-6 mb-2 mb-md-0">
                                 <button type="submit" class="btn btn-eliminar btn-block">
-                                    <i class="fas fa-trash-alt mr-2"></i>
-                                    Confirmar Eliminación
+                                    Eliminar
                                 </button>
                             </div>
                             <div class="col-md-6">
                                 <a asp-action="Index" class="btn btn-cancelar btn-block">
-                                    <i class="fas fa-times mr-2"></i>
                                     Cancelar
                                 </a>
                             </div>

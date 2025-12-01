@@ -102,6 +102,29 @@
         min-height: 100px;
         resize: vertical;
     }
+
+    /* Alerta de errores de validación */
+    .validation-errors {
+        background: #fee;
+        border: 1px solid #fcc;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .validation-errors h5 {
+        color: #c33;
+        margin-bottom: 10px;
+    }
+
+    .validation-errors ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .validation-errors li {
+        color: #c33;
+    }
 </style>
 
 <div class="container-fluid px-4 py-4">
@@ -109,7 +132,7 @@
     <div class="mb-4">
         <h1 class="h3 mb-1 page-title">
             <i class="fas fa-plus-circle"></i>
-            Crear Nuevo Producto
+            Nuevo Producto
         </h1>
         <p class="text-muted mb-0">Complete el formulario para registrar un nuevo producto</p>
     </div>
@@ -120,23 +143,41 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <i class="fas fa-hamburger"></i>
                         Información del Producto
                     </h4>
                 </div>
                 <div class="card-body p-4">
-                    <form asp-action="Create">
+                    <!-- Mostrar errores de validación del servidor -->
+                    @if (ViewBag.ValidationErrors != null)
+                    {
+                        <div class="validation-errors">
+                            <h5> Errores de validación:</h5>
+                            <ul>
+                                @foreach (var error in ViewBag.ValidationErrors)
+                                {
+                                    <li><strong>@error.Field:</strong> @string.Join(", ", error.Errors)</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <form asp-action="Create" method="post">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- Campo Estado oculto - CORREGIDO: tipo number para que se envíe como short -->
+                        <input type="hidden" name="Estado" value="1" />
+                        
+                        <!-- Campo Id oculto (para evitar problemas de binding) -->
+                        <input type="hidden" name="Id" value="0" />
 
                         <div class="row">
                             <!-- Código -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Codigo" class="form-label">
-                                        <i class="fas fa-barcode text-muted mr-1"></i>
-                                        Código del Producto
+                                        Código del Producto 
                                     </label>
-                                    <input asp-for="Codigo" class="form-control" placeholder="Ej: PROD001" />
+                                    <input asp-for="Codigo" class="form-control" placeholder="Ej: PROD001" required />
                                     <span asp-validation-for="Codigo" class="text-danger"></span>
                                 </div>
                             </div>
@@ -145,10 +186,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Nombre" class="form-label">
-                                        <i class="fas fa-tag text-muted mr-1"></i>
-                                        Nombre del Producto
+                                        Nombre del Producto 
                                     </label>
-                                    <input asp-for="Nombre" class="form-control" placeholder="Ej: Hamburguesa Clásica" />
+                                    <input asp-for="Nombre" class="form-control" placeholder="Ej: Hamburguesa Clásica" required />
                                     <span asp-validation-for="Nombre" class="text-danger"></span>
                                 </div>
                             </div>
@@ -159,10 +199,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="IdCategoria" class="form-label">
-                                        <i class="fas fa-tags text-muted mr-1"></i>
-                                        Categoría
+                                        Categoría 
                                     </label>
-                                    <select asp-for="IdCategoria" class="form-control form-select" asp-items="ViewBag.IdCategoria">
+                                    <select asp-for="IdCategoria" class="form-control form-select" asp-items="ViewBag.IdCategoria" required>
                                         <option value="">-- Seleccione una categoría --</option>
                                     </select>
                                     <span asp-validation-for="IdCategoria" class="text-danger"></span>
@@ -173,10 +212,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="PrecioVenta" class="form-label">
-                                        <i class="fas fa-dollar-sign text-muted mr-1"></i>
-                                        Precio de Venta (Bs.)
+                                        Precio de Venta (Bs.) 
                                     </label>
-                                    <input asp-for="PrecioVenta" class="form-control" type="number" step="0.01" placeholder="0.00" />
+                                    <input asp-for="PrecioVenta" class="form-control" type="number" step="0.01" min="0" placeholder="0.00" required />
                                     <span asp-validation-for="PrecioVenta" class="text-danger"></span>
                                 </div>
                             </div>
@@ -187,51 +225,33 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Saldo" class="form-label">
-                                        <i class="fas fa-boxes text-muted mr-1"></i>
                                         Stock Inicial
                                     </label>
-                                    <input asp-for="Saldo" class="form-control" type="number" step="0.01" placeholder="0" />
+                                    <input asp-for="Saldo" class="form-control" type="number" step="0.01" min="0" placeholder="0" value="0" />
                                     <span asp-validation-for="Saldo" class="text-danger"></span>
                                 </div>
                             </div>
 
-                            <!-- Estado -->
+                            <!-- Usuario Registro -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label asp-for="Estado" class="form-label">
-                                        <i class="fas fa-toggle-on text-muted mr-1"></i>
-                                        Estado
+                                    <label asp-for="UsuarioRegistro" class="form-label">
+                                        Usuario de Registro 
                                     </label>
-                                    <select asp-for="Estado" class="form-control form-select">
-                                        <option value="1">Activo</option>
-                                        <option value="0">Inactivo</option>
-                                    </select>
-                                    <span asp-validation-for="Estado" class="text-danger"></span>
+                                    <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" required />
+                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <!-- Usuario Registro -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="UsuarioRegistro" class="form-label">
-                                        <i class="fas fa-user text-muted mr-1"></i>
-                                        Usuario de Registro
-                                    </label>
-                                    <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" />
-                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
-                                </div>
-                            </div>
-
-                            <!-- Fecha Registro -->
-                            <div class="col-md-6">
+                            <!-- Fecha Registro - CORREGIDO -->
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label asp-for="FechaRegistro" class="form-label">
-                                        <i class="fas fa-calendar text-muted mr-1"></i>
-                                        Fecha de Registro
+                                        Fecha de Registro 
                                     </label>
-                                    <input asp-for="FechaRegistro" class="form-control" type="datetime-local" />
+                                    <input asp-for="FechaRegistro" id="fechaRegistro" class="form-control" type="datetime-local" required />
                                     <span asp-validation-for="FechaRegistro" class="text-danger"></span>
                                 </div>
                             </div>
@@ -240,7 +260,6 @@
                         <!-- Descripción -->
                         <div class="form-group">
                             <label asp-for="Descripcion" class="form-label">
-                                <i class="fas fa-align-left text-muted mr-1"></i>
                                 Descripción
                             </label>
                             <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Descripción detallada del producto..."></textarea>
@@ -251,14 +270,14 @@
                         <div class="form-group mt-4 mb-0">
                             <div class="row">
                                 <div class="col-md-6 mb-2 mb-md-0">
-                                    <button type="submit" class="btn btn-guardar btn-block">
-                                        <i class="fas fa-save mr-2"></i>
+                                    <button type="submit" class="btn btn-guardar w-100">
+                                        <i class="fa fa-save"></i>
                                         Guardar Producto
                                     </button>
                                 </div>
                                 <div class="col-md-6">
-                                    <a asp-action="Index" class="btn btn-cancelar btn-block">
-                                        <i class="fas fa-times mr-2"></i>
+                                    <a asp-action="Index" class="btn btn-cancelar w-100">
+                                        <i class="fa fa-times"></i>
                                         Cancelar
                                     </a>
                                 </div>
@@ -275,4 +294,44 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        // Establecer la fecha y hora actual automáticamente
+        document.addEventListener('DOMContentLoaded', function() {
+            const fechaInput = document.getElementById('fechaRegistro');
+            
+            if (fechaInput && !fechaInput.value) {
+                const now = new Date();
+                // Ajustar a la zona horaria local
+                const offset = now.getTimezoneOffset() * 60000;
+                const localDate = new Date(now.getTime() - offset);
+                const fechaISO = localDate.toISOString().slice(0, 16);
+                
+                fechaInput.value = fechaISO;
+            }
+
+            // Validación adicional del formulario
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                // Validar que la categoría esté seleccionada
+                const categoria = document.querySelector('select[name="IdCategoria"]');
+                if (!categoria.value) {
+                    e.preventDefault();
+                    alert('Por favor seleccione una categoría');
+                    categoria.focus();
+                    return false;
+                }
+
+                // Validar precio
+                const precio = document.querySelector('input[name="PrecioVenta"]');
+                if (parseFloat(precio.value) <= 0) {
+                    e.preventDefault();
+                    alert('El precio debe ser mayor a 0');
+                    precio.focus();
+                    return false;
+                }
+
+                console.log('Formulario enviado correctamente');
+            });
+        });
+    </script>
 }

@@ -1,47 +1,256 @@
 ﻿@model WebHamburgueseria.Models.DetalleVentas
-
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Detalle de Venta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<style>
+    /* Estilos personalizados para el formulario */
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-<h4>DetalleVentas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdVenta" class="control-label"></label>
-                <select asp-for="IdVenta" class ="form-control" asp-items="ViewBag.IdVenta"></select>
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px;
+    }
+
+    .page-title {
+        color: #2d3436;
+        margin-bottom: 5px;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        padding: 12px 15px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+    .btn-guardar {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(25, 158, 55, 0.3);
+    }
+
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(25, 158, 55, 0.4);
+            color: white;
+        }
+
+    .btn-cancelar {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+    }
+
+        .btn-cancelar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(108, 117, 125, 0.4);
+            color: white;
+        }
+
+    .text-danger {
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 page-title">
+            <i class="fas fa-plus-circle"></i>
+            Crear Detalle de Venta
+        </h1>
+        <p class="text-muted mb-0">Agregar un nuevo detalle de venta al sistema</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-file-invoice mr-2"></i>
+                        Información del Detalle de Venta
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="IdVenta" class="form-label">
+                                        <i class="fas fa-receipt mr-1"></i>
+                                        ID Venta
+                                    </label>
+                                    <select asp-for="IdVenta" class="form-control form-select" asp-items="ViewBag.IdVenta">
+                                        <option value="">-- Seleccione una venta --</option>
+                                    </select>
+                                    <span asp-validation-for="IdVenta" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="IdProducto" class="form-label">
+                                        <i class="fas fa-hamburger mr-1"></i>
+                                        Producto
+                                    </label>
+                                    <select asp-for="IdProducto" class="form-control form-select" asp-items="ViewBag.IdProducto">
+                                        <option value="">-- Seleccione un producto --</option>
+                                    </select>
+                                    <span asp-validation-for="IdProducto" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Cantidad" class="form-label">
+                                        <i class="fas fa-boxes mr-1"></i>
+                                        Cantidad
+                                    </label>
+                                    <input asp-for="Cantidad" class="form-control" type="number" min="1" />
+                                    <span asp-validation-for="Cantidad" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="PrecioUnitario" class="form-label">
+                                        <i class="fas fa-dollar-sign mr-1"></i>
+                                        Precio Unitario (Bs.)
+                                    </label>
+                                    <input asp-for="PrecioUnitario" class="form-control" type="number" step="0.01" min="0" />
+                                    <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="Total" class="form-label">
+                                        <i class="fas fa-calculator mr-1"></i>
+                                        Total (Bs.)
+                                    </label>
+                                    <input asp-for="Total" class="form-control" type="number" step="0.01" min="0" readonly />
+                                    <span asp-validation-for="Total" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UsuarioRegistro" class="form-label">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Usuario Registro
+                                    </label>
+                                    <input asp-for="UsuarioRegistro" class="form-control" />
+                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FechaRegistro" class="form-label">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        Fecha Registro
+                                    </label>
+                                    <input asp-for="FechaRegistro" class="form-control" type="datetime-local" />
+                                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Estado" class="form-label">
+                                <i class="fas fa-toggle-on mr-1"></i>
+                                Estado
+                            </label>
+                            <select asp-for="Estado" class="form-control form-select">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                            <span asp-validation-for="Estado" class="text-danger"></span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-cancelar">
+                                <i class="fas fa-times mr-2"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-guardar">
+                                <i class="fas fa-save mr-2"></i>
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="IdProducto" class="control-label"></label>
-                <select asp-for="IdProducto" class ="form-control" asp-items="ViewBag.IdProducto"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cantidad" class="control-label"></label>
-                <input asp-for="Cantidad" class="form-control" />
-                <span asp-validation-for="Cantidad" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecioUnitario" class="control-label"></label>
-                <input asp-for="PrecioUnitario" class="form-control" />
-                <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Calcular total automáticamente
+        const cantidadInput = document.querySelector('input[name="Cantidad"]');
+        const precioInput = document.querySelector('input[name="PrecioUnitario"]');
+        const totalInput = document.querySelector('input[name="Total"]');
+
+        function calcularTotal() {
+            const cantidad = parseFloat(cantidadInput.value) || 0;
+            const precio = parseFloat(precioInput.value) || 0;
+            const total = cantidad * precio;
+            totalInput.value = total.toFixed(2);
+        }
+
+        cantidadInput.addEventListener('input', calcularTotal);
+        precioInput.addEventListener('input', calcularTotal);
+    </script>
 }

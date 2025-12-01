@@ -1,55 +1,201 @@
 ﻿@model WebHamburgueseria.Models.Ventas
-
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Venta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<style>
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-<h4>Ventas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <select asp-for="IdUsuario" class="form-control" asp-items="ViewBag.IdUsuario"></select>
-                <span asp-validation-for="IdUsuario" class="text-danger"></span>
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px;
+    }
+
+    .page-title {
+        color: #2d3436;
+        margin-bottom: 5px;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+
+    .form-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        border: 2px solid #e9ecef;
+        padding: 12px 15px;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-control:disabled, .form-control[readonly] {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+
+    .btn-guardar {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(25, 158, 55, 0.3);
+    }
+
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(25, 158, 55, 0.4);
+            color: white;
+        }
+
+    .btn-cancelar {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+    }
+
+        .btn-cancelar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(108, 117, 125, 0.4);
+            color: white;
+        }
+
+    .text-danger {
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .info-badge {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 page-title">
+            <i class="fas fa-edit"></i>
+            Editar Venta
+        </h1>
+        <p class="text-muted mb-0">Modificar información de la venta</p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        Información de la Venta
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="IdUsuario" class="form-label">
+                                        Usuario
+                                    </label>
+                                    <select asp-for="IdUsuario" class="form-control form-select" asp-items="ViewBag.IdUsuario">
+                                        <option value="">-- Seleccione un usuario --</option>
+                                    </select>
+                                    <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="IdCliente" class="form-label">
+                                        Cliente
+                                    </label>
+                                    <select asp-for="IdCliente" class="form-control form-select" asp-items="ViewBag.IdCliente">
+                                        <option value="">-- Seleccione un cliente --</option>
+                                    </select>
+                                    <span asp-validation-for="IdCliente" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UsuarioRegistro" class="form-label">
+                                        Usuario Registro
+                                    </label>
+                                    <input asp-for="UsuarioRegistro" class="form-control" readonly />
+                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="FechaRegistro" class="form-label">
+                                        Fecha Registro
+                                    </label>
+                                    <input asp-for="FechaRegistro" class="form-control" type="datetime-local" readonly />
+                                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-cancelar">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-guardar">
+                                Guardar Cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="IdCliente" class="control-label"></label>
-                <select asp-for="IdCliente" class="form-control" asp-items="ViewBag.IdCliente"></select>
-                <span asp-validation-for="IdCliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioRegistro" class="control-label"></label>
-                <input asp-for="UsuarioRegistro" class="form-control" />
-                <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaRegistro" class="control-label"></label>
-                <input asp-for="FechaRegistro" class="form-control" />
-                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

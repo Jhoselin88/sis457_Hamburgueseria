@@ -1,67 +1,220 @@
 ﻿@model WebHamburgueseria.Models.DetalleVentas
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Detalle de Venta";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<style>
+    /* Estilos personalizados para la vista de detalles */
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
 
-<div>
-    <h4>DetalleVentas</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cantidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioUnitario)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecioUnitario)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdProductoNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdProductoNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdVentaNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdVentaNavigation.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px;
+    }
+
+    .page-title {
+        color: #2d3436;
+        margin-bottom: 5px;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+
+    .detail-row {
+        padding: 15px 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        font-weight: 600;
+        color: #6c757d;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 5px;
+    }
+
+    .detail-value {
+        font-size: 1.1rem;
+        color: #2d3436;
+        font-weight: 500;
+    }
+
+    .badge-venta {
+        background: linear-gradient(135deg, #783022, #a29bfe);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .badge-estado {
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .badge-activo {
+        background: linear-gradient(135deg, #00b894, #55efc4);
+        color: white;
+    }
+
+    .badge-inactivo {
+        background: linear-gradient(135deg, #6c757d, #adb5bd);
+        color: white;
+    }
+
+    .btn-editar {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(25, 158, 55, 0.3);
+    }
+
+        .btn-editar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(25, 158, 55, 0.4);
+            color: white;
+        }
+
+    .btn-volver {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+    }
+
+        .btn-volver:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(108, 117, 125, 0.4);
+            color: white;
+        }
+
+    .highlight-box {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #ff6b35;
+    }
+
+    .price-highlight {
+        color: #00b894;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 page-title">
+            Detalles del Detalle de Venta
+        </h1>
+        <p class="text-muted mb-0">Información completa del detalle de venta</p>
+    </div>
+
+    <!-- Detalles -->
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        Información del Detalle de Venta
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row detail-row">
+                        <div class="col-md-6">
+                            <div class="detail-label">
+                                Producto
+                            </div>
+                            <div class="detail-value">
+                                @(Model.IdProductoNavigation?.Nombre ?? $"Producto #{Model.IdProducto}")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row detail-row">
+                        <div class="col-md-4">
+                            <div class="detail-label">
+                                Cantidad
+                            </div>
+                            <div class="detail-value">
+                                @Model.Cantidad unidades
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="detail-label">
+                                Precio Unitario
+                            </div>
+                            <div class="detail-value">
+                                Bs. @Model.PrecioUnitario.ToString("N2")
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box my-4">
+                        <div class="detail-label">
+                            Total
+                        </div>
+                        <div class="price-highlight">
+                            Bs. @(Model.Total?.ToString("N2") ?? "0.00")
+                        </div>
+                    </div>
+
+                    <div class="row detail-row">
+                        <div class="col-md-6">
+                            <div class="detail-label">
+                                Usuario Registro
+                            </div>
+                            <div class="detail-value">
+                                @Model.UsuarioRegistro
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="detail-label">
+                                Fecha Registro
+                            </div>
+                            <div class="detail-value">
+                                @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm:ss")
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-volver">
+                            Volver a la Lista
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-editar">
+                            Editar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

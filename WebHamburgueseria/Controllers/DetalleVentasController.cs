@@ -21,7 +21,9 @@ namespace WebHamburgueseria.Controllers
         // GET: DetalleVentas
         public async Task<IActionResult> Index()
         {
-            var labHamburgueseriaContext = _context.DetalleVentas.Include(d => d.IdProductoNavigation).Include(d => d.IdVentaNavigation);
+            var labHamburgueseriaContext = _context.DetalleVentas
+                .Include(d => d.IdProductoNavigation)
+                .Include(d => d.IdVentaNavigation);
             return View(await labHamburgueseriaContext.ToListAsync());
         }
 
@@ -48,25 +50,26 @@ namespace WebHamburgueseria.Controllers
         // GET: DetalleVentas/Create
         public IActionResult Create()
         {
-            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Id");
+            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Nombre");
             ViewData["IdVenta"] = new SelectList(_context.Ventas, "Id", "Id");
             return View();
         }
 
         // POST: DetalleVentas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,IdVenta,IdProducto,Cantidad,PrecioUnitario,Total,UsuarioRegistro,FechaRegistro,Estado")] DetalleVentas detalleVentas)
         {
             if (ModelState.IsValid)
             {
+                // Calcular el total antes de guardar
+                detalleVentas.Total = detalleVentas.Cantidad * detalleVentas.PrecioUnitario;
+
                 _context.Add(detalleVentas);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Id", detalleVentas.IdProducto);
+            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Nombre", detalleVentas.IdProducto);
             ViewData["IdVenta"] = new SelectList(_context.Ventas, "Id", "Id", detalleVentas.IdVenta);
             return View(detalleVentas);
         }
@@ -79,19 +82,22 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
-            var detalleVentas = await _context.DetalleVentas.FindAsync(id);
+            var detalleVentas = await _context.DetalleVentas
+                .AsNoTracking()
+                .FirstOrDefaultAsync(d => d.Id == id);
+
             if (detalleVentas == null)
             {
                 return NotFound();
             }
-            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Id", detalleVentas.IdProducto);
+
+            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Nombre", detalleVentas.IdProducto);
             ViewData["IdVenta"] = new SelectList(_context.Ventas, "Id", "Id", detalleVentas.IdVenta);
+
             return View(detalleVentas);
         }
 
         // POST: DetalleVentas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,IdVenta,IdProducto,Cantidad,PrecioUnitario,Total,UsuarioRegistro,FechaRegistro,Estado")] DetalleVentas detalleVentas)
@@ -101,12 +107,24 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
+            // Remover validaciones de navegación si existen
+            ModelState.Remove("IdProductoNavigation");
+            ModelState.Remove("IdVentaNavigation");
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(detalleVentas);
+                    // Calcular el total
+                    detalleVentas.Total = detalleVentas.Cantidad * detalleVentas.PrecioUnitario;
+
+                    // Attach y marcar como modificado
+                    _context.Attach(detalleVentas);
+                    _context.Entry(detalleVentas).State = EntityState.Modified;
+
                     await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,9 +137,14 @@ namespace WebHamburgueseria.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Error al guardar: {ex.Message}");
+                }
             }
-            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Id", detalleVentas.IdProducto);
+
+            // Si llegamos aquí, algo falló. Volver a mostrar el formulario
+            ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Nombre", detalleVentas.IdProducto);
             ViewData["IdVenta"] = new SelectList(_context.Ventas, "Id", "Id", detalleVentas.IdVenta);
             return View(detalleVentas);
         }
@@ -155,9 +178,9 @@ namespace WebHamburgueseria.Controllers
             if (detalleVentas != null)
             {
                 _context.DetalleVentas.Remove(detalleVentas);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

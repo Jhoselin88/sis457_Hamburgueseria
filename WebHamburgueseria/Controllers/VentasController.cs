@@ -22,7 +22,9 @@ namespace WebHamburgueseria.Controllers
         // GET: Ventas
         public async Task<IActionResult> Index()
         {
-            var labHamburgueseriaContext = _context.Ventas.Include(v => v.IdClienteNavigation).Include(v => v.IdUsuarioNavigation);
+            var labHamburgueseriaContext = _context.Ventas
+                .Include(v => v.IdClienteNavigation)
+                .Include(v => v.IdUsuarioNavigation);
             return View(await labHamburgueseriaContext.ToListAsync());
         }
 
@@ -37,7 +39,10 @@ namespace WebHamburgueseria.Controllers
             var ventas = await _context.Ventas
                 .Include(v => v.IdClienteNavigation)
                 .Include(v => v.IdUsuarioNavigation)
+                .Include(v => v.DetalleVentas)
+                    .ThenInclude(d => d.IdProductoNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (ventas == null)
             {
                 return NotFound();
@@ -49,38 +54,35 @@ namespace WebHamburgueseria.Controllers
         // GET: Ventas/Create
         public IActionResult Create()
         {
-            // Cargar clientes con sus nombres completos
-            ViewData["IdCliente"] = new SelectList(
-                _context.Cliente.Select(c => new
+            // Cargar clientes con JSON para búsqueda
+            var clientes = _context.Cliente
+                .Where(c => c.Estado == 1)
+                .Select(c => new
                 {
                     c.Id,
-                    NombreCompleto = c.Nombres + " - CI: " + c.CedulaIdentidad
-                }),
-                "Id",
-                "NombreCompleto"
-            );
+                    c.Nombres,
+                    c.Apellidos,
+                    c.CedulaIdentidad
+                })
+                .ToList();
+            ViewBag.ClientesJson = JsonSerializer.Serialize(clientes);
+
 
             // Cargar usuarios
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1");
 
-            // Cargar productos con nombre y precio - ASEGURARSE DE QUE PrecioVenta SEA DECIMAL
+            // Cargar productos con nombre y precio
             var productos = _context.Producto
-                .Where(p => p.Estado == 1) // Solo productos activos
+                .Where(p => p.Estado == 1)
                 .Select(p => new
                 {
-                    Id = p.Id,
-                    Nombre = p.Nombre,
-                    PrecioVenta = p.PrecioVenta
+                    p.Id,
+                    p.Nombre,
+                    p.PrecioVenta
                 })
                 .ToList();
-
+            ViewBag.ProductosJson = JsonSerializer.Serialize(productos);
             ViewBag.Productos = productos;
-
-            // Para depuración - puedes eliminar esto después
-            foreach (var prod in productos)
-            {
-                Console.WriteLine($"Producto: {prod.Nombre}, Precio: {prod.PrecioVenta}");
-            }
 
             return View();
         }
@@ -101,35 +103,54 @@ namespace WebHamburgueseria.Controllers
         {
             try
             {
-                // Deserializar los detalles de la venta
                 var detallesVenta = JsonSerializer.Deserialize<List<DetalleVentaDto>>(DetallesVentaJson);
 
                 if (detallesVenta == null || !detallesVenta.Any())
                 {
                     ModelState.AddModelError("", "Debe agregar al menos un producto a la venta");
-                    // Recargar datos para la vista
                     ViewData["IdCliente"] = new SelectList(_context.Cliente, "Id", "Nombres", ventas.IdCliente);
                     ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1", ventas.IdUsuario);
                     ViewBag.Productos = _context.Producto.Where(p => p.Estado == 1).ToList();
                     return View(ventas);
                 }
 
-                // Calcular el total de la venta
+                // VALIDAR SALDO (STOCK) ANTES DE PROCESAR LA VENTA
+                foreach (var detalle in detallesVenta)
+                {
+                    var producto = await _context.Producto.FindAsync(detalle.IdProducto);
+                    if (producto == null)
+                    {
+                        ModelState.AddModelError("", $"El producto con ID {detalle.IdProducto} no existe");
+                        ViewData["IdCliente"] = new SelectList(_context.Cliente, "Id", "Nombres", ventas.IdCliente);
+                        ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1", ventas.IdUsuario);
+                        ViewBag.Productos = _context.Producto.Where(p => p.Estado == 1).ToList();
+                        return View(ventas);
+                    }
+
+                    if (producto.Saldo < detalle.Cantidad)
+                    {
+                        ModelState.AddModelError("", $"Stock insuficiente para el producto '{producto.Nombre}'. Stock disponible: {producto.Saldo}, Cantidad solicitada: {detalle.Cantidad}");
+                        ViewData["IdCliente"] = new SelectList(_context.Cliente, "Id", "Nombres", ventas.IdCliente);
+                        ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1", ventas.IdUsuario);
+                        ViewBag.Productos = _context.Producto.Where(p => p.Estado == 1).ToList();
+                        return View(ventas);
+                    }
+                }
+
                 decimal totalVenta = detallesVenta.Sum(d => d.Subtotal);
 
-                // Generar número de transacción si es TXN-AUTO
                 if (ventas.NumeroTransaccion == "TXN-AUTO")
                 {
                     ventas.NumeroTransaccion = "TXN-" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 }
 
-                // Guardar la venta
                 _context.Add(ventas);
                 await _context.SaveChangesAsync();
 
-                // Guardar los detalles de la venta
+                // GUARDAR DETALLES Y DESCONTAR SALDO (STOCK)
                 foreach (var detalle in detallesVenta)
                 {
+                    // Crear detalle de venta
                     var detalleVenta = new DetalleVentas
                     {
                         IdVenta = ventas.Id,
@@ -142,18 +163,22 @@ namespace WebHamburgueseria.Controllers
                         Estado = 1
                     };
                     _context.DetalleVentas.Add(detalleVenta);
+
+                    // DESCONTAR SALDO (STOCK) DEL PRODUCTO
+                    var producto = await _context.Producto.FindAsync(detalle.IdProducto);
+                    producto.Saldo -= detalle.Cantidad;
+                    _context.Update(producto);
                 }
 
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Venta registrada exitosamente";
+                TempData["SuccessMessage"] = "Venta registrada exitosamente y stock actualizado";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", "Error al guardar la venta: " + ex.Message);
 
-                // Recargar datos para la vista
                 ViewData["IdCliente"] = new SelectList(_context.Cliente, "Id", "Nombres", ventas.IdCliente);
                 ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1", ventas.IdUsuario);
                 ViewBag.Productos = _context.Producto.Where(p => p.Estado == 1).ToList();
@@ -169,13 +194,30 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
-            var ventas = await _context.Ventas.FindAsync(id);
+            var ventas = await _context.Ventas
+                .AsNoTracking()
+                .FirstOrDefaultAsync(v => v.Id == id);
+
             if (ventas == null)
             {
                 return NotFound();
             }
-            ViewData["IdCliente"] = new SelectList(_context.Cliente, "Id", "Id", ventas.IdCliente);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", ventas.IdUsuario);
+
+            // Cargar clientes con nombres completos
+            ViewData["IdCliente"] = new SelectList(
+                _context.Cliente.Select(c => new
+                {
+                    c.Id,
+                    NombreCompleto = c.Nombres + " - CI: " + c.CedulaIdentidad
+                }),
+                "Id",
+                "NombreCompleto",
+                ventas.IdCliente
+            );
+
+            // Cargar usuarios
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1", ventas.IdUsuario);
+
             return View(ventas);
         }
 
@@ -189,12 +231,23 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
+            // Remover validaciones de propiedades de navegación
+            ModelState.Remove("IdClienteNavigation");
+            ModelState.Remove("IdUsuarioNavigation");
+            ModelState.Remove("DetalleVentas");
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(ventas);
+                    // Método 1: Attach y marcar como modificado
+                    _context.Attach(ventas);
+                    _context.Entry(ventas).State = EntityState.Modified;
+
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Venta actualizada exitosamente";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -207,10 +260,25 @@ namespace WebHamburgueseria.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Error al actualizar: {ex.Message}");
+                }
             }
-            ViewData["IdCliente"] = new SelectList(_context.Cliente, "Id", "Id", ventas.IdCliente);
-            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Id", ventas.IdUsuario);
+
+            // Si hay error, recargar los datos
+            ViewData["IdCliente"] = new SelectList(
+                _context.Cliente.Select(c => new
+                {
+                    c.Id,
+                    NombreCompleto = c.Nombres + " - CI: " + c.CedulaIdentidad
+                }),
+                "Id",
+                "NombreCompleto",
+                ventas.IdCliente
+            );
+            ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1", ventas.IdUsuario);
+
             return View(ventas);
         }
 
@@ -226,6 +294,7 @@ namespace WebHamburgueseria.Controllers
                 .Include(v => v.IdClienteNavigation)
                 .Include(v => v.IdUsuarioNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (ventas == null)
             {
                 return NotFound();
@@ -239,14 +308,43 @@ namespace WebHamburgueseria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ventas = await _context.Ventas.FindAsync(id);
-            if (ventas != null)
+            try
             {
-                _context.Ventas.Remove(ventas);
-            }
+                var ventas = await _context.Ventas
+                    .Include(v => v.DetalleVentas)
+                    .FirstOrDefaultAsync(v => v.Id == id);
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                if (ventas != null)
+                {
+                    // DEVOLVER EL SALDO (STOCK) ANTES DE ELIMINAR
+                    foreach (var detalle in ventas.DetalleVentas)
+                    {
+                        var producto = await _context.Producto.FindAsync(detalle.IdProducto);
+                        if (producto != null)
+                        {
+                            producto.Saldo += detalle.Cantidad; // Devolver saldo (stock)
+                            _context.Update(producto);
+                        }
+                    }
+
+                    // Eliminar los detalles de venta
+                    _context.DetalleVentas.RemoveRange(ventas.DetalleVentas);
+
+                    // Eliminar la venta
+                    _context.Ventas.Remove(ventas);
+
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Venta eliminada exitosamente y stock devuelto";
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error al eliminar la venta: " + ex.Message;
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool VentasExists(int id)

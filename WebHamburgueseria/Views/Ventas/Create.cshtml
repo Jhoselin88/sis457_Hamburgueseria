@@ -12,7 +12,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #783022 0%, #E02804 100%) !important;
+            background: linear-gradient(135deg, #000000 0%, #000000 100%) !important;
             min-height: 100vh;
         }
 
@@ -25,12 +25,12 @@
         }
 
         .ventas-card {
-            background: #F5E6D3;
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
             padding: 40px;
             max-width: 900px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .card-header-title {
@@ -38,11 +38,14 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 35px;
-            color: #5D4037;
+            color: #2d3436;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #ff6b35;
         }
 
             .card-header-title i {
                 font-size: 2.5rem;
+                color: #ff6b35;
             }
 
             .card-header-title h2 {
@@ -60,13 +63,14 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 20px;
-            color: #5D4037;
+            color: #2d3436;
             font-size: 1.2rem;
             font-weight: 600;
         }
 
             .section-header i {
                 font-size: 1.4rem;
+                color: #ff6b35;
             }
 
         .form-row {
@@ -85,38 +89,40 @@
             align-items: center;
             gap: 8px;
             font-weight: 600;
-            color: #5D4037;
+            color: #495057;
             margin-bottom: 10px;
             font-size: 0.95rem;
         }
 
             .form-label i {
                 font-size: 1.1rem;
+                color: #667eea;
             }
 
         .form-control, .form-select {
             width: 100%;
-            border: 2px solid #D7CCC8;
-            border-radius: 12px;
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
             padding: 14px 18px;
             font-size: 0.95rem;
             background: white;
-            color: #5D4037;
+            color: #495057;
             transition: all 0.3s;
         }
 
             .form-control:focus, .form-select:focus {
-                border-color: #ff6b35;
-                box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+                border-color: #f7931e;
+                box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
                 outline: none;
             }
 
             .form-control::placeholder {
-                color: #A1887F;
+                color: #adb5bd;
             }
 
         .cliente-info-box {
-            background: rgba(255, 255, 255, 0.7);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+            border: 2px solid #ff6b35;
             border-radius: 12px;
             padding: 20px;
             display: none;
@@ -128,42 +134,59 @@
 
             .cliente-info-box .info-label {
                 font-size: 0.85rem;
-                color: #795548;
-                font-weight: 500;
+                color: #ff6b35;
+                font-weight: 600;
                 margin-bottom: 8px;
             }
 
             .cliente-info-box .info-value {
                 font-size: 1.3rem;
-                color: #5D4037;
+                color: #2d3436;
                 font-weight: 700;
             }
 
         .productos-section {
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 16px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .add-product-row {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 15px;
             align-items: end;
             margin-bottom: 25px;
         }
 
+        .productos-section .section-header {
+            color: white;
+        }
+
+            .productos-section .section-header i {
+                color: #ff6b35;
+            }
+
+        .productos-section .form-label {
+            color: white;
+        }
+
+            .productos-section .form-label i {
+                color: #ff6b35;
+            }
+
         .btn-agregar {
-            background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
             color: white;
             border: none;
             padding: 14px 24px;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(25, 158, 55, 0.3);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -173,7 +196,7 @@
 
             .btn-agregar:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(25, 158, 55, 0.4);
+                box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
             }
 
         .productos-table {
@@ -181,6 +204,7 @@
             border-radius: 12px;
             overflow: hidden;
             margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
             .productos-table table {
@@ -194,22 +218,33 @@
                 }
 
                     .productos-table table thead th {
-                        padding: 16px;
+                        padding: 18px;
                         text-align: left;
                         font-weight: 600;
-                        font-size: 0.9rem;
+                        font-size: 0.85rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        border: none;
                     }
 
                 .productos-table table tbody td {
-                    padding: 16px;
-                    border-bottom: 1px solid #E0E0E0;
-                    color: #5D4037;
+                    padding: 18px;
+                    border-top: 1px solid #e9ecef;
+                    color: #495057;
                     font-size: 0.95rem;
+                    vertical-align: middle;
                 }
 
-                .productos-table table tbody tr:hover {
-                    background: #FFF3E0;
+                .productos-table table tbody tr {
+                    background: white;
+                    transition: all 0.2s;
                 }
+
+                    .productos-table table tbody tr:hover {
+                        background: #f8f9fa;
+                        box-shadow: 0 2px 8px rgba(108, 92, 231, 0.15);
+                        transform: scale(1.01);
+                    }
 
         .btn-eliminar {
             background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
@@ -226,7 +261,7 @@
         }
 
             .btn-eliminar:hover {
-                transform: scale(1.15);
+                transform: scale(1.15) translateY(-3px);
                 box-shadow: 0 4px 12px rgba(186, 46, 17, 0.4);
             }
 
@@ -238,10 +273,12 @@
         }
 
         .total-box {
-            background: rgba(255, 255, 255, 0.7);
+            background: white;
+            border: 2px solid #e9ecef;
             border-radius: 12px;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
             .total-box .label {
@@ -249,7 +286,7 @@
                 align-items: center;
                 justify-content: center;
                 gap: 8px;
-                color: #5D4037;
+                color: #2d3436;
                 font-weight: 600;
                 margin-bottom: 12px;
                 font-size: 0.95rem;
@@ -257,30 +294,31 @@
 
                 .total-box .label i {
                     font-size: 1.2rem;
+                    color: #ff6b35;
                 }
 
             .total-box input {
                 width: 100%;
-                border: 2px solid #D7CCC8;
-                border-radius: 10px;
+                border: 2px solid #ff6b35;
+                border-radius: 8px;
                 padding: 12px;
                 font-size: 1.3rem;
                 font-weight: 700;
                 text-align: center;
                 background: white;
-                color: #5D4037;
+                color: #2d3436;
             }
 
                 .total-box input:focus {
-                    border-color: #ff6b35;
-                    box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+                    border-color: #f7931e;
+                    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
                     outline: none;
                 }
 
             .total-box .value {
                 font-size: 1.5rem;
                 font-weight: 700;
-                color: #5D4037;
+                color: #2d3436;
             }
 
         .actions-section {
@@ -294,7 +332,7 @@
             color: white;
             border: none;
             padding: 16px 32px;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s;
@@ -316,7 +354,7 @@
             color: white;
             border: none;
             padding: 16px 32px;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s;
@@ -328,7 +366,6 @@
             gap: 10px;
         }
 
-
             .btn-cancelar:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 6px 16px rgba(186, 46, 17, 0.4);
@@ -338,7 +375,7 @@
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: #A1887F;
+            color: #adb5bd;
         }
 
             .empty-state p {
@@ -347,21 +384,86 @@
             }
 
         .text-danger {
-            color: #BA2E11;
+            color: #f5576c;
             font-size: 0.85rem;
             margin-top: 5px;
         }
 
+        /* Sugerencias de búsqueda */
+        .search-suggestions {
+            position: absolute;
+            background: white;
+            border: 2px solid #ff6b35;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            width: calc(100% - 4px);
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin-top: 5px;
+            display: none;
+        }
+
+            .search-suggestions.show {
+                display: block;
+            }
+
+            .search-suggestions .suggestion-item {
+                padding: 14px 18px;
+                cursor: pointer;
+                border-bottom: 1px solid #e9ecef;
+                transition: background 0.2s;
+                color: #495057;
+            }
+
+                .search-suggestions .suggestion-item:last-child {
+                    border-bottom: none;
+                }
+
+                .search-suggestions .suggestion-item:hover {
+                    background: #f8f9fa;
+                }
+
+                .search-suggestions .suggestion-item .cliente-nombre {
+                    font-weight: 600;
+                    font-size: 0.95rem;
+                    color: #2d3436;
+                }
+
+                .search-suggestions .suggestion-item .cliente-ci {
+                    font-size: 0.85rem;
+                    color: #ff6b35;
+                    margin-top: 2px;
+                }
+
+            .search-suggestions .no-results {
+                padding: 14px 18px;
+                color: #adb5bd;
+                text-align: center;
+            }
+
         /* Responsive */
-</style>
+        @@media (max-width: 768px) {
+            .ventas-card
+
+        {
+            padding: 25px;
+        }
+
+        .form-row, .add-product-row, .totals-section, .actions-section {
+            grid-template-columns: 1fr;
+        }
+
+        .card-header-title h2 {
+            font-size: 1.8rem;
+        }
+
+        }</style>
 }
 
 <div class="ventas-container">
     <div class="ventas-card">
         <form asp-action="Create" method="post" id="formVenta">
-            <!-- Encabezado -->
-
-
             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
             <!-- Sección Cliente -->
@@ -372,15 +474,22 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group">
+                    <div class="form-group" style="position: relative;">
                         <label class="form-label">
                             <i class="fa fa-search"></i>
                             Buscar Cliente
                         </label>
-                        <input type="text" id="buscarCliente" class="form-control" placeholder="Buscar por nombre o CI..." autocomplete="off" />
-                        <select asp-for="IdCliente" id="clienteSelect" class="form-control form-select" asp-items="ViewBag.IdCliente" style="display:none;">
-                            <option value="">Seleccione un cliente</option>
-                        </select>
+                        <input type="text"
+                               id="buscarCliente"
+                               class="form-control"
+                               placeholder="Buscar por nombre o CI..."
+                               autocomplete="off" />
+
+                        <!-- Sugerencias de búsqueda -->
+                        <div id="searchSuggestions" class="search-suggestions"></div>
+
+                        <!-- Campo oculto para enviar el ID del cliente -->
+                        <input type="hidden" asp-for="IdCliente" id="clienteIdHidden" />
                         <span asp-validation-for="IdCliente" class="text-danger"></span>
                     </div>
 
@@ -388,6 +497,7 @@
                         <div id="clienteInfoBox" class="cliente-info-box">
                             <div class="info-label">Cliente Seleccionado:</div>
                             <div class="info-value" id="clienteNombre">-</div>
+                            <div style="font-size: 0.9rem; color: #795548; margin-top: 8px;" id="clienteCI">-</div>
                         </div>
                     </div>
                 </div>
@@ -403,15 +513,13 @@
                 <div class="add-product-row">
                     <div class="form-group">
                         <label class="form-label">Producto</label>
-                        <select class="form-control form-select" id="productoSelect" style="display: block !important;">
+                        <select class="form-control form-select" id="productoSelect">
                             <option value="">Seleccione un producto</option>
                             @if (ViewBag.Productos != null)
                             {
                                 foreach (var producto in ViewBag.Productos)
                                 {
-                                    <option value="@producto.Id"
-                                            data-precio="@producto.PrecioVenta"
-                                            data-nombre="@producto.Nombre">
+                                    <option value="@producto.Id">
                                         @producto.Nombre - Bs. @producto.PrecioVenta
                                     </option>
                                 }
@@ -422,11 +530,6 @@
                     <div class="form-group">
                         <label class="form-label">Cantidad</label>
                         <input type="number" class="form-control" id="cantidadInput" value="1" min="1" step="1" />
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Precio</label>
-                        <input type="text" class="form-control" id="precioInput" value="0.00" readonly />
                     </div>
                 </div>
 
@@ -513,6 +616,30 @@
     }
 
     <script>
+        // ===== DESHABILITAR ERROR DE GOOGLE MAPS SI NO SE USA =====
+        window.console.error = (function(oldError) {
+            return function(error) {
+                if (typeof error === 'string' && error.includes('InvalidValueError')) {
+                    return;
+                }
+                oldError.apply(console, arguments);
+            };
+        })(window.console.error);
+
+        // ===== CARGAR PRODUCTOS DESDE JSON =====
+        const productosData = @Html.Raw(ViewBag.ProductosJson ?? "[]");
+        console.log('Productos cargados:', productosData);
+
+        // Crear un mapa de productos por ID para acceso rápido
+        const productosMap = new Map();
+        productosData.forEach(prod => {
+            productosMap.set(prod.Id, prod);
+        });
+
+        // ===== CARGAR CLIENTES =====
+        const clientesData = @Html.Raw(ViewBag.ClientesJson ?? "[]");
+        console.log('Clientes cargados:', clientesData);
+
         // Referencias a elementos del DOM
         const pagoClienteInput = document.getElementById('pagoCliente');
         const totalValue = document.getElementById('totalValue');
@@ -520,16 +647,20 @@
         const emptyState = document.getElementById('emptyState');
         const productosTableBody = document.getElementById('productosTableBody');
         const productoSelect = document.getElementById('productoSelect');
-        const precioInput = document.getElementById('precioInput');
         const cantidadInput = document.getElementById('cantidadInput');
         const buscarClienteInput = document.getElementById('buscarCliente');
-        const clienteSelect = document.getElementById('clienteSelect');
+        const searchSuggestions = document.getElementById('searchSuggestions');
         const clienteInfoBox = document.getElementById('clienteInfoBox');
         const clienteNombre = document.getElementById('clienteNombre');
+        const clienteCI = document.getElementById('clienteCI');
+        const clienteIdHidden = document.getElementById('clienteIdHidden');
 
         // Array para almacenar los productos agregados
         let productosAgregados = [];
         let contadorProductos = 0;
+
+        // Cliente seleccionado
+        let clienteSeleccionado = null;
 
         // Establecer fecha actual automáticamente
         const ahora = new Date();
@@ -550,99 +681,67 @@
                 @:}
         }
 
-        // ===== BÚSQUEDA DE CLIENTES =====
+        // ===== BÚSQUEDA DE CLIENTES CON SUGERENCIAS =====
         buscarClienteInput.addEventListener('input', function () {
             const searchTerm = this.value.toLowerCase().trim();
 
             if (searchTerm === '') {
-                clienteSelect.value = '';
-                clienteInfoBox.classList.remove('show');
-                clienteNombre.textContent = '-';
+                searchSuggestions.classList.remove('show');
+                searchSuggestions.innerHTML = '';
                 return;
             }
 
-            const options = clienteSelect.options;
-            let found = false;
+            // Filtrar clientes
+            const resultados = clientesData.filter(cliente => {
+                const nombreCompleto = `${cliente.Nombres} ${cliente.Apellidos}`.toLowerCase();
+                const ci = cliente.CedulaIdentidad.toLowerCase();
+                return nombreCompleto.includes(searchTerm) || ci.includes(searchTerm);
+            });
 
-            for (let i = 1; i < options.length; i++) {
-                const option = options[i];
-                const text = option.text.toLowerCase();
-
-                if (text.includes(searchTerm)) {
-                    clienteSelect.value = option.value;
-                    clienteNombre.textContent = option.text;
-                    clienteInfoBox.classList.add('show');
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found) {
-                clienteSelect.value = '';
-                clienteInfoBox.classList.remove('show');
-                clienteNombre.textContent = '-';
+            // Mostrar resultados
+            if (resultados.length > 0) {
+                searchSuggestions.innerHTML = resultados.map(cliente => `
+                    <div class="suggestion-item" data-id="${cliente.Id}" data-nombre="${cliente.Nombres} ${cliente.Apellidos}" data-ci="${cliente.CedulaIdentidad}">
+                        <div class="cliente-nombre">${cliente.Nombres} ${cliente.Apellidos}</div>
+                        <div class="cliente-ci">CI: ${cliente.CedulaIdentidad}</div>
+                    </div>
+                `).join('');
+                searchSuggestions.classList.add('show');
+            } else {
+                searchSuggestions.innerHTML = '<div class="no-results">No se encontraron clientes</div>';
+                searchSuggestions.classList.add('show');
             }
         });
 
-        // ===== ACTUALIZAR PRECIO AL SELECCIONAR PRODUCTO =====
-        // ... código anterior ...
+        // Seleccionar cliente de las sugerencias
+        searchSuggestions.addEventListener('click', function(e) {
+            const suggestionItem = e.target.closest('.suggestion-item');
+            if (suggestionItem) {
+                const clienteId = suggestionItem.getAttribute('data-id');
+                const nombre = suggestionItem.getAttribute('data-nombre');
+                const ci = suggestionItem.getAttribute('data-ci');
 
-                // ===== DEPURACIÓN Y ACTUALIZAR PRECIO AL SELECCIONAR PRODUCTO =====
-                console.log('=== INICIO DEPURACIÓN ===');
-                console.log('productoSelect encontrado:', productoSelect);
+                // Actualizar campos
+                buscarClienteInput.value = nombre;
+                clienteIdHidden.value = clienteId;
+                clienteNombre.textContent = nombre;
+                clienteCI.textContent = `CI: ${ci}`;
+                clienteInfoBox.classList.add('show');
 
-                if (productoSelect) {
-                    console.log('Número total de opciones:', productoSelect.options.length);
+                // Ocultar sugerencias
+                searchSuggestions.classList.remove('show');
+                searchSuggestions.innerHTML = '';
 
-                    // Mostrar todas las opciones disponibles
-                    for (let i = 0; i < productoSelect.options.length; i++) {
-                        const opt = productoSelect.options[i];
-                        console.log(`Opción ${i}:`, {
-                            value: opt.value,
-                            text: opt.text,
-                            'data-precio': opt.getAttribute('data-precio'),
-                            'data-nombre': opt.getAttribute('data-nombre')
-                        });
-                    }
-                }
+                clienteSeleccionado = { id: clienteId, nombre: nombre, ci: ci };
+            }
+        });
 
-                productoSelect.addEventListener('change', function () {
-                    console.log('=== PRODUCTO SELECCIONADO ===');
-                    const selectedOption = this.options[this.selectedIndex];
-
-                    console.log('Índice seleccionado:', this.selectedIndex);
-                    console.log('Opción completa:', selectedOption);
-                    console.log('Value:', selectedOption.value);
-                    console.log('Text:', selectedOption.text);
-                    console.log('data-precio (getAttribute):', selectedOption.getAttribute('data-precio'));
-                    console.log('data-nombre (getAttribute):', selectedOption.getAttribute('data-nombre'));
-
-                    if (selectedOption && selectedOption.value) {
-                        const precioString = selectedOption.getAttribute('data-precio');
-                        console.log('Precio como string:', precioString);
-                        console.log('Tipo de precioString:', typeof precioString);
-
-                        const precio = parseFloat(precioString);
-                        console.log('Precio parseado:', precio);
-                        console.log('Es NaN?:', isNaN(precio));
-
-                        if (!isNaN(precio)) {
-                            precioInput.value = precio.toFixed(2);
-                            console.log('Precio asignado al input:', precioInput.value);
-                        } else {
-                            precioInput.value = '0.00';
-                            console.log('Precio inválido, asignando 0.00');
-                        }
-                    } else {
-                        precioInput.value = '0.00';
-                        console.log('No hay opción válida seleccionada');
-                    }
-                });
-
-                // ===== CALCULAR CAMBIO =====
-                pagoClienteInput.addEventListener('input', calcularCambio);
-
-                // ... resto del código ...
+        // Cerrar sugerencias al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!buscarClienteInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                searchSuggestions.classList.remove('show');
+            }
+        });
 
         // ===== CALCULAR CAMBIO =====
         pagoClienteInput.addEventListener('input', calcularCambio);
@@ -671,11 +770,23 @@
                 return;
             }
 
-            // Obtener datos del producto
-            const precioUnitario = parseFloat(precioInput.value);
-            const subtotal = cantidad * precioUnitario;
             const productoId = parseInt(productoSelect.value);
-            const productoNombre = productoSelect.options[productoSelect.selectedIndex].getAttribute('data-nombre');
+            const producto = productosMap.get(productoId);
+
+            if (!producto) {
+                alert('Error: No se encontró el producto seleccionado');
+                return;
+            }
+
+            const precioUnitario = parseFloat(producto.PrecioVenta);
+
+            if (isNaN(precioUnitario) || precioUnitario <= 0) {
+                alert('Error: El precio del producto no es válido');
+                return;
+            }
+
+            const subtotal = cantidad * precioUnitario;
+            const productoNombre = producto.Nombre;
 
             // Agregar al array de productos
             productosAgregados.push({
@@ -707,19 +818,16 @@
             // Limpiar campos
             productoSelect.value = '';
             cantidadInput.value = '1';
-            precioInput.value = '0.00';
         });
 
         // ===== ELIMINAR PRODUCTO =====
         function eliminarProducto(index) {
             if (confirm('¿Está seguro de eliminar este producto?')) {
-                // Buscar la fila con el índice correspondiente
                 const row = document.querySelector(`tr[data-index="${index}"]`);
                 if (row) {
                     row.remove();
                 }
 
-                // Buscar y eliminar del array
                 const arrayIndex = productosAgregados.findIndex((p, i) => {
                     const rowElement = document.querySelector(`tr[data-index="${i}"]`);
                     return rowElement && rowElement.getAttribute('data-index') == index;
@@ -752,23 +860,19 @@
 
         // ===== ENVIAR FORMULARIO =====
         document.getElementById('formVenta').addEventListener('submit', function (e) {
-            // Validar que haya productos
             if (productosAgregados.length === 0) {
                 e.preventDefault();
                 alert('Debe agregar al menos un producto a la venta');
                 return false;
             }
 
-            // Validar que se haya seleccionado un cliente
-            if (!clienteSelect.value) {
+            if (!clienteIdHidden.value) {
                 e.preventDefault();
                 alert('Debe seleccionar un cliente');
                 return false;
             }
 
-            // Convertir array de productos a JSON
             document.getElementById('detallesVentaJson').value = JSON.stringify(productosAgregados);
-
             console.log('Productos enviados:', productosAgregados);
             return true;
         });

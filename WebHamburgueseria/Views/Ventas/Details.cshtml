@@ -1,55 +1,396 @@
 ﻿@model WebHamburgueseria.Models.Ventas
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de la Venta";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Calcular el total de la venta desde los detalles
+    decimal totalVenta = 0;
+    if (Model.DetalleVentas != null && Model.DetalleVentas.Any())
+    {
+        totalVenta = Model.DetalleVentas.Sum(d => d.Total ?? 0);
+    }
 }
 
-<h1>Details</h1>
+<style>
+    .card {
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
 
-<div>
-    <h4>Ventas</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NumeroTransaccion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NumeroTransaccion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FechaRegistro)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FechaRegistro)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Estado)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Estado)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdClienteNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdClienteNavigation.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdUsuarioNavigation.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    .card-header {
+        background: linear-gradient(135deg, #783022 0%, #E02804 100%);
+        color: white;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 20px;
+    }
+
+    .card-header-info {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    }
+
+    .card-header-success {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+    }
+
+    .page-title {
+        color: #2d3436;
+        margin-bottom: 5px;
+    }
+
+        .page-title i {
+            color: #ff6b35;
+        }
+
+    .info-row {
+        padding: 15px;
+        border-bottom: 1px solid #e9ecef;
+        transition: background-color 0.3s;
+    }
+
+        .info-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+    .info-label {
+        font-weight: 600;
+        color: #2d3436;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .info-label i {
+            color: #ff6b35;
+            width: 20px;
+        }
+
+    .info-value {
+        color: #636e72;
+        font-size: 1rem;
+        padding-left: 28px;
+    }
+
+    .badge-estado {
+        padding: 8px 15px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .badge-activo {
+        background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
+        color: white;
+    }
+
+    .badge-inactivo {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+    }
+
+    .transaction-badge {
+        background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        color: white;
+        padding: 12px 25px;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: inline-block;
+        box-shadow: 0 4px 10px rgba(155, 89, 182, 0.3);
+    }
+
+    .total-badge {
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        color: white;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 1.5rem;
+        font-weight: 700;
+        display: inline-block;
+        box-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+    }
+
+    .btn-volver {
+        background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(108, 117, 125, 0.3);
+    }
+
+        .btn-volver:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(108, 117, 125, 0.4);
+            color: white;
+        }
+
+    .btn-editar {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        border: none;
+        color: white;
+        padding: 12px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+    }
+
+        .btn-editar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.4);
+            color: white;
+        }
+
+    /* Tabla de productos */
+    .table-productos {
+        margin: 0;
+    }
+
+        .table-productos thead {
+            background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+            color: white;
+        }
+
+            .table-productos thead th {
+                border: none;
+                padding: 15px;
+                font-weight: 600;
+                text-align: center;
+            }
+
+        .table-productos tbody tr {
+            transition: all 0.3s;
+        }
+
+            .table-productos tbody tr:hover {
+                background-color: #f8f9fa;
+                transform: scale(1.01);
+            }
+
+        .table-productos tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+    .producto-nombre {
+        font-weight: 600;
+        color: #2d3436;
+    }
+
+    .cantidad-badge {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+    }
+
+    .precio-text {
+        color: #27ae60;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .total-text {
+        color: #e74c3c;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #95a5a6;
+    }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+</style>
+
+<div class="container-fluid px-4 py-4">
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h1 class="h3 page-title">
+            <i class="fas fa-file-invoice"></i>
+            Detalles de la Venta
+        </h1>
+        <p class="text-muted mb-0">Información completa de la venta y sus productos</p>
+    </div>
+
+    <div class="row">
+        <!-- Información General de la Venta -->
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        Venta
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+
+                    <!-- Usuario -->
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span>Usuario</span>
+                        </div>
+                        <div class="info-value">
+                            @Html.DisplayFor(model => model.IdUsuarioNavigation.Usuario1)
+                        </div>
+                    </div>
+
+                    <!-- Cliente -->
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span>Cliente</span>
+                        </div>
+                        <div class="info-value">
+                            @Html.DisplayFor(model => model.IdClienteNavigation.Nombres)
+                            @if (!string.IsNullOrEmpty(Model.IdClienteNavigation.CedulaIdentidad))
+                            {
+                                <span class="text-muted"> - CI: @Model.IdClienteNavigation.CedulaIdentidad</span>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Usuario Registro -->
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span>Usuario Registro</span>
+                        </div>
+                        <div class="info-value">
+                            @Html.DisplayFor(model => model.UsuarioRegistro)
+                        </div>
+                    </div>
+
+                    <!-- Fecha Registro -->
+                    <div class="info-row">
+                        <div class="info-label">
+                            <span>Fecha de Registro</span>
+                        </div>
+                        <div class="info-value">
+                            @Model.FechaRegistro.ToString("dd/MM/yyyy HH:mm:ss")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total de la Venta -->
+            <div class="card">
+                <div class="card-header card-header-success">
+                    <h4 class="mb-0">
+                        Total de la Venta
+                    </h4>
+                </div>
+                <div class="card-body text-center p-4">
+                    <div class="total-badge">
+                        @totalVenta.ToString("N2") Bs.
+                    </div>
+                    <p class="text-muted mt-3 mb-0">
+                        <small>@Model.DetalleVentas.Count producto(s) en total</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Productos de la Venta -->
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-header card-header-info">
+                    <h4 class="mb-0">
+                        Productos de la Venta
+                    </h4>
+                </div>
+                <div class="card-body p-0">
+                    @if (Model.DetalleVentas != null && Model.DetalleVentas.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-productos mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Unit.</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int contador = 1;
+                                    }
+                                    @foreach (var detalle in Model.DetalleVentas)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <strong>@contador</strong>
+                                            </td>
+                                            <td>
+                                                <span class="producto-nombre">
+                                                    <i class="fas fa-circle mr-1" style="font-size: 0.5rem; color: #ff6b35;"></i>
+                                                    @detalle.IdProductoNavigation.Nombre
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="cantidad-badge">
+                                                    @detalle.Cantidad
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="precio-text">
+                                                    @detalle.PrecioUnitario.ToString("N2") Bs.
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="total-text">
+                                                    @detalle.Total?.ToString("N2") Bs.
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        contador++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state">
+                            <p class="mb-0">No hay productos en esta venta</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-volver">
+                            Volver a la Lista
+                        </a>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-editar">
+                            Editar Venta
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -276,3 +276,6 @@ SELECT * FROM Usuario;
 SELECT * FROM Ventas;
 
 EXEC paProductoListar '';
+
+ALTER TABLE Producto
+ADD rutaImagen VARCHAR(500) NULL;

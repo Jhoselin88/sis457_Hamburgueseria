@@ -167,6 +167,8 @@ public partial class LabHamburgueseriaContext : DbContext
                 .HasColumnName("usuarioRegistro");
         });
 
+        // Reemplazá la sección de modelBuilder.Entity<Producto> con esto:
+
         modelBuilder.Entity<Producto>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Producto__3213E83F5F3DFF37");
@@ -203,6 +205,12 @@ public partial class LabHamburgueseriaContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValueSql("(suser_name())")
                 .HasColumnName("usuarioRegistro");
+
+            // NUEVO: Propiedad para la ruta de la imagen
+            entity.Property(e => e.RutaImagen)
+                .HasMaxLength(500)
+                .IsUnicode(false)
+                .HasColumnName("rutaImagen");
 
             entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Producto)
                 .HasForeignKey(d => d.IdCategoria)

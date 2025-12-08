@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 using WebHamburgueseria.Models;
 
 namespace WebHamburgueseria.Controllers
@@ -13,27 +15,26 @@ namespace WebHamburgueseria.Controllers
     public class ProductosController : Controller
     {
         private readonly LabHamburgueseriaContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductosController(LabHamburgueseriaContext context)
+        public ProductosController(LabHamburgueseriaContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Productos
         public async Task<IActionResult> Index(string search, int? categoria)
         {
-            // Cargar categorías para el dropdown
             ViewBag.Categorias = await _context.Categoria
                 .Where(c => c.Estado == 1)
                 .Select(c => new { c.Id, c.Nombre })
                 .ToListAsync();
 
-            // Consulta base
             var productos = _context.Producto
                 .Include(p => p.IdCategoriaNavigation)
                 .AsQueryable();
 
-            // Filtrar por búsqueda
             if (!string.IsNullOrEmpty(search))
             {
                 productos = productos.Where(p =>
@@ -42,7 +43,6 @@ namespace WebHamburgueseria.Controllers
                     (p.Descripcion != null && p.Descripcion.Contains(search)));
             }
 
-            // Filtrar por categoría
             if (categoria.HasValue)
             {
                 productos = productos.Where(p => p.IdCategoria == categoria.Value);
@@ -74,7 +74,6 @@ namespace WebHamburgueseria.Controllers
         // GET: Productos/Create
         public IActionResult Create()
         {
-            // Cargar categorías activas con Id y Nombre
             ViewData["IdCategoria"] = new SelectList(
                 _context.Categoria.Where(c => c.Estado == 1),
                 "Id",
@@ -87,13 +86,12 @@ namespace WebHamburgueseria.Controllers
         // POST: Productos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado,ImagenFile")] Producto producto)
         {
-            // SOLUCIÓN CRÍTICA: Remover la validación de propiedades de navegación
             ModelState.Remove("IdCategoriaNavigation");
             ModelState.Remove("DetalleVentas");
+            ModelState.Remove("RutaImagen");
 
-            // DEBUGGING: Ver qué errores tiene el ModelState
             if (!ModelState.IsValid)
             {
                 var errors = ModelState
@@ -104,7 +102,6 @@ namespace WebHamburgueseria.Controllers
                     })
                     .ToList();
 
-                // Esto mostrará los errores en la consola de Visual Studio
                 foreach (var error in errors)
                 {
                     Console.WriteLine($"Campo: {error.Field}");
@@ -114,7 +111,6 @@ namespace WebHamburgueseria.Controllers
                     }
                 }
 
-                // También podemos pasar los errores a la vista
                 ViewBag.ValidationErrors = errors;
             }
 
@@ -122,6 +118,12 @@ namespace WebHamburgueseria.Controllers
             {
                 try
                 {
+                    // Procesar la imagen si fue subida
+                    if (producto.ImagenFile != null && producto.ImagenFile.Length > 0)
+                    {
+                        producto.RutaImagen = await GuardarImagen(producto.ImagenFile);
+                    }
+
                     _context.Add(producto);
                     await _context.SaveChangesAsync();
 
@@ -130,7 +132,6 @@ namespace WebHamburgueseria.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // Capturar cualquier error de base de datos
                     Console.WriteLine($"Error al guardar: {ex.Message}");
                     if (ex.InnerException != null)
                     {
@@ -141,7 +142,6 @@ namespace WebHamburgueseria.Controllers
                 }
             }
 
-            // Recargar categorías si hay error
             ViewData["IdCategoria"] = new SelectList(
                 _context.Categoria.Where(c => c.Estado == 1),
                 "Id",
@@ -166,7 +166,6 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
-            // Cargar categorías con Id y Nombre
             ViewData["IdCategoria"] = new SelectList(
                 _context.Categoria.Where(c => c.Estado == 1),
                 "Id",
@@ -180,14 +179,13 @@ namespace WebHamburgueseria.Controllers
         // POST: Productos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado")] Producto producto)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado,RutaImagen,ImagenFile")] Producto producto)
         {
             if (id != producto.Id)
             {
                 return NotFound();
             }
 
-            // SOLUCIÓN: Remover validación de propiedades de navegación
             ModelState.Remove("IdCategoriaNavigation");
             ModelState.Remove("DetalleVentas");
 
@@ -195,6 +193,19 @@ namespace WebHamburgueseria.Controllers
             {
                 try
                 {
+                    // Si se subió una nueva imagen
+                    if (producto.ImagenFile != null && producto.ImagenFile.Length > 0)
+                    {
+                        // Eliminar imagen anterior si existe
+                        if (!string.IsNullOrEmpty(producto.RutaImagen))
+                        {
+                            EliminarImagen(producto.RutaImagen);
+                        }
+
+                        // Guardar nueva imagen
+                        producto.RutaImagen = await GuardarImagen(producto.ImagenFile);
+                    }
+
                     _context.Update(producto);
                     await _context.SaveChangesAsync();
 
@@ -219,7 +230,6 @@ namespace WebHamburgueseria.Controllers
                 }
             }
 
-            // Recargar categorías si hay error
             ViewData["IdCategoria"] = new SelectList(
                 _context.Categoria.Where(c => c.Estado == 1),
                 "Id",
@@ -238,7 +248,6 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
-            // Incluir la navegación de categoría
             var producto = await _context.Producto
                 .Include(p => p.IdCategoriaNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -261,6 +270,12 @@ namespace WebHamburgueseria.Controllers
                 var producto = await _context.Producto.FindAsync(id);
                 if (producto != null)
                 {
+                    // Eliminar imagen si existe
+                    if (!string.IsNullOrEmpty(producto.RutaImagen))
+                    {
+                        EliminarImagen(producto.RutaImagen);
+                    }
+
                     _context.Producto.Remove(producto);
                     await _context.SaveChangesAsync();
 
@@ -279,6 +294,52 @@ namespace WebHamburgueseria.Controllers
         private bool ProductoExists(int id)
         {
             return _context.Producto.Any(e => e.Id == id);
+        }
+
+        // MÉTODOS AUXILIARES PARA MANEJAR IMÁGENES
+
+        private async Task<string> GuardarImagen(IFormFile imagen)
+        {
+            // Crear carpeta si no existe
+            string carpetaProductos = Path.Combine(_webHostEnvironment.WebRootPath, "images", "productos");
+            if (!Directory.Exists(carpetaProductos))
+            {
+                Directory.CreateDirectory(carpetaProductos);
+            }
+
+            // Generar nombre único para la imagen
+            string extension = Path.GetExtension(imagen.FileName);
+            string nombreArchivo = $"{Guid.NewGuid()}{extension}";
+            string rutaCompleta = Path.Combine(carpetaProductos, nombreArchivo);
+
+            // Guardar archivo
+            using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+            {
+                await imagen.CopyToAsync(stream);
+            }
+
+            // Retornar la ruta relativa
+            return $"/images/productos/{nombreArchivo}";
+        }
+
+        private void EliminarImagen(string rutaImagen)
+        {
+            if (string.IsNullOrEmpty(rutaImagen))
+                return;
+
+            string rutaCompleta = Path.Combine(_webHostEnvironment.WebRootPath, rutaImagen.TrimStart('/'));
+
+            if (System.IO.File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    System.IO.File.Delete(rutaCompleta);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error al eliminar imagen: {ex.Message}");
+                }
+            }
         }
     }
 }

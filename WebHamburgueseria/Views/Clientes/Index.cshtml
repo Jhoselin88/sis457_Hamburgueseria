@@ -190,9 +190,9 @@
                 <table class="table table-hover table-clientes mb-0">
                     <thead>
                         <tr>
-                            <th>Cédula Identidad</th>
                             <th>Nombres</th>
                             <th>Apellido</th>
+                            <th>Cédula Identidad</th>
                             <th>Usuario Registro</th>
                             <th>Fecha de Registro</th>
                             <th class="text-center">Acciones</th>
@@ -201,12 +201,15 @@
                     <tbody>
                         @if (Model != null && Model.Any())
                         {
-                            foreach (var item in Model)
+                            @* Ordenar clientes alfabéticamente por nombres A-Z *@
+                            var clientesOrdenados = Model.OrderBy(c => c.Nombres).ToList();
+
+                            foreach (var item in clientesOrdenados)
                             {
                                 <tr>
-                                    <td class="font-weight-bold text-primary">@item.CedulaIdentidad</td>
                                     <td class="font-weight-bold">@item.Nombres</td>
                                     <td>@item.Apellidos</td>
+                                    <td class="font-weight-bold text-primary">@item.CedulaIdentidad</td>
                                     <td>@item.UsuarioRegistro</td>
                                     <td>@item.FechaRegistro.ToString("dd/MM/yyyy")</td>
                                     <td class="text-center">
@@ -215,20 +218,19 @@
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-edit btn-sm"
                                                title="Editar">
-                                                 Editar
+                                                Editar
                                             </a>
                                             <a asp-action="Details"
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-details btn-sm"
                                                title="Ver detalles">
-                                                 Ver
+                                                Ver
                                             </a>
                                             <a asp-action="Delete"
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-delete btn-sm"
-                                               title="Eliminar"
-                                               >
-                                                 Eliminar
+                                               title="Eliminar">
+                                                Eliminar
                                             </a>
                                         </div>
                                     </td>
@@ -264,19 +266,17 @@
             const searchValue = this.value.toLowerCase();
 
             tableRows.forEach(row => {
-                const ci = row.cells[0]?.textContent.toLowerCase() || '';
-                const nombres = row.cells[1]?.textContent.toLowerCase() || '';
-                const apellidos = row.cells[2]?.textContent.toLowerCase() || '';
+                // Actualizado para reflejar el nuevo orden de columnas
+                const nombres = row.cells[0]?.textContent.toLowerCase() || '';
+                const apellidos = row.cells[1]?.textContent.toLowerCase() || '';
+                const ci = row.cells[2]?.textContent.toLowerCase() || '';
 
-                if (ci.includes(searchValue) || nombres.includes(searchValue) || apellidos.includes(searchValue)) {
+                if (nombres.includes(searchValue) || apellidos.includes(searchValue) || ci.includes(searchValue)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
                 }
             });
         });
-
-        // Confirmar eliminación
-
     </script>
 }

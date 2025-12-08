@@ -51,6 +51,8 @@ namespace WebHamburgueseria.Controllers
             return View(ventas);
         }
 
+        // Reemplazá el método Create (GET) en VentasController.cs con este código:
+
         // GET: Ventas/Create
         public IActionResult Create()
         {
@@ -67,18 +69,19 @@ namespace WebHamburgueseria.Controllers
                 .ToList();
             ViewBag.ClientesJson = JsonSerializer.Serialize(clientes);
 
-
             // Cargar usuarios
             ViewData["IdUsuario"] = new SelectList(_context.Usuario, "Id", "Usuario1");
 
-            // Cargar productos con nombre y precio
+            // ACTUALIZADO: Cargar productos con nombre, precio, saldo e IMAGEN
             var productos = _context.Producto
                 .Where(p => p.Estado == 1)
                 .Select(p => new
                 {
                     p.Id,
                     p.Nombre,
-                    p.PrecioVenta
+                    p.PrecioVenta,
+                    p.Saldo,
+                    p.RutaImagen  // NUEVO: Incluir la ruta de la imagen
                 })
                 .ToList();
             ViewBag.ProductosJson = JsonSerializer.Serialize(productos);

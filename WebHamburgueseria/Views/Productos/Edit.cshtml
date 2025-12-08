@@ -98,19 +98,76 @@
         margin-bottom: 1.5rem;
     }
 
-    .badge-id {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-        color: white;
-        padding: 8px 16px;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        font-weight: 600;
-    }
-
     textarea.form-control {
         min-height: 100px;
         resize: vertical;
     }
+
+    /* Estilos para imagen */
+    .current-image-container {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .current-image {
+        max-width: 100%;
+        max-height: 250px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-upload-container {
+        border: 3px dashed #ff6b35;
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        background: #f8f9fa;
+        transition: all 0.3s;
+        cursor: pointer;
+    }
+
+        .image-upload-container:hover {
+            background: #fff5f2;
+            border-color: #E02804;
+        }
+
+    .image-upload-icon {
+        font-size: 3rem;
+        color: #ff6b35;
+        margin-bottom: 15px;
+    }
+
+    .image-preview {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 12px;
+        margin-top: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #imagenFile {
+        display: none;
+    }
+
+    .btn-seleccionar-imagen {
+        background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .btn-seleccionar-imagen:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
 </style>
 
 <div class="container-fluid px-4 py-4">
@@ -134,18 +191,53 @@
                     </h4>
                 </div>
                 <div class="card-body p-4">
-                    <form asp-action="Edit" method="post">
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
                         <input type="hidden" asp-for="Id" />
                         <input type="hidden" asp-for="Estado" />
+                        <input type="hidden" asp-for="RutaImagen" id="rutaImagenHidden" />
+
+                        <!-- IMAGEN ACTUAL Y NUEVA -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-image"></i> Imagen del Producto
+                            </label>
+
+                            @if (!string.IsNullOrEmpty(Model.RutaImagen))
+                            {
+                                <div class="current-image-container">
+                                    <p class="mb-3"><strong>Imagen Actual:</strong></p>
+                                    <img src="@Model.RutaImagen" alt="@Model.Nombre" class="current-image" />
+                                    <p class="mt-2 text-muted small">Si seleccionas una nueva imagen, esta será reemplazada</p>
+                                </div>
+                            }
+
+                            <div class="image-upload-container" onclick="document.getElementById('imagenFile').click()">
+                                <i class="fas fa-cloud-upload-alt image-upload-icon"></i>
+                                <p class="mb-2"><strong>@(string.IsNullOrEmpty(Model.RutaImagen) ? "Seleccionar imagen" : "Cambiar imagen")</strong></p>
+                                <p class="text-muted mb-0 small">Formatos aceptados: JPG, PNG, GIF (Máx. 5MB)</p>
+                                <button type="button" class="btn-seleccionar-imagen" onclick="event.stopPropagation(); document.getElementById('imagenFile').click()">
+                                    <i class="fas fa-folder-open"></i> Seleccionar Nueva Imagen
+                                </button>
+                            </div>
+                            <input type="file"
+                                   id="imagenFile"
+                                   name="ImagenFile"
+                                   accept="image/*"
+                                   onchange="previewImage(event)" />
+                            <div id="imagePreviewContainer" style="display: none; text-align: center; margin-top: 15px;">
+                                <img id="imagePreview" class="image-preview" alt="Vista previa" />
+                                <p class="mt-2 text-success"><i class="fas fa-check-circle"></i> Nueva imagen seleccionada</p>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <!-- Código -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Codigo" class="form-label">
-                                        Código del Producto
+                                        <i class="fas fa-barcode"></i> Código del Producto
                                     </label>
                                     <input asp-for="Codigo" class="form-control" placeholder="Ej: PROD001" />
                                     <span asp-validation-for="Codigo" class="text-danger"></span>
@@ -156,7 +248,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Nombre" class="form-label">
-                                        Nombre del Producto
+                                        <i class="fas fa-hamburger"></i> Nombre del Producto
                                     </label>
                                     <input asp-for="Nombre" class="form-control" placeholder="Ej: Hamburguesa Clásica" />
                                     <span asp-validation-for="Nombre" class="text-danger"></span>
@@ -169,7 +261,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="IdCategoria" class="form-label">
-                                        Categoría
+                                        <i class="fas fa-tags"></i> Categoría
                                     </label>
                                     <select asp-for="IdCategoria" class="form-control form-select" asp-items="ViewBag.IdCategoria">
                                         <option value="">-- Seleccione una categoría --</option>
@@ -182,7 +274,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="PrecioVenta" class="form-label">
-                                        Precio de Venta (Bs.)
+                                        <i class="fas fa-dollar-sign"></i> Precio de Venta (Bs.)
                                     </label>
                                     <input asp-for="PrecioVenta" class="form-control" type="number" step="0.01" placeholder="0.00" />
                                     <span asp-validation-for="PrecioVenta" class="text-danger"></span>
@@ -195,7 +287,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Saldo" class="form-label">
-                                        Stock Actual
+                                        <i class="fas fa-boxes"></i> Stock Actual
                                     </label>
                                     <input asp-for="Saldo" class="form-control" type="number" step="0.01" placeholder="0" />
                                     <span asp-validation-for="Saldo" class="text-danger"></span>
@@ -206,7 +298,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="UsuarioRegistro" class="form-label">
-                                        Usuario de Registro
+                                        <i class="fas fa-user"></i> Usuario de Registro
                                     </label>
                                     <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" readonly />
                                     <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
@@ -219,7 +311,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label asp-for="FechaRegistro" class="form-label">
-                                        Fecha de Registro
+                                        <i class="fas fa-calendar-alt"></i> Fecha de Registro
                                     </label>
                                     <input asp-for="FechaRegistro" class="form-control" type="datetime-local" readonly />
                                     <span asp-validation-for="FechaRegistro" class="text-danger"></span>
@@ -230,7 +322,7 @@
                         <!-- Descripción -->
                         <div class="form-group">
                             <label asp-for="Descripcion" class="form-label">
-                                Descripción
+                                <i class="fas fa-align-left"></i> Descripción
                             </label>
                             <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Descripción detallada del producto..."></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger"></span>
@@ -264,4 +356,33 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        // Vista previa de imagen
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Validar tamaño (5MB máximo)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('La imagen es muy grande. El tamaño máximo es 5MB.');
+                    event.target.value = '';
+                    return;
+                }
+
+                // Validar tipo de archivo
+                const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
+                if (!validTypes.includes(file.type)) {
+                    alert('Por favor selecciona una imagen válida (JPG, PNG, GIF)');
+                    event.target.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreviewContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 }

@@ -107,7 +107,7 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
-            // Remover validaciones de navegación si existen
+            // Remover validaciones de las propiedades de navegación
             ModelState.Remove("IdProductoNavigation");
             ModelState.Remove("IdVentaNavigation");
 
@@ -118,15 +118,26 @@ namespace WebHamburgueseria.Controllers
                     // Calcular el total
                     detalleVentas.Total = detalleVentas.Cantidad * detalleVentas.PrecioUnitario;
 
-                    // Attach y marcar como modificado
-                    _context.Attach(detalleVentas);
-                    _context.Entry(detalleVentas).State = EntityState.Modified;
+                    // Obtener la entidad original de la base de datos sin tracking
+                    var detalleOriginal = await _context.DetalleVentas
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(d => d.Id == id);
 
+                    if (detalleOriginal == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Limpiar el ChangeTracker para evitar conflictos
+                    _context.ChangeTracker.Clear();
+
+                    // Actualizar la entidad
+                    _context.DetalleVentas.Update(detalleVentas);
                     await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     if (!DetalleVentasExists(detalleVentas.Id))
                     {
@@ -134,16 +145,27 @@ namespace WebHamburgueseria.Controllers
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("", $"Error de concurrencia: {ex.Message}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", $"Error al guardar: {ex.Message}");
+                    // Log del error completo para debugging
+                    var innerMessage = ex.InnerException?.Message ?? ex.Message;
+                    ModelState.AddModelError("", $"Error al guardar: {innerMessage}");
+                }
+            }
+            else
+            {
+                // Mostrar errores del ModelState para debugging
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine($"Error de validación: {error.ErrorMessage}");
                 }
             }
 
-            // Si llegamos aquí, algo falló. Volver a mostrar el formulario
+            // Si llegamos aquí, algo falló. Volver a cargar los datos
             ViewData["IdProducto"] = new SelectList(_context.Producto, "Id", "Nombre", detalleVentas.IdProducto);
             ViewData["IdVenta"] = new SelectList(_context.Ventas, "Id", "Id", detalleVentas.IdVenta);
             return View(detalleVentas);

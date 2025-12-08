@@ -199,9 +199,9 @@
                 <table class="table table-hover table-empleados mb-0">
                     <thead>
                         <tr>
-                            <th>Cédula Identidad</th>
                             <th>Nombres</th>
                             <th>Apellidos</th>
+                            <th>Cédula Identidad</th>
                             <th>Celular</th>
                             <th>Cargo</th>
                             <th>Dirección</th>
@@ -211,12 +211,15 @@
                     <tbody>
                         @if (Model != null && Model.Any())
                         {
-                            foreach (var item in Model)
+                            @* Ordenar empleados alfabéticamente por nombres A-Z *@
+                            var empleadosOrdenados = Model.OrderBy(e => e.Nombres).ToList();
+
+                            foreach (var item in empleadosOrdenados)
                             {
                                 <tr>
-                                    <td class="font-weight-bold text-primary">@item.CedulaIdentidad</td>
                                     <td class="font-weight-bold">@item.Nombres</td>
                                     <td>@item.PrimerApellido @item.SegundoApellido</td>
+                                    <td class="font-weight-bold text-primary">@item.CedulaIdentidad</td>
                                     <td>
                                         @item.Celular
                                     </td>
@@ -240,14 +243,13 @@
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-details btn-sm"
                                                title="Ver detalles">
-                                               Ver
+                                                Ver
                                             </a>
                                             <a asp-action="Delete"
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-delete btn-sm"
-                                               title="Eliminar"
-                                               >
-                                               Eliminar
+                                               title="Eliminar">
+                                                Eliminar
                                             </a>
                                         </div>
                                     </td>
@@ -283,13 +285,14 @@
             const searchValue = this.value.toLowerCase();
 
             tableRows.forEach(row => {
-                const ci = row.cells[0]?.textContent.toLowerCase() || '';
-                const nombres = row.cells[1]?.textContent.toLowerCase() || '';
-                const apellidos = row.cells[2]?.textContent.toLowerCase() || '';
+                // Actualizado para reflejar el nuevo orden de columnas
+                const nombres = row.cells[0]?.textContent.toLowerCase() || '';
+                const apellidos = row.cells[1]?.textContent.toLowerCase() || '';
+                const ci = row.cells[2]?.textContent.toLowerCase() || '';
                 const cargo = row.cells[4]?.textContent.toLowerCase() || '';
 
-                if (ci.includes(searchValue) || nombres.includes(searchValue) ||
-                    apellidos.includes(searchValue) || cargo.includes(searchValue)) {
+                if (nombres.includes(searchValue) || apellidos.includes(searchValue) ||
+                    ci.includes(searchValue) || cargo.includes(searchValue)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

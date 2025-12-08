@@ -1,7 +1,7 @@
 ﻿@model WebHamburgueseria.Models.Ventas
 @{
-    ViewData["Title"] = "Nueva Venta";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Registro de Pedidos";
+    ViewData["BodyClass"] = "";
 }
 
 @section Styles {
@@ -12,390 +12,103 @@
         }
 
         body {
-            background: linear-gradient(135deg, #000000 0%, #000000 100%) !important;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
             min-height: 100vh;
         }
 
-        .ventas-container {
+        .ventas-wrapper {
+            padding: 20px;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
         }
 
-        .ventas-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 900px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-header-title {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 35px;
-            color: #2d3436;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #ff6b35;
-        }
-
-            .card-header-title i {
-                font-size: 2.5rem;
-                color: #ff6b35;
-            }
-
-            .card-header-title h2 {
-                font-size: 2.2rem;
-                font-weight: 700;
-                margin: 0;
-            }
-
-        .form-section {
-            margin-bottom: 35px;
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            color: #2d3436;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-            .section-header i {
-                font-size: 1.4rem;
-                color: #ff6b35;
-            }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
+        .ventas-header {
+            background: linear-gradient(135deg, #d2691e 0%, #cd853f 100%);
+            padding: 20px 40px;
+            border-radius: 10px 10px 0 0;
             margin-bottom: 0;
         }
 
-        .form-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            color: #495057;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-        }
-
-            .form-label i {
-                font-size: 1.1rem;
-                color: #667eea;
+            .ventas-header h2 {
+                color: white;
+                font-size: 32px;
+                font-weight: 700;
+                margin: 0;
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 2px;
             }
 
-        .form-control, .form-select {
-            width: 100%;
-            border: 2px solid #ff6b35;
-            border-radius: 8px;
-            padding: 14px 18px;
-            font-size: 0.95rem;
+        .ventas-content {
+            display: grid;
+            grid-template-columns: 500px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        /* SECCIÓN IZQUIERDA - DATOS DEL CLIENTE */
+        .cliente-section {
             background: white;
-            color: #495057;
+            border-radius: 0 0 10px 10px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: block;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #d2691e;
+            border-radius: 8px;
+            font-size: 14px;
             transition: all 0.3s;
         }
 
-            .form-control:focus, .form-select:focus {
-                border-color: #f7931e;
-                box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
+            .form-control:focus {
+                border-color: #cd853f;
                 outline: none;
+                box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.2);
             }
 
-            .form-control::placeholder {
-                color: #adb5bd;
-            }
-
-        .cliente-info-box {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
-            border: 2px solid #ff6b35;
-            border-radius: 12px;
-            padding: 20px;
+        .cliente-info-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #d2691e;
             display: none;
         }
 
-            .cliente-info-box.show {
+            .cliente-info-display.show {
                 display: block;
             }
 
-            .cliente-info-box .info-label {
-                font-size: 0.85rem;
-                color: #ff6b35;
-                font-weight: 600;
-                margin-bottom: 8px;
-            }
-
-            .cliente-info-box .info-value {
-                font-size: 1.3rem;
-                color: #2d3436;
+            .cliente-info-display .cliente-nombre {
+                font-size: 18px;
                 font-weight: 700;
+                color: #2c3e50;
+                margin-bottom: 5px;
             }
 
-        .productos-section {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .add-product-row {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 15px;
-            align-items: end;
-            margin-bottom: 25px;
-        }
-
-        .productos-section .section-header {
-            color: white;
-        }
-
-            .productos-section .section-header i {
-                color: #ff6b35;
+            .cliente-info-display .cliente-ci {
+                color: #6c757d;
+                font-size: 14px;
             }
 
-        .productos-section .form-label {
-            color: white;
-        }
-
-            .productos-section .form-label i {
-                color: #ff6b35;
-            }
-
-        .btn-agregar {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            color: white;
-            border: none;
-            padding: 14px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-            .btn-agregar:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
-            }
-
-        .productos-table {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-            .productos-table table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-                .productos-table table thead {
-                    background: linear-gradient(135deg, #783022 0%, #E02804 100%);
-                    color: white;
-                }
-
-                    .productos-table table thead th {
-                        padding: 18px;
-                        text-align: left;
-                        font-weight: 600;
-                        font-size: 0.85rem;
-                        text-transform: uppercase;
-                        letter-spacing: 0.5px;
-                        border: none;
-                    }
-
-                .productos-table table tbody td {
-                    padding: 18px;
-                    border-top: 1px solid #e9ecef;
-                    color: #495057;
-                    font-size: 0.95rem;
-                    vertical-align: middle;
-                }
-
-                .productos-table table tbody tr {
-                    background: white;
-                    transition: all 0.2s;
-                }
-
-                    .productos-table table tbody tr:hover {
-                        background: #f8f9fa;
-                        box-shadow: 0 2px 8px rgba(108, 92, 231, 0.15);
-                        transform: scale(1.01);
-                    }
-
-        .btn-eliminar {
-            background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-            .btn-eliminar:hover {
-                transform: scale(1.15) translateY(-3px);
-                box-shadow: 0 4px 12px rgba(186, 46, 17, 0.4);
-            }
-
-        .totals-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .total-box {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-            .total-box .label {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                color: #2d3436;
-                font-weight: 600;
-                margin-bottom: 12px;
-                font-size: 0.95rem;
-            }
-
-                .total-box .label i {
-                    font-size: 1.2rem;
-                    color: #ff6b35;
-                }
-
-            .total-box input {
-                width: 100%;
-                border: 2px solid #ff6b35;
-                border-radius: 8px;
-                padding: 12px;
-                font-size: 1.3rem;
-                font-weight: 700;
-                text-align: center;
-                background: white;
-                color: #2d3436;
-            }
-
-                .total-box input:focus {
-                    border-color: #f7931e;
-                    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
-                    outline: none;
-                }
-
-            .total-box .value {
-                font-size: 1.5rem;
-                font-weight: 700;
-                color: #2d3436;
-            }
-
-        .actions-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .btn-guardar {
-            background: linear-gradient(135deg, #199E37 0%, #06701E 100%);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(25, 158, 55, 0.3);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-            .btn-guardar:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(25, 158, 55, 0.4);
-            }
-
-        .btn-cancelar {
-            background: linear-gradient(135deg, #BA2E11 0%, #82220E 100%);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(186, 46, 17, 0.3);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-            .btn-cancelar:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(186, 46, 17, 0.4);
-                color: white;
-            }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #adb5bd;
-        }
-
-            .empty-state p {
-                margin: 0;
-                font-size: 1rem;
-            }
-
-        .text-danger {
-            color: #f5576c;
-            font-size: 0.85rem;
-            margin-top: 5px;
-        }
-
-        /* Sugerencias de búsqueda */
         .search-suggestions {
             position: absolute;
             background: white;
-            border: 2px solid #ff6b35;
+            border: 2px solid #d2691e;
             border-radius: 8px;
-            max-height: 300px;
+            max-height: 250px;
             overflow-y: auto;
             width: calc(100% - 4px);
             z-index: 1000;
@@ -409,16 +122,11 @@
             }
 
             .search-suggestions .suggestion-item {
-                padding: 14px 18px;
+                padding: 12px 15px;
                 cursor: pointer;
                 border-bottom: 1px solid #e9ecef;
                 transition: background 0.2s;
-                color: #495057;
             }
-
-                .search-suggestions .suggestion-item:last-child {
-                    border-bottom: none;
-                }
 
                 .search-suggestions .suggestion-item:hover {
                     background: #f8f9fa;
@@ -426,369 +134,760 @@
 
                 .search-suggestions .suggestion-item .cliente-nombre {
                     font-weight: 600;
-                    font-size: 0.95rem;
-                    color: #2d3436;
+                    color: #2c3e50;
                 }
 
                 .search-suggestions .suggestion-item .cliente-ci {
-                    font-size: 0.85rem;
-                    color: #ff6b35;
-                    margin-top: 2px;
+                    font-size: 12px;
+                    color: #d2691e;
                 }
 
-            .search-suggestions .no-results {
-                padding: 14px 18px;
-                color: #adb5bd;
+        /* TABLA DE PRODUCTOS AGREGADOS */
+        .productos-table {
+            margin-top: 30px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+            .productos-table table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+                .productos-table table thead {
+                    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+                }
+
+                    .productos-table table thead th {
+                        padding: 15px;
+                        text-align: left;
+                        color: white;
+                        font-weight: 600;
+                        font-size: 12px;
+                        text-transform: uppercase;
+                    }
+
+                .productos-table table tbody td {
+                    padding: 15px;
+                    border-bottom: 1px solid #e9ecef;
+                    color: #2c3e50;
+                }
+
+                .productos-table table tbody tr:hover {
+                    background: #f8f9fa;
+                }
+
+        .btn-delete-product {
+            background: #dc3545;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .btn-delete-product:hover {
+                background: #c82333;
+                transform: scale(1.1);
+            }
+
+        /* TOTALES */
+        .totals-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+            .total-row:last-child {
+                border-bottom: none;
+                margin-top: 10px;
+                padding-top: 15px;
+                border-top: 2px solid #d2691e;
+            }
+
+            .total-row .label {
+                font-weight: 600;
+                color: #2c3e50;
+                font-size: 16px;
+            }
+
+            .total-row .value {
+                font-size: 20px;
+                font-weight: 700;
+                color: #d2691e;
+            }
+
+            .total-row input {
+                width: 150px;
+                padding: 8px 12px;
+                border: 2px solid #d2691e;
+                border-radius: 6px;
+                font-size: 18px;
+                font-weight: 600;
+                text-align: right;
+            }
+
+        /* BOTONES */
+        .actions-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-guardar {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .btn-guardar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+            }
+
+        .btn-actualizar {
+            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .btn-actualizar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+            }
+
+        /* SECCIÓN DERECHA - PRODUCTOS */
+        .productos-section {
+            background: linear-gradient(135deg, #cd853f 0%, #d2691e 100%);
+            border-radius: 10px;
+            padding: 20px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            position: sticky;
+            top: 20px;
+            min-width: 900px;
+        }
+
+            .productos-section h3 {
+                color: white;
+                font-size: 20px;
+                font-weight: 700;
+                margin-bottom: 20px;
                 text-align: center;
+                text-transform: uppercase;
+            }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .producto-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+            .producto-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            }
+
+            .producto-card.no-stock {
+                opacity: 0.6;
+                cursor: not-allowed;
+            }
+
+                .producto-card.no-stock:hover {
+                    transform: none;
+                }
+
+        /* IMAGEN DEL PRODUCTO - ACTUALIZADO */
+        .producto-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background: #f8f9fa;
+            display: block;
+        }
+
+        .producto-info {
+            padding: 10px;
+        }
+
+            .producto-info .nombre {
+                font-weight: 700;
+                color: #2c3e50;
+                font-size: 13px;
+                margin-bottom: 4px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .producto-info .stock {
+                font-size: 10px;
+                color: #6c757d;
+                margin-bottom: 6px;
+            }
+
+                .producto-info .stock.bajo-stock {
+                    color: #dc3545;
+                    font-weight: 600;
+                }
+
+            .producto-info .precio {
+                font-size: 16px;
+                font-weight: 700;
+                color: #d2691e;
+                margin-bottom: 8px;
+            }
+
+        .producto-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+            .producto-actions input {
+                width: 50px;
+                padding: 5px;
+                border: 2px solid #d2691e;
+                border-radius: 6px;
+                text-align: center;
+                font-weight: 600;
+                font-size: 12px;
+            }
+
+        .btn-agregar-producto {
+            flex: 1;
+            background: #d2691e;
+            color: white;
+            border: none;
+            padding: 6px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .btn-agregar-producto:hover {
+                background: #cd853f;
+            }
+
+            .btn-agregar-producto:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        /* Scrollbar personalizado */
+        .productos-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .productos-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .productos-section::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+
+            .productos-section::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.5);
             }
 
         /* Responsive */
-        @@media (max-width: 768px) {
-            .ventas-card
+        @@media (max-width: 1400px) {
+            .productos-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
 
-        {
+            .productos-section {
+                min-width: 700px;
+            }
+        }
+
+        @@media (max-width: 1200px) {
+            .ventas-content {
+                grid-template-columns: 1fr;
+            }
+
+            .productos-section {
+                position: relative;
+                top: 0;
+                max-height: 600px;
+                min-width: auto;
+            }
+
+            .productos-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .productos-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .actions-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @@media (max-width: 480px) {
+            .productos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* MODAL NUEVO CLIENTE */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .modal-overlay.show {
+                display: flex;
+            }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @@keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .modal-header h3 {
+                margin: 0;
+                font-size: 20px;
+                font-weight: 700;
+            }
+
+        .btn-close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+            .btn-close-modal:hover {
+                transform: rotate(90deg);
+            }
+
+        .modal-body {
             padding: 25px;
         }
 
-        .form-row, .add-product-row, .totals-section, .actions-section {
-            grid-template-columns: 1fr;
+        .modal-form-group {
+            margin-bottom: 20px;
         }
 
-        .card-header-title h2 {
-            font-size: 1.8rem;
+            .modal-form-group label {
+                font-weight: 600;
+                color: #2c3e50;
+                margin-bottom: 8px;
+                display: block;
+                font-size: 14px;
+            }
+
+            .modal-form-group input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 2px solid #e9ecef;
+                border-radius: 8px;
+                font-size: 14px;
+                transition: all 0.3s;
+            }
+
+                .modal-form-group input:focus {
+                    border-color: #3498db;
+                    outline: none;
+                    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+                }
+
+            .modal-form-group .error-message {
+                color: #dc3545;
+                font-size: 12px;
+                margin-top: 5px;
+                display: none;
+            }
+
+                .modal-form-group .error-message.show {
+                    display: block;
+                }
+
+        .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
         }
 
-        }</style>
+        .btn-modal-guardar {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .btn-modal-guardar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            }
+
+            .btn-modal-guardar:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+        .btn-modal-cancelar {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .btn-modal-cancelar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+            }
+    </style>
 }
 
-<div class="ventas-container">
-    <div class="ventas-card">
-        <form asp-action="Create" method="post" id="formVenta">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+<div class="ventas-wrapper">
+    <div class="ventas-header">
+        <h2>Registro de Pedidos</h2>
+    </div>
 
-            <!-- Sección Cliente -->
-            <div class="form-section">
-                <div class="section-header">
-                    <i class="fa fa-user"></i>
-                    <span>Cliente</span>
-                </div>
+    <div class="ventas-content">
+        <!-- SECCIÓN IZQUIERDA: Datos del Cliente y Productos Agregados -->
+        <div>
+            <div class="cliente-section">
+                <form asp-action="Create" method="post" id="formVenta">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                <div class="form-row">
+                    <!-- Fecha -->
+                    <div class="form-group">
+                        <label class="form-label">Fecha</label>
+                        <input type="datetime-local" class="form-control" id="fechaInput" readonly />
+                    </div>
+
+                    <!-- Búsqueda de Cliente -->
                     <div class="form-group" style="position: relative;">
-                        <label class="form-label">
-                            <i class="fa fa-search"></i>
-                            Buscar Cliente
-                        </label>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <label class="form-label" style="margin-bottom: 0;">NIT/CI</label>
+                            <button type="button" class="btn-nuevo-cliente" onclick="abrirModalCliente()">
+                                <i class="fa fa-user-plus"></i> Nuevo Cliente
+                            </button>
+                        </div>
                         <input type="text"
                                id="buscarCliente"
                                class="form-control"
                                placeholder="Buscar por nombre o CI..."
                                autocomplete="off" />
-
-                        <!-- Sugerencias de búsqueda -->
                         <div id="searchSuggestions" class="search-suggestions"></div>
-
-                        <!-- Campo oculto para enviar el ID del cliente -->
                         <input type="hidden" asp-for="IdCliente" id="clienteIdHidden" />
-                        <span asp-validation-for="IdCliente" class="text-danger"></span>
                     </div>
 
+                    <!-- Info del Cliente -->
                     <div class="form-group">
-                        <div id="clienteInfoBox" class="cliente-info-box">
-                            <div class="info-label">Cliente Seleccionado:</div>
-                            <div class="info-value" id="clienteNombre">-</div>
-                            <div style="font-size: 0.9rem; color: #795548; margin-top: 8px;" id="clienteCI">-</div>
+                        <label class="form-label">Nombre</label>
+                        <div id="clienteInfoDisplay" class="cliente-info-display">
+                            <div class="cliente-nombre" id="clienteNombre">-</div>
+                            <div class="cliente-ci" id="clienteCI">-</div>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Tabla de Productos Agregados -->
+                    <div class="productos-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="productosTableBody">
+                            </tbody>
+                        </table>
+                        <div id="emptyState" class="empty-state">
+                            No hay productos agregados
+                        </div>
+                    </div>
+
+                    <!-- Totales -->
+                    <div class="totals-section">
+                        <div class="total-row">
+                            <span class="label">Total:</span>
+                            <span class="value" id="totalValue">Bs. 0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span class="label">Efectivo:</span>
+                            <input type="number" id="pagoCliente" value="0.00" step="0.01" min="0" />
+                        </div>
+                        <div class="total-row">
+                            <span class="label">Cambio:</span>
+                            <span class="value" id="cambioValue">Bs. 0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Campos ocultos -->
+                    <input type="hidden" asp-for="NumeroTransaccion" value="TXN-AUTO" />
+                    <input type="hidden" asp-for="FechaRegistro" id="fechaRegistroHidden" />
+                    <input type="hidden" asp-for="IdUsuario" id="usuarioHidden" value="1" />
+                    <input type="hidden" asp-for="UsuarioRegistro" value="Admin" />
+                    <input type="hidden" asp-for="Estado" value="1" />
+                    <input type="hidden" id="detallesVentaJson" name="DetallesVentaJson" />
+
+                    <!-- Botones -->
+                    <div class="actions-buttons">
+                        <button type="submit" class="btn-guardar">Guardar</button>
+                        <button type="button" class="btn-actualizar">Actualizar</button>
+                    </div>
+                </form>
             </div>
+        </div>
 
-            <!-- Sección Agregar Productos -->
-            <div class="productos-section">
-                <div class="section-header">
-                    <i class="fa fa-shopping-basket"></i>
-                    <span>Agregar Productos</span>
-                </div>
-
-                <div class="add-product-row">
-                    <div class="form-group">
-                        <label class="form-label">Producto</label>
-                        <select class="form-control form-select" id="productoSelect">
-                            <option value="">Seleccione un producto</option>
-                            @if (ViewBag.Productos != null)
-                            {
-                                foreach (var producto in ViewBag.Productos)
-                                {
-                                    <option value="@producto.Id">
-                                        @producto.Nombre - Bs. @producto.PrecioVenta
-                                    </option>
-                                }
-                            }
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidadInput" value="1" min="1" step="1" />
-                    </div>
-                </div>
-
-                <button type="button" class="btn-agregar" id="btnAgregar" style="width: 100%;">
-                    <i class="fa fa-plus-circle"></i>
-                    Agregar Producto
-                </button>
-
-                <!-- Tabla de productos -->
-                <div class="productos-table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio Unitario</th>
-                                <th>Total</th>
-                                <th style="text-align: center;">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="productosTableBody">
-                            <!-- Productos dinámicos -->
-                        </tbody>
-                    </table>
-                    <div id="emptyState" class="empty-state">
-                        <p>No hay productos agregados</p>
-                    </div>
-                </div>
+        <!-- SECCIÓN DERECHA: Productos Disponibles -->
+        <div class="productos-section">
+            <h3>Productos Disponibles</h3>
+            <div class="productos-grid" id="productosGrid">
+                <!-- Los productos se cargarán aquí dinámicamente -->
             </div>
+        </div>
+    </div>
+</div>
 
-            <!-- Sección de Totales -->
-            <div class="totals-section">
-                <div class="total-box">
-                    <div class="label">
-                        <i class="fa fa-wallet"></i>
-                        Efectivo
-                    </div>
-                    <input type="number" id="pagoCliente" value="0.00" step="0.01" min="0" />
+<!-- MODAL PARA CREAR NUEVO CLIENTE -->
+<div class="modal-overlay" id="modalNuevoCliente">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fa fa-user-plus"></i> Nuevo Cliente</h3>
+            <button class="btn-close-modal" onclick="cerrarModalCliente()">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="formNuevoCliente" onsubmit="return false;">
+                <div class="modal-form-group">
+                    <label>Cédula de Identidad *</label>
+                    <input type="text" id="modalCI" placeholder="Ej: 12345678" required />
+                    <span class="error-message" id="errorCI"></span>
                 </div>
 
-                <div class="total-box">
-                    <div class="label">
-                        <i class="fa fa-calculator"></i>
-                        Total
-                    </div>
-                    <div class="value" id="totalValue">Bs. 0.00</div>
+                <div class="modal-form-group">
+                    <label>Nombres *</label>
+                    <input type="text" id="modalNombres" placeholder="Ej: Juan Carlos" required />
+                    <span class="error-message" id="errorNombres"></span>
                 </div>
 
-                <div class="total-box">
-                    <div class="label">
-                        <i class="fa fa-coins"></i>
-                        Cambio
-                    </div>
-                    <div class="value" id="cambioValue">Bs. 0.00</div>
+                <div class="modal-form-group">
+                    <label>Apellidos *</label>
+                    <input type="text" id="modalApellidos" placeholder="Ej: Pérez López" required />
+                    <span class="error-message" id="errorApellidos"></span>
                 </div>
-            </div>
 
-            <!-- Campos ocultos requeridos -->
-            <input type="hidden" asp-for="NumeroTransaccion" value="TXN-AUTO" />
-            <input type="hidden" asp-for="FechaRegistro" id="fechaRegistroHidden" />
-            <input type="hidden" asp-for="IdUsuario" id="usuarioHidden" />
-            <input type="hidden" asp-for="UsuarioRegistro" value="Admin" />
-            <input type="hidden" asp-for="Estado" value="1" />
-            <input type="hidden" id="detallesVentaJson" name="DetallesVentaJson" />
-
-            <!-- Botones de Acción -->
-            <div class="actions-section">
-                <button type="submit" class="btn-guardar">
-                    <i class="fa fa-save"></i>
-                    Guardar Pedido
-                </button>
-                <a asp-action="Index" class="btn-cancelar">
-                    <i class="fa fa-times"></i>
-                    Cancelar
-                </a>
-            </div>
-        </form>
+                <div class="modal-actions">
+                    <button type="button" class="btn-modal-guardar" onclick="guardarNuevoCliente()">
+                        <i class="fa fa-save"></i> Guardar
+                    </button>
+                    <button type="button" class="btn-modal-cancelar" onclick="cerrarModalCliente()">
+                        <i class="fa fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
     <script>
-        // ===== DESHABILITAR ERROR DE GOOGLE MAPS SI NO SE USA =====
-        window.console.error = (function(oldError) {
-            return function(error) {
-                if (typeof error === 'string' && error.includes('InvalidValueError')) {
-                    return;
-                }
-                oldError.apply(console, arguments);
-            };
-        })(window.console.error);
-
-        // ===== CARGAR PRODUCTOS DESDE JSON =====
+        // Cargar productos y clientes
         const productosData = @Html.Raw(ViewBag.ProductosJson ?? "[]");
-        console.log('Productos cargados:', productosData);
-
-        // Crear un mapa de productos por ID para acceso rápido
-        const productosMap = new Map();
-        productosData.forEach(prod => {
-            productosMap.set(prod.Id, prod);
-        });
-
-        // ===== CARGAR CLIENTES =====
         const clientesData = @Html.Raw(ViewBag.ClientesJson ?? "[]");
-        console.log('Clientes cargados:', clientesData);
 
-        // Referencias a elementos del DOM
-        const pagoClienteInput = document.getElementById('pagoCliente');
-        const totalValue = document.getElementById('totalValue');
-        const cambioValue = document.getElementById('cambioValue');
-        const emptyState = document.getElementById('emptyState');
-        const productosTableBody = document.getElementById('productosTableBody');
-        const productoSelect = document.getElementById('productoSelect');
-        const cantidadInput = document.getElementById('cantidadInput');
-        const buscarClienteInput = document.getElementById('buscarCliente');
-        const searchSuggestions = document.getElementById('searchSuggestions');
-        const clienteInfoBox = document.getElementById('clienteInfoBox');
-        const clienteNombre = document.getElementById('clienteNombre');
-        const clienteCI = document.getElementById('clienteCI');
-        const clienteIdHidden = document.getElementById('clienteIdHidden');
-
-        // Array para almacenar los productos agregados
+        // Variables globales
         let productosAgregados = [];
         let contadorProductos = 0;
 
-        // Cliente seleccionado
-        let clienteSeleccionado = null;
+        // Referencias DOM
+        const productosGrid = document.getElementById('productosGrid');
+        const productosTableBody = document.getElementById('productosTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const totalValue = document.getElementById('totalValue');
+        const pagoClienteInput = document.getElementById('pagoCliente');
+        const cambioValue = document.getElementById('cambioValue');
+        const buscarClienteInput = document.getElementById('buscarCliente');
+        const searchSuggestions = document.getElementById('searchSuggestions');
+        const clienteInfoDisplay = document.getElementById('clienteInfoDisplay');
+        const clienteNombre = document.getElementById('clienteNombre');
+        const clienteCI = document.getElementById('clienteCI');
+        const clienteIdHidden = document.getElementById('clienteIdHidden');
+        const fechaInput = document.getElementById('fechaInput');
 
-        // Establecer fecha actual automáticamente
+        // Establecer fecha actual
         const ahora = new Date();
-        const year = ahora.getFullYear();
-        const month = String(ahora.getMonth() + 1).padStart(2, '0');
-        const day = String(ahora.getDate()).padStart(2, '0');
-        const hours = String(ahora.getHours()).padStart(2, '0');
-        const minutes = String(ahora.getMinutes()).padStart(2, '0');
-        const fechaISO = `${year}-${month}-${day}T${hours}:${minutes}`;
-        document.getElementById('fechaRegistroHidden').value = fechaISO;
+        fechaInput.value = ahora.toISOString().slice(0, 16);
+        document.getElementById('fechaRegistroHidden').value = ahora.toISOString().slice(0, 16);
 
-        // Establecer usuario por defecto
-        @if (ViewBag.IdUsuario != null)
-        {
-                @:var selectUsuario = @Html.Raw(Json.Serialize(ViewBag.IdUsuario));
-                @:if (selectUsuario && selectUsuario.length > 0) {
-                    @:document.getElementById('usuarioHidden').value = selectUsuario[0].value;
-                @:}
+        // FUNCIÓN PARA OBTENER IMAGEN DEL PRODUCTO
+        function obtenerImagenProducto(producto) {
+            // Si tiene imagen propia, usarla
+            if (producto.RutaImagen && producto.RutaImagen.trim() !== '') {
+                return producto.RutaImagen;
+            }
+            // Si no, usar imagen por defecto
+            return '/images/producto-default.png';
         }
 
-        // ===== BÚSQUEDA DE CLIENTES CON SUGERENCIAS =====
-        buscarClienteInput.addEventListener('input', function () {
-            const searchTerm = this.value.toLowerCase().trim();
-
-            if (searchTerm === '') {
-                searchSuggestions.classList.remove('show');
-                searchSuggestions.innerHTML = '';
-                return;
-            }
-
-            // Filtrar clientes
-            const resultados = clientesData.filter(cliente => {
-                const nombreCompleto = `${cliente.Nombres} ${cliente.Apellidos}`.toLowerCase();
-                const ci = cliente.CedulaIdentidad.toLowerCase();
-                return nombreCompleto.includes(searchTerm) || ci.includes(searchTerm);
-            });
-
-            // Mostrar resultados
-            if (resultados.length > 0) {
-                searchSuggestions.innerHTML = resultados.map(cliente => `
-                    <div class="suggestion-item" data-id="${cliente.Id}" data-nombre="${cliente.Nombres} ${cliente.Apellidos}" data-ci="${cliente.CedulaIdentidad}">
-                        <div class="cliente-nombre">${cliente.Nombres} ${cliente.Apellidos}</div>
-                        <div class="cliente-ci">CI: ${cliente.CedulaIdentidad}</div>
+        // RENDERIZAR PRODUCTOS - ACTUALIZADO
+        function renderizarProductos() {
+            productosGrid.innerHTML = productosData.map(producto => {
+                const imagenUrl = obtenerImagenProducto(producto);
+                return `
+                    <div class="producto-card ${producto.Saldo <= 0 ? 'no-stock' : ''}" data-id="${producto.Id}">
+                        <img src="${imagenUrl}"
+                             alt="${producto.Nombre}"
+                             class="producto-img"
+                             onerror="this.src='/images/producto-default.png'">
+                        <div class="producto-info">
+                            <div class="nombre">${producto.Nombre}</div>
+                            <div class="stock ${producto.Saldo < 10 ? 'bajo-stock' : ''}">
+                                Stock: ${producto.Saldo}
+                            </div>
+                            <div class="precio">Bs. ${parseFloat(producto.PrecioVenta).toFixed(2)}</div>
+                            <div class="producto-actions">
+                                <input type="number"
+                                       class="cantidad-input"
+                                       value="1"
+                                       min="1"
+                                       max="${producto.Saldo}"
+                                       ${producto.Saldo <= 0 ? 'disabled' : ''}>
+                                <button class="btn-agregar-producto"
+                                        onclick="agregarProducto(${producto.Id})"
+                                        ${producto.Saldo <= 0 ? 'disabled' : ''}>
+                                    Agregar
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                `).join('');
-                searchSuggestions.classList.add('show');
-            } else {
-                searchSuggestions.innerHTML = '<div class="no-results">No se encontraron clientes</div>';
-                searchSuggestions.classList.add('show');
-            }
-        });
-
-        // Seleccionar cliente de las sugerencias
-        searchSuggestions.addEventListener('click', function(e) {
-            const suggestionItem = e.target.closest('.suggestion-item');
-            if (suggestionItem) {
-                const clienteId = suggestionItem.getAttribute('data-id');
-                const nombre = suggestionItem.getAttribute('data-nombre');
-                const ci = suggestionItem.getAttribute('data-ci');
-
-                // Actualizar campos
-                buscarClienteInput.value = nombre;
-                clienteIdHidden.value = clienteId;
-                clienteNombre.textContent = nombre;
-                clienteCI.textContent = `CI: ${ci}`;
-                clienteInfoBox.classList.add('show');
-
-                // Ocultar sugerencias
-                searchSuggestions.classList.remove('show');
-                searchSuggestions.innerHTML = '';
-
-                clienteSeleccionado = { id: clienteId, nombre: nombre, ci: ci };
-            }
-        });
-
-        // Cerrar sugerencias al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            if (!buscarClienteInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
-                searchSuggestions.classList.remove('show');
-            }
-        });
-
-        // ===== CALCULAR CAMBIO =====
-        pagoClienteInput.addEventListener('input', calcularCambio);
-
-        function calcularCambio() {
-            const totalText = totalValue.textContent.replace('Bs. ', '').trim();
-            const total = parseFloat(totalText) || 0;
-            const pago = parseFloat(pagoClienteInput.value) || 0;
-            const cambio = pago - total;
-
-            cambioValue.textContent = 'Bs. ' + cambio.toFixed(2);
+                `;
+            }).join('');
         }
 
-        // ===== AGREGAR PRODUCTO =====
-        document.getElementById('btnAgregar').addEventListener('click', function () {
-            // Validar que se haya seleccionado un producto
-            if (!productoSelect.value) {
-                alert('Por favor seleccione un producto');
-                return;
-            }
+        // AGREGAR PRODUCTO
+        function agregarProducto(productoId) {
+            const producto = productosData.find(p => p.Id === productoId);
+            if (!producto) return;
 
-            // Validar cantidad
+            const card = document.querySelector(`.producto-card[data-id="${productoId}"]`);
+            const cantidadInput = card.querySelector('.cantidad-input');
             const cantidad = parseInt(cantidadInput.value);
-            if (cantidad <= 0 || isNaN(cantidad)) {
-                alert('Por favor ingrese una cantidad válida mayor a 0');
-                return;
-            }
 
-            const productoId = parseInt(productoSelect.value);
-            const producto = productosMap.get(productoId);
-
-            if (!producto) {
-                alert('Error: No se encontró el producto seleccionado');
+            if (cantidad <= 0 || cantidad > producto.Saldo) {
+                alert('Cantidad inválida');
                 return;
             }
 
             const precioUnitario = parseFloat(producto.PrecioVenta);
-
-            if (isNaN(precioUnitario) || precioUnitario <= 0) {
-                alert('Error: El precio del producto no es válido');
-                return;
-            }
-
             const subtotal = cantidad * precioUnitario;
-            const productoNombre = producto.Nombre;
 
-            // Agregar al array de productos
             productosAgregados.push({
                 IdProducto: productoId,
                 Cantidad: cantidad,
@@ -796,16 +895,15 @@
                 Subtotal: subtotal
             });
 
-            // Agregar a la tabla visualmente
             const row = productosTableBody.insertRow();
             row.setAttribute('data-index', contadorProductos);
             row.innerHTML = `
-                <td>${productoNombre}</td>
+                <td>${producto.Nombre}</td>
                 <td>${cantidad}</td>
                 <td>Bs. ${precioUnitario.toFixed(2)}</td>
                 <td>Bs. ${subtotal.toFixed(2)}</td>
-                <td style="text-align: center;">
-                    <button type="button" class="btn-eliminar" onclick="eliminarProducto(${contadorProductos})">
+                <td>
+                    <button type="button" class="btn-delete-product" onclick="eliminarProducto(${contadorProductos})">
                         <i class="fa fa-trash"></i>
                     </button>
                 </td>
@@ -814,55 +912,117 @@
             contadorProductos++;
             actualizarTotal();
             verificarTablaVacia();
-
-            // Limpiar campos
-            productoSelect.value = '';
             cantidadInput.value = '1';
-        });
-
-        // ===== ELIMINAR PRODUCTO =====
-        function eliminarProducto(index) {
-            if (confirm('¿Está seguro de eliminar este producto?')) {
-                const row = document.querySelector(`tr[data-index="${index}"]`);
-                if (row) {
-                    row.remove();
-                }
-
-                const arrayIndex = productosAgregados.findIndex((p, i) => {
-                    const rowElement = document.querySelector(`tr[data-index="${i}"]`);
-                    return rowElement && rowElement.getAttribute('data-index') == index;
-                });
-
-                if (arrayIndex !== -1) {
-                    productosAgregados.splice(arrayIndex, 1);
-                }
-
-                actualizarTotal();
-                verificarTablaVacia();
-            }
         }
 
-        // ===== ACTUALIZAR TOTAL =====
-        function actualizarTotal() {
-            let total = 0;
-            productosAgregados.forEach(producto => {
-                total += producto.Subtotal;
+        // ELIMINAR PRODUCTO - CORREGIDO
+        function eliminarProducto(index) {
+            // Eliminar fila visual
+            const row = document.querySelector(`tr[data-index="${index}"]`);
+            if (row) {
+                row.remove();
+            }
+
+            // Reconstruir el array solo con los productos que tienen fila visible
+            const productosTemp = [];
+            productosTableBody.querySelectorAll('tr').forEach((row, i) => {
+                const oldIndex = parseInt(row.getAttribute('data-index'));
+                if (productosAgregados[oldIndex]) {
+                    productosTemp.push(productosAgregados[oldIndex]);
+                    // Actualizar el data-index de la fila
+                    row.setAttribute('data-index', i);
+                    // Actualizar el onclick del botón eliminar
+                    const btnEliminar = row.querySelector('.btn-delete-product');
+                    if (btnEliminar) {
+                        btnEliminar.setAttribute('onclick', `eliminarProducto(${i})`);
+                    }
+                }
             });
 
+            // Reemplazar el array con los productos que quedaron
+            productosAgregados = productosTemp;
+            contadorProductos = productosAgregados.length;
+
+            actualizarTotal();
+            verificarTablaVacia();
+        }
+
+        // ACTUALIZAR TOTAL
+        function actualizarTotal() {
+            const total = productosAgregados.reduce((sum, p) => sum + p.Subtotal, 0);
             totalValue.textContent = 'Bs. ' + total.toFixed(2);
             calcularCambio();
         }
 
-        // ===== VERIFICAR SI LA TABLA ESTÁ VACÍA =====
+        // CALCULAR CAMBIO
+        function calcularCambio() {
+            const total = parseFloat(totalValue.textContent.replace('Bs. ', '')) || 0;
+            const pago = parseFloat(pagoClienteInput.value) || 0;
+            const cambio = pago - total;
+            cambioValue.textContent = 'Bs. ' + cambio.toFixed(2);
+        }
+
+        pagoClienteInput.addEventListener('input', calcularCambio);
+
+        // VERIFICAR TABLA VACÍA
         function verificarTablaVacia() {
             emptyState.style.display = productosTableBody.children.length === 0 ? 'block' : 'none';
         }
 
-        // ===== ENVIAR FORMULARIO =====
+        // BÚSQUEDA DE CLIENTES
+        buscarClienteInput.addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase().trim();
+
+            if (searchTerm === '') {
+                searchSuggestions.classList.remove('show');
+                return;
+            }
+
+            const resultados = clientesData.filter(cliente => {
+                const nombreCompleto = `${cliente.Nombres} ${cliente.Apellidos}`.toLowerCase();
+                const ci = cliente.CedulaIdentidad.toLowerCase();
+                return nombreCompleto.includes(searchTerm) || ci.includes(searchTerm);
+            });
+
+            if (resultados.length > 0) {
+                searchSuggestions.innerHTML = resultados.map(cliente => `
+                    <div class="suggestion-item"
+                         data-id="${cliente.Id}"
+                         data-nombre="${cliente.Nombres} ${cliente.Apellidos}"
+                         data-ci="${cliente.CedulaIdentidad}">
+                        <div class="cliente-nombre">${cliente.Nombres} ${cliente.Apellidos}</div>
+                        <div class="cliente-ci">CI: ${cliente.CedulaIdentidad}</div>
+                    </div>
+                `).join('');
+                searchSuggestions.classList.add('show');
+            } else {
+                searchSuggestions.innerHTML = '<div style="padding: 12px; text-align: center; color: #6c757d;">No se encontraron clientes</div>';
+                searchSuggestions.classList.add('show');
+            }
+        });
+
+        // SELECCIONAR CLIENTE
+        searchSuggestions.addEventListener('click', function(e) {
+            const item = e.target.closest('.suggestion-item');
+            if (item) {
+                const id = item.getAttribute('data-id');
+                const nombre = item.getAttribute('data-nombre');
+                const ci = item.getAttribute('data-ci');
+
+                buscarClienteInput.value = ci;
+                clienteIdHidden.value = id;
+                clienteNombre.textContent = nombre;
+                clienteCI.textContent = `CI: ${ci}`;
+                clienteInfoDisplay.classList.add('show');
+                searchSuggestions.classList.remove('show');
+            }
+        });
+
+        // ENVIAR FORMULARIO
         document.getElementById('formVenta').addEventListener('submit', function (e) {
             if (productosAgregados.length === 0) {
                 e.preventDefault();
-                alert('Debe agregar al menos un producto a la venta');
+                alert('Debe agregar al menos un producto');
                 return false;
             }
 
@@ -873,11 +1033,157 @@
             }
 
             document.getElementById('detallesVentaJson').value = JSON.stringify(productosAgregados);
-            console.log('Productos enviados:', productosAgregados);
             return true;
         });
 
-        // Inicializar vista
+        // INICIALIZAR
+        renderizarProductos();
         verificarTablaVacia();
+
+        // ==========================================
+        // FUNCIONES PARA MODAL DE NUEVO CLIENTE
+        // ==========================================
+
+        function abrirModalCliente() {
+            document.getElementById('modalNuevoCliente').classList.add('show');
+            document.getElementById('modalCI').focus();
+            limpiarFormularioCliente();
+        }
+
+        function cerrarModalCliente() {
+            document.getElementById('modalNuevoCliente').classList.remove('show');
+            limpiarFormularioCliente();
+        }
+
+        function limpiarFormularioCliente() {
+            document.getElementById('modalCI').value = '';
+            document.getElementById('modalNombres').value = '';
+            document.getElementById('modalApellidos').value = '';
+
+            // Limpiar errores
+            document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+        }
+
+        function validarFormularioCliente() {
+            let valido = true;
+
+            // Validar CI
+            const ci = document.getElementById('modalCI').value.trim();
+            const errorCI = document.getElementById('errorCI');
+            if (!ci) {
+                errorCI.textContent = 'La cédula es obligatoria';
+                errorCI.classList.add('show');
+                valido = false;
+            } else if (ci.length < 5) {
+                errorCI.textContent = 'La cédula debe tener al menos 5 caracteres';
+                errorCI.classList.add('show');
+                valido = false;
+            } else {
+                errorCI.classList.remove('show');
+            }
+
+            // Validar Nombres
+            const nombres = document.getElementById('modalNombres').value.trim();
+            const errorNombres = document.getElementById('errorNombres');
+            if (!nombres) {
+                errorNombres.textContent = 'El nombre es obligatorio';
+                errorNombres.classList.add('show');
+                valido = false;
+            } else {
+                errorNombres.classList.remove('show');
+            }
+
+            // Validar Apellidos
+            const apellidos = document.getElementById('modalApellidos').value.trim();
+            const errorApellidos = document.getElementById('errorApellidos');
+            if (!apellidos) {
+                errorApellidos.textContent = 'Los apellidos son obligatorios';
+                errorApellidos.classList.add('show');
+                valido = false;
+            } else {
+                errorApellidos.classList.remove('show');
+            }
+
+            return valido;
+        }
+
+        async function guardarNuevoCliente() {
+            // Validar formulario
+            if (!validarFormularioCliente()) {
+                return;
+            }
+
+            // Deshabilitar botón
+            const btnGuardar = event.target;
+            btnGuardar.disabled = true;
+            btnGuardar.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Guardando...';
+
+            // Obtener datos del formulario
+            const nuevoCliente = {
+                CedulaIdentidad: document.getElementById('modalCI').value.trim(),
+                Nombres: document.getElementById('modalNombres').value.trim(),
+                Apellidos: document.getElementById('modalApellidos').value.trim(),
+                UsuarioRegistro: 'Admin'
+            };
+
+            try {
+                // Enviar petición AJAX
+                const response = await fetch('/Clientes/CrearClienteAjax', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(nuevoCliente)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Agregar cliente a la lista
+                    clientesData.push({
+                        Id: result.cliente.id,
+                        Nombres: result.cliente.nombres,
+                        Apellidos: result.cliente.apellidos,
+                        CedulaIdentidad: result.cliente.cedulaIdentidad
+                    });
+
+                    // Seleccionar automáticamente el nuevo cliente
+                    clienteIdHidden.value = result.cliente.id;
+                    buscarClienteInput.value = result.cliente.cedulaIdentidad;
+                    clienteNombre.textContent = `${result.cliente.nombres} ${result.cliente.apellidos}`;
+                    clienteCI.textContent = `CI: ${result.cliente.cedulaIdentidad}`;
+                    clienteInfoDisplay.classList.add('show');
+
+                    // Cerrar modal
+                    cerrarModalCliente();
+
+                    // Mostrar mensaje de éxito
+                    alert('¡Cliente creado exitosamente!');
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al guardar el cliente. Por favor intente nuevamente.');
+            } finally {
+                // Rehabilitar botón
+                btnGuardar.disabled = false;
+                btnGuardar.innerHTML = '<i class="fa fa-save"></i> Guardar';
+            }
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.getElementById('modalNuevoCliente').addEventListener('click', function(e) {
+            if (e.target === this) {
+                cerrarModalCliente();
+            }
+        });
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                cerrarModalCliente();
+            }
+        });
     </script>
 }

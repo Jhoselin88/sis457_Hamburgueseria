@@ -287,10 +287,10 @@
                 <table class="table table-hover table-productos mb-0">
                     <thead>
                         <tr>
-                            <th>Código</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Categoría</th>
+                            <th>Código</th>
                             <th>Stock</th>
                             <th>Precio Venta</th>
                             <th class="text-center">Acciones</th>
@@ -299,10 +299,12 @@
                     <tbody>
                         @if (Model != null && Model.Any())
                         {
-                            foreach (var item in Model)
+                            @* Ordenar productos alfabéticamente por nombre A-Z *@
+                            var productosOrdenados = Model.OrderBy(p => p.Nombre).ToList();
+
+                            foreach (var item in productosOrdenados)
                             {
                                 <tr>
-                                    <td class="font-weight-bold text-primary">@item.Codigo</td>
                                     <td class="font-weight-bold">@item.Nombre</td>
                                     <td class="text-truncate-custom" style="max-width: 250px;" title="@item.Descripcion">
                                         @(item.Descripcion ?? "Sin descripción")
@@ -312,6 +314,7 @@
                                             @(item.IdCategoriaNavigation?.Nombre ?? "Sin categoría")
                                         </span>
                                     </td>
+                                    <td class="font-weight-bold text-primary">@item.Codigo</td>
                                     <td>
                                         @item.Saldo
                                     </td>
@@ -335,8 +338,7 @@
                                             <a asp-action="Delete"
                                                asp-route-id="@item.Id"
                                                class="btn btn-action-delete btn-sm"
-                                               title="Eliminar"
-                                               >
+                                               title="Eliminar">
                                                 Eliminar
                                             </a>
                                         </div>
@@ -376,7 +378,5 @@
                 window.location.href = '@Url.Action("Index", "Productos")?search=' + encodeURIComponent(searchValue);
             }, 500); // Espera 500ms después de que el usuario deje de escribir
         });
-
-
     </script>
 }

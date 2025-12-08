@@ -49,8 +49,6 @@ namespace WebHamburgueseria.Controllers
         }
 
         // POST: Clientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CedulaIdentidad,Nombres,Apellidos,UsuarioRegistro,FechaRegistro,Estado")] Cliente cliente)
@@ -62,6 +60,70 @@ namespace WebHamburgueseria.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(cliente);
+        }
+
+        // NUEVO: API para crear cliente desde modal (AJAX)
+        [HttpPost]
+        public async Task<IActionResult> CrearClienteAjax([FromBody] Cliente cliente)
+        {
+            try
+            {
+                // Validaciones básicas
+                if (string.IsNullOrWhiteSpace(cliente.CedulaIdentidad))
+                {
+                    return Json(new { success = false, message = "La Cédula de Identidad es obligatoria" });
+                }
+
+                if (string.IsNullOrWhiteSpace(cliente.Nombres))
+                {
+                    return Json(new { success = false, message = "El nombre es obligatorio" });
+                }
+
+                if (string.IsNullOrWhiteSpace(cliente.Apellidos))
+                {
+                    return Json(new { success = false, message = "Los apellidos son obligatorios" });
+                }
+
+                // Verificar si ya existe un cliente con esa CI
+                var clienteExiste = await _context.Cliente
+                    .AnyAsync(c => c.CedulaIdentidad == cliente.CedulaIdentidad && c.Estado == 1);
+
+                if (clienteExiste)
+                {
+                    return Json(new { success = false, message = "Ya existe un cliente con esa Cédula de Identidad" });
+                }
+
+                // Establecer valores por defecto
+                cliente.FechaRegistro = DateTime.Now;
+                cliente.Estado = 1;
+
+                if (string.IsNullOrWhiteSpace(cliente.UsuarioRegistro))
+                {
+                    cliente.UsuarioRegistro = "Admin";
+                }
+
+                // Guardar cliente
+                _context.Add(cliente);
+                await _context.SaveChangesAsync();
+
+                // Retornar el cliente creado
+                return Json(new
+                {
+                    success = true,
+                    message = "Cliente creado exitosamente",
+                    cliente = new
+                    {
+                        cliente.Id,
+                        cliente.CedulaIdentidad,
+                        cliente.Nombres,
+                        cliente.Apellidos
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al crear el cliente: " + ex.Message });
+            }
         }
 
         // GET: Clientes/Edit/5
@@ -81,8 +143,6 @@ namespace WebHamburgueseria.Controllers
         }
 
         // POST: Clientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CedulaIdentidad,Nombres,Apellidos,UsuarioRegistro,FechaRegistro,Estado")] Cliente cliente)

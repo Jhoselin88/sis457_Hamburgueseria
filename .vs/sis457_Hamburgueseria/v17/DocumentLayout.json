@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\controllers\\productoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\views\\pages\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\views\\pages\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\views\\menuu\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\views\\menuu\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\views\\pages\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\views\\pages\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\controllers\\pagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\controllers\\pagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|c:\\users\\jairo\\desktop\\sis457_hamburgueseria\\webhamburgueseria\\views\\productos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{88C66DF3-1220-44CA-BE26-5AF6A002676B}|WebHamburgueseria\\WebHamburgueseria.csproj|solutionrelative:webhamburgueseria\\views\\productos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,69 +18,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "About.cshtml",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Pages\\About.cshtml",
-              "RelativeDocumentMoniker": "WebHamburgueseria\\Views\\Pages\\About.cshtml",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Pages\\About.cshtml",
-              "RelativeToolTip": "WebHamburgueseria\\Views\\Pages\\About.cshtml",
-              "ViewState": "AgIAAHcAAAAAAAAAAAAQwL0AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T03:14:13.342Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Book.cshtml",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Pages\\Book.cshtml",
-              "RelativeDocumentMoniker": "WebHamburgueseria\\Views\\Pages\\Book.cshtml",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Pages\\Book.cshtml",
-              "RelativeToolTip": "WebHamburgueseria\\Views\\Pages\\Book.cshtml",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAIwFYBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T03:10:23.253Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "WebHamburgueseria\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "WebHamburgueseria\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T03:04:58.325Z",
+              "Title": "ProductosController.cs",
+              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Controllers\\ProductosController.cs",
+              "RelativeDocumentMoniker": "WebHamburgueseria\\Controllers\\ProductosController.cs",
+              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Controllers\\ProductosController.cs",
+              "RelativeToolTip": "WebHamburgueseria\\Controllers\\ProductosController.cs",
+              "ViewState": "AgIAAB0BAAAAAAAAAAAQwCsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T09:00:10.676Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PagesController.cs",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Controllers\\PagesController.cs",
-              "RelativeDocumentMoniker": "WebHamburgueseria\\Controllers\\PagesController.cs",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Controllers\\PagesController.cs",
-              "RelativeToolTip": "WebHamburgueseria\\Controllers\\PagesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T03:04:19.702Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Menuu\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebHamburgueseria\\Views\\Menuu\\Index.cshtml",
-              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Menuu\\Index.cshtml",
-              "RelativeToolTip": "WebHamburgueseria\\Views\\Menuu\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMsBAAAgAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Productos\\Create.cshtml",
+              "RelativeDocumentMoniker": "WebHamburgueseria\\Views\\Productos\\Create.cshtml",
+              "ToolTip": "C:\\Users\\JAIRO\\Desktop\\sis457_Hamburgueseria\\WebHamburgueseria\\Views\\Productos\\Create.cshtml",
+              "RelativeToolTip": "WebHamburgueseria\\Views\\Productos\\Create.cshtml",
+              "ViewState": "AgIAAHYBAAAAAAAAAAAqwLQBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-12-08T03:16:31.282Z"
+              "WhenOpened": "2025-12-08T08:57:20.862Z",
+              "EditorCaption": ""
             }
           ]
         }

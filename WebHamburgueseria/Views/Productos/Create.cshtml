@@ -220,20 +220,20 @@
                     <form asp-action="Create" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
+                        <!-- Campos ocultos -->
                         <input type="hidden" name="Estado" value="1" />
                         <input type="hidden" name="Id" value="0" />
 
                         <!-- SECCIÓN DE IMAGEN -->
                         <div class="form-group">
                             <label class="form-label file-input-label">
-                                <i class="fas fa-image"></i> Imagen del Producto
+                                Imagen del Producto
                             </label>
                             <div class="image-upload-container" onclick="document.getElementById('imagenFile').click()">
-                                <i class="fas fa-cloud-upload-alt image-upload-icon"></i>
                                 <p class="mb-2"><strong>Haz clic aquí para seleccionar una imagen</strong></p>
                                 <p class="text-muted mb-0 small">Formatos aceptados: JPG, PNG, GIF (Máx. 5MB)</p>
                                 <button type="button" class="btn-seleccionar-imagen" onclick="event.stopPropagation(); document.getElementById('imagenFile').click()">
-                                    <i class="fas fa-folder-open"></i> Seleccionar Imagen
+                                    Seleccionar Imagen
                                 </button>
                             </div>
                             <input type="file"
@@ -252,7 +252,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="Codigo" class="form-label">
-                                        <i class="fas fa-barcode"></i> Código del Producto
+                                        Código del Producto
                                     </label>
                                     <input asp-for="Codigo" class="form-control" placeholder="Ej: PROD001" required />
                                     <span asp-validation-for="Codigo" class="text-danger"></span>
@@ -276,7 +276,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label asp-for="IdCategoria" class="form-label">
-                                        <i class="fas fa-tags"></i> Categoría
+                                         Categoría
                                     </label>
                                     <select asp-for="IdCategoria" class="form-control form-select" asp-items="ViewBag.IdCategoria" required>
                                         <option value="">-- Seleccione una categoría --</option>
@@ -299,7 +299,7 @@
 
                         <div class="row">
                             <!-- Stock/Saldo -->
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label asp-for="Saldo" class="form-label">
                                         <i class="fas fa-boxes"></i> Stock Inicial
@@ -308,36 +308,12 @@
                                     <span asp-validation-for="Saldo" class="text-danger"></span>
                                 </div>
                             </div>
-
-                            <!-- Usuario Registro -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label asp-for="UsuarioRegistro" class="form-label">
-                                        <i class="fas fa-user"></i> Usuario de Registro
-                                    </label>
-                                    <input asp-for="UsuarioRegistro" class="form-control" placeholder="Usuario" required />
-                                    <span asp-validation-for="UsuarioRegistro" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <!-- Fecha Registro -->
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label asp-for="FechaRegistro" class="form-label">
-                                        <i class="fas fa-calendar-alt"></i> Fecha de Registro
-                                    </label>
-                                    <input asp-for="FechaRegistro" id="fechaRegistro" class="form-control" type="datetime-local" required />
-                                    <span asp-validation-for="FechaRegistro" class="text-danger"></span>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Descripción -->
                         <div class="form-group">
                             <label asp-for="Descripcion" class="form-label">
-                                <i class="fas fa-align-left"></i> Descripción
+                                Descripción
                             </label>
                             <textarea asp-for="Descripcion" class="form-control" rows="4" placeholder="Descripción detallada del producto..."></textarea>
                             <span asp-validation-for="Descripcion" class="text-danger"></span>
@@ -400,20 +376,8 @@
             }
         }
 
-        // Establecer la fecha y hora actual automáticamente
+        // Validación adicional del formulario
         document.addEventListener('DOMContentLoaded', function() {
-            const fechaInput = document.getElementById('fechaRegistro');
-
-            if (fechaInput && !fechaInput.value) {
-                const now = new Date();
-                const offset = now.getTimezoneOffset() * 60000;
-                const localDate = new Date(now.getTime() - offset);
-                const fechaISO = localDate.toISOString().slice(0, 16);
-
-                fechaInput.value = fechaISO;
-            }
-
-            // Validación adicional del formulario
             const form = document.querySelector('form');
             form.addEventListener('submit', function(e) {
                 const categoria = document.querySelector('select[name="IdCategoria"]');

@@ -86,11 +86,20 @@ namespace WebHamburgueseria.Controllers
         // POST: Productos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,UsuarioRegistro,FechaRegistro,Estado,ImagenFile")] Producto producto)
+        public async Task<IActionResult> Create([Bind("Id,IdCategoria,Codigo,Nombre,Descripcion,Saldo,PrecioVenta,Estado,ImagenFile")] Producto producto)
         {
+            // Establecer automáticamente el usuario y fecha de registro
+            producto.UsuarioRegistro = User.Identity?.Name ?? "Admin";
+            producto.FechaRegistro = DateTime.Now;
+            producto.Estado = 1; // Asegurar que el estado sea activo
+
+            // Remover validaciones de campos que no vienen del formulario
+            ModelState.Remove("UsuarioRegistro");
+            ModelState.Remove("FechaRegistro");
             ModelState.Remove("IdCategoriaNavigation");
             ModelState.Remove("DetalleVentas");
             ModelState.Remove("RutaImagen");
+            ModelState.Remove("ImagenFile");
 
             if (!ModelState.IsValid)
             {
@@ -188,6 +197,7 @@ namespace WebHamburgueseria.Controllers
 
             ModelState.Remove("IdCategoriaNavigation");
             ModelState.Remove("DetalleVentas");
+            ModelState.Remove("ImagenFile");
 
             if (ModelState.IsValid)
             {

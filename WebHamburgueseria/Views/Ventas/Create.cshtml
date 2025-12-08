@@ -268,8 +268,9 @@
                 box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
             }
 
-        .btn-actualizar {
-            background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+        /* BOTÓN CANCELAR - ACTUALIZADO */
+        .btn-cancelar {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
             color: white;
             border: none;
             padding: 15px;
@@ -278,11 +279,16 @@
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
-            .btn-actualizar:hover {
+            .btn-cancelar:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+                box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+                color: white;
+                text-decoration: none;
             }
 
         /* SECCIÓN DERECHA - PRODUCTOS */
@@ -334,7 +340,6 @@
                     transform: none;
                 }
 
-        /* IMAGEN DEL PRODUCTO - ACTUALIZADO */
         .producto-img {
             width: 100%;
             height: 120px;
@@ -418,6 +423,23 @@
             padding: 40px;
             color: #6c757d;
         }
+
+        .btn-nuevo-cliente {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .btn-nuevo-cliente:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+            }
 
         /* Scrollbar personalizado */
         .productos-section::-webkit-scrollbar {
@@ -649,7 +671,7 @@
 
 <div class="ventas-wrapper">
     <div class="ventas-header">
-        <h2>Registro de Pedidos</h2>
+        <h2>Registro de Ventas</h2>
     </div>
 
     <div class="ventas-content">
@@ -735,10 +757,10 @@
                     <input type="hidden" asp-for="Estado" value="1" />
                     <input type="hidden" id="detallesVentaJson" name="DetallesVentaJson" />
 
-                    <!-- Botones -->
+                    <!-- Botones - ACTUALIZADO CON CANCELAR -->
                     <div class="actions-buttons">
                         <button type="submit" class="btn-guardar">Guardar</button>
-                        <button type="button" class="btn-actualizar">Actualizar</button>
+                        <a href="@Url.Action("Index", "Ventas")" class="btn-cancelar">Cancelar</a>
                     </div>
                 </form>
             </div>
@@ -795,7 +817,8 @@
         </div>
     </div>
 </div>
-
+<!-- AQUÍ TERMINA LA PARTE 1 -->
+<!-- CONTINÚA EN LA PARTE 2 CON LA SECCIÓN  Scripts -->
 @section Scripts {
     <script>
         // Cargar productos y clientes

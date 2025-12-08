@@ -53,10 +53,15 @@ namespace WebHamburgueseria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CedulaIdentidad,Nombres,PrimerApellido,SegundoApellido,Direccion,Celular,Cargo,UsuarioRegistro,FechaRegistro,Estado")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("Id,CedulaIdentidad,Nombres,PrimerApellido,SegundoApellido,Direccion,Celular,Cargo")] Empleado empleado)
         {
             if (ModelState.IsValid)
             {
+                // Asignar automáticamente el usuario y fecha de registro
+                empleado.UsuarioRegistro = User.Identity.Name ?? "admin";
+                empleado.FechaRegistro = DateTime.Now;
+                empleado.Estado = 1; // Estado activo por defecto
+
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

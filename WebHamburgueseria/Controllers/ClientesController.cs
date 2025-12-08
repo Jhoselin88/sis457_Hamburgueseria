@@ -51,14 +51,34 @@ namespace WebHamburgueseria.Controllers
         // POST: Clientes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CedulaIdentidad,Nombres,Apellidos,UsuarioRegistro,FechaRegistro,Estado")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,CedulaIdentidad,Nombres,Apellidos,Estado")] Cliente cliente)
         {
+            // Establecer automáticamente el usuario y fecha de registro
+            cliente.UsuarioRegistro = User.Identity?.Name ?? "Admin";
+            cliente.FechaRegistro = DateTime.Now;
+            cliente.Estado = 1; // Asegurar que el estado sea activo
+
+            // Remover validaciones de campos que no vienen del formulario
+            ModelState.Remove("UsuarioRegistro");
+            ModelState.Remove("FechaRegistro");
+            ModelState.Remove("Ventas");
+
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(cliente);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Cliente creado exitosamente";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Error al guardar el cliente: {ex.Message}");
+                }
             }
+
             return View(cliente);
         }
 
@@ -96,11 +116,7 @@ namespace WebHamburgueseria.Controllers
                 // Establecer valores por defecto
                 cliente.FechaRegistro = DateTime.Now;
                 cliente.Estado = 1;
-
-                if (string.IsNullOrWhiteSpace(cliente.UsuarioRegistro))
-                {
-                    cliente.UsuarioRegistro = "Admin";
-                }
+                cliente.UsuarioRegistro = User.Identity?.Name ?? "Admin";
 
                 // Guardar cliente
                 _context.Add(cliente);
@@ -152,12 +168,17 @@ namespace WebHamburgueseria.Controllers
                 return NotFound();
             }
 
+            ModelState.Remove("Ventas");
+
             if (ModelState.IsValid)
             {
                 try
                 {
                     _context.Update(cliente);
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Cliente actualizado exitosamente";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -170,7 +191,10 @@ namespace WebHamburgueseria.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Error al actualizar el cliente: {ex.Message}");
+                }
             }
             return View(cliente);
         }
@@ -198,13 +222,22 @@ namespace WebHamburgueseria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cliente = await _context.Cliente.FindAsync(id);
-            if (cliente != null)
+            try
             {
-                _context.Cliente.Remove(cliente);
+                var cliente = await _context.Cliente.FindAsync(id);
+                if (cliente != null)
+                {
+                    _context.Cliente.Remove(cliente);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Cliente eliminado exitosamente";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Error al eliminar el cliente. Puede que esté siendo usado en ventas.";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

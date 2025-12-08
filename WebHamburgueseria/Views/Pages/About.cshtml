@@ -1,0 +1,226 @@
+﻿@{
+    ViewData["Title"] = "Acerca de";
+    ViewData["BodyClass"] = "sub_page";
+}
+
+<div class="hero_area">
+    <div class="bg-box">
+        <img src="~/images/hero-bg.jpg" alt="">
+    </div>
+</div>
+
+<!-- about section -->
+<section class="about_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="img-box">
+                    <img src="~/images/about-img.png" alt="Bendita Burger">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <h2>
+                            Somos Bendita Burger
+                        </h2>
+                    </div>
+                    <p>
+                        En Bendita Burger preparamos hamburguesas hechas con ingredientes frescos y de la mejor calidad.
+                        Cada bocado está pensado para ofrecerte sabor, textura y una experiencia única.
+                        Ven y descubre por qué nuestras burgers son las favoritas de todos.
+                    </p>
+                    <p>
+                        Nos especializamos en crear hamburguesas artesanales con carne 100% de res, vegetales frescos del día,
+                        y nuestros panes especiales horneados diariamente. Cada hamburguesa es preparada al momento para
+                        garantizar la mejor experiencia culinaria.
+                    </p>
+                    <p>
+                        Además de nuestras deliciosas hamburguesas, ofrecemos pizzas artesanales, papas fritas crujientes
+                        y una variedad de bebidas refrescantes. Nuestro ambiente acogedor es perfecto para disfrutar
+                        con familia y amigos.
+                    </p>
+                    <div class="btn-box mt-4">
+                        <a asp-controller="menuu" asp-action="Index" class="btn btn-primary">
+                            Ver Nuestro Menú
+                        </a>
+                        <a asp-controller="Pages" asp-action="Book" class="btn btn-outline-primary ml-2">
+                            Reservar Mesa
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end about section -->
+
+<style>
+    .about_section {
+        background-color: #fff;
+    }
+
+        .about_section .img-box img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about_section .detail-box h2 {
+            color: #222831;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .about_section .detail-box p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+    .feature_section {
+        background-color: #f8f9fa;
+    }
+
+        .feature_section .box {
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+            .feature_section .box:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            }
+
+        .feature_section .img-box {
+            margin-bottom: 20px;
+        }
+
+        .feature_section .detail-box h5 {
+            color: #222831;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .feature_section .detail-box p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+    .btn-primary {
+        background-color: #ffbe33;
+        border-color: #ffbe33;
+        color: #222831;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-primary:hover {
+            background-color: #222831;
+            border-color: #222831;
+            color: #ffbe33;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+    .btn-outline-primary {
+        color: #ffbe33;
+        border: 2px solid #ffbe33;
+        background-color: transparent;
+        padding: 10px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #ffbe33;
+            border-color: #ffbe33;
+            color: #222831;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 190, 51, 0.3);
+        }
+
+    .client_section {
+        background-color: #fff;
+    }
+
+    .testimonial-box {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+        .testimonial-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+    .client-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .client-img {
+        margin-right: 15px;
+    }
+
+    .client-name h6 {
+        color: #222831;
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 18px;
+    }
+
+    .client-name p {
+        color: #666;
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .testimonial-box p {
+        color: #666;
+        line-height: 1.6;
+        font-style: italic;
+        margin-bottom: 15px;
+    }
+
+    .rating {
+        color: #ffbe33;
+    }
+
+        .rating i {
+            margin-right: 3px;
+        }
+
+    .heading_container {
+        margin-bottom: 50px;
+    }
+
+    .heading_center {
+        text-align: center;
+    }
+
+        .heading_center h2 {
+            color: #222831;
+            font-weight: 700;
+            font-size: 36px;
+        }
+</style>

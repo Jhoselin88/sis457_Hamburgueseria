@@ -7,25 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\NewFolder1\**" />
     <Compile Remove="Views\NewFolder\**" />
-    <Content Remove="Views\NewFolder1\**" />
     <Content Remove="Views\NewFolder\**" />
-    <EmbeddedResource Remove="Views\NewFolder1\**" />
     <EmbeddedResource Remove="Views\NewFolder\**" />
-    <None Remove="Views\NewFolder1\**" />
     <None Remove="Views\NewFolder\**" />
-    <TypeScriptCompile Remove="Views\NewFolder1\**" />
     <TypeScriptCompile Remove="Views\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Home\Menu.cshtml.cs" />
     <Compile Remove="Views\Ventas\NuevaVenta.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Home\Menu.cshtml" />
     <Content Remove="Views\Ventas\Index1.cshtml" />
     <Content Remove="Views\Ventas\NuevaVenta.cshtml" />
+    <Content Remove="wwwroot\about.html" />
+    <Content Remove="wwwroot\menu.html" />
   </ItemGroup>
 
   <ItemGroup>

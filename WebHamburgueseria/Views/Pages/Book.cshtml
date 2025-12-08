@@ -1,0 +1,343 @@
+﻿@{
+    ViewData["Title"] = "Reservas";
+    ViewData["BodyClass"] = "sub_page";
+}
+
+<div class="hero_area">
+    <div class="bg-box">
+        <img src="~/images/hero-bg.jpg" alt="">
+    </div>
+</div>
+
+<!-- book section -->
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Reserva una Mesa
+            </h2>
+            <p class="text-center">Completa el formulario y te contactaremos para confirmar tu reserva</p>
+        </div>
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fa fa-check-circle"></i> @TempData["Success"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle"></i> @TempData["Error"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form asp-controller="Pages" asp-action="BookTable" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <input type="text"
+                                   name="Nombre"
+                                   class="form-control"
+                                   placeholder="Tu Nombre *"
+                                   required
+                                   minlength="3"
+                                   maxlength="100" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="tel"
+                                   name="Telefono"
+                                   class="form-control"
+                                   placeholder="Número de Teléfono *"
+                                   required
+                                   pattern="[0-9]{8,15}"
+                                   title="Ingresa un número válido (8-15 dígitos)" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email"
+                                   name="Email"
+                                   class="form-control"
+                                   placeholder="Tu Email *"
+                                   required />
+                        </div>
+
+                        <div class="form-group">
+                            <select name="NumeroPersonas"
+                                    class="form-control nice-select wide"
+                                    required>
+                                <option value="" disabled selected>
+                                    ¿Cuántas personas? *
+                                </option>
+                                <option value="1">1 persona</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4">4 personas</option>
+                                <option value="5">5 personas</option>
+                                <option value="6">6 personas</option>
+                                <option value="7">7 personas</option>
+                                <option value="8">8 personas</option>
+                                <option value="9">9+ personas</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="date"
+                                   name="Fecha"
+                                   class="form-control"
+                                   required
+                                   min="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                   max="@DateTime.Now.AddMonths(2).ToString("yyyy-MM-dd")">
+                        </div>
+
+                        <div class="form-group">
+                            <select name="Hora"
+                                    class="form-control nice-select wide"
+                                    required>
+                                <option value="" disabled selected>Selecciona la hora *</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="10:30">10:30 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="11:30">11:30 AM</option>
+                                <option value="12:00">12:00 PM</option>
+                                <option value="12:30">12:30 PM</option>
+                                <option value="13:00">01:00 PM</option>
+                                <option value="13:30">01:30 PM</option>
+                                <option value="14:00">02:00 PM</option>
+                                <option value="14:30">02:30 PM</option>
+                                <option value="15:00">03:00 PM</option>
+                                <option value="15:30">03:30 PM</option>
+                                <option value="16:00">04:00 PM</option>
+                                <option value="16:30">04:30 PM</option>
+                                <option value="17:00">05:00 PM</option>
+                                <option value="17:30">05:30 PM</option>
+                                <option value="18:00">06:00 PM</option>
+                                <option value="18:30">06:30 PM</option>
+                                <option value="19:00">07:00 PM</option>
+                                <option value="19:30">07:30 PM</option>
+                                <option value="20:00">08:00 PM</option>
+                                <option value="20:30">08:30 PM</option>
+                                <option value="21:00">09:00 PM</option>
+                                <option value="21:30">09:30 PM</option>
+                                <option value="22:00">10:00 PM</option>
+                            </select>
+                        </div>
+
+                        <div class="btn_box">
+                            <button type="submit" class="btn-submit">
+                                <i class="fa fa-calendar-check-o"></i> Reservar Ahora
+                            </button>
+                        </div>
+
+                        <p class="text-muted text-center mt-3">
+                            <small>* Campos obligatorios</small>
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="info-container mb-4">
+                    <div class="info-box">
+                        <h4><i class="fa fa-clock-o"></i> Horario de Atención</h4>
+                        <p>Todos los días: 10:00 AM - 10:00 PM</p>
+                    </div>
+                    <div class="info-box">
+                        <h4><i class="fa fa-phone"></i> Teléfono</h4>
+                        <p>+591 75889636</p>
+                    </div>
+                    <div class="info-box">
+                        <h4><i class="fa fa-envelope"></i> Email</h4>
+                        <p>BenditaBurger@gmail.com</p>
+                    </div>
+                    <div class="info-box">
+                        <h4><i class="fa fa-map-marker"></i> Ubicación</h4>
+                        <p>La Paz, Bolivia</p>
+                    </div>
+                </div>
+
+                <div class="map_container">
+                    <div id="googleMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end book section -->
+
+<style>
+    .book_section .heading_container p {
+        color: #666;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .form_container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+        .form_container .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form_container input,
+        .form_container select {
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+            .form_container input:focus,
+            .form_container select:focus {
+                border-color: #ffbe33;
+                box-shadow: 0 0 0 0.2rem rgba(255, 190, 51, 0.25);
+            }
+
+    .btn-submit {
+        width: 100%;
+        background-color: #ffbe33;
+        color: #222831;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .btn-submit:hover {
+            background-color: #222831;
+            color: #ffbe33;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+    .info-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .info-box {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+        .info-box:last-child {
+            border-bottom: none;
+        }
+
+        .info-box h4 {
+            color: #222831;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+            .info-box h4 i {
+                color: #ffbe33;
+                margin-right: 10px;
+            }
+
+        .info-box p {
+            color: #666;
+            margin: 0;
+            font-size: 15px;
+        }
+
+    .map_container {
+        height: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    #googleMap {
+        height: 100%;
+        width: 100%;
+    }
+
+    .alert {
+        border-radius: 10px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+    }
+
+        .alert i {
+            margin-right: 10px;
+        }
+</style>
+
+@section Scripts {
+    <script>
+        // Inicializar nice-select
+        $(document).ready(function() {
+            if ($.fn.niceSelect) {
+                $('select').niceSelect();
+            }
+        });
+
+        // Mapa de Google
+        function myMap() {
+            // Coordenadas de La Paz, Bolivia (puedes cambiarlas a tu ubicación exacta)
+            var latLng = new google.maps.LatLng(-16.5000, -68.1500);
+
+            var mapProp = {
+                center: latLng,
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+            // Agregar marcador
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: 'Bendita Burger',
+                animation: google.maps.Animation.DROP
+            });
+
+            // Info window
+            var infowindow = new google.maps.InfoWindow({
+                content: '<div style="padding:10px;"><h5 style="margin:0 0 5px 0;">Bendita Burger</h5><p style="margin:0;">La mejor hamburguesería de La Paz</p></div>'
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+
+        // Validación adicional del formulario
+        $('form').on('submit', function(e) {
+            var fecha = new Date($('input[name="Fecha"]').val());
+            var hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+
+            if (fecha < hoy) {
+                e.preventDefault();
+                alert('Por favor, selecciona una fecha válida.');
+                return false;
+            }
+        });
+    </script>
+}

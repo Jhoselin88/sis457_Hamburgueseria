@@ -9,7 +9,7 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="~/images/favicon.png" type="">
 
-    <title>@ViewData["Title"] - Feane</title>
+    <title>@ViewData["Title"] - Bendita Burger</title>
 
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="~/WebHamburgueseria.styles.css" asp-append-version="true" />
 
     @await RenderSectionAsync("Styles", required: false)
-    <!-- Jhoselin nalga siki -->
 </head>
 
 <body class="@ViewData["BodyClass"]">
@@ -38,110 +37,98 @@
         var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
         var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
     }
-            <div class="bg-box">
-                <img src="~/images/hero-bg.jpg" alt="">
-            </div>
-            <!-- header section strats -->
-            <header class="header_section">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-expand-lg custom_nav-container ">
-                        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                            <span>
-                                Bendita Burger
-                            </span>
-                        </a>
+    <div class="bg-box">
+        <img src="~/images/hero-bg.jpg" alt="">
+    </div>
+    <!-- header section strats -->
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <span>
+                        Bendita Burger
+                    </span>
+                </a>
 
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav  mx-auto ">
-                                @if (User.Identity?.IsAuthenticated == true)
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Productos" asp-action="Index">Productos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Clientes" asp-action="Index">Clientes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Empleados" asp-action="Index">Empleados</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Categorias" asp-action="Index">Categorias</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="Ventas" asp-action="Index">Ventas</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" asp-controller="DetalleVentas" asp-action="Index">DetalleVentas</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="~/menu.html">Menu</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="~/about.html">Acerda de</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">Book Table</a>
-                                    </li>
-                                <li class="nav-item active">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
-                                        Tables
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="table_clients.html" style="color: black;">Clients</a></li>
-                                        <li><a class="dropdown-item" href="table_orders.html" style="color: black;">Orders</a></li>
-                                        <li><a class="dropdown-item" href="table_products.html" style="color: black;">Products</a></li>
-                                    </ul>
-                                </li>
-                                }
-                            </ul>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav  mx-auto ">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item @(currentController == "Productos" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Productos" asp-action="Index">Productos</a>
+                            </li>
+                            <li class="nav-item @(currentController == "Clientes" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                            </li>
+                            <li class="nav-item @(currentController == "Empleados" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Empleados" asp-action="Index">Empleados</a>
+                            </li>
+                            <li class="nav-item @(currentController == "Categorias" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Categorias" asp-action="Index">Categorias</a>
+                            </li>
+                            <li class="nav-item @(currentController == "Ventas" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Ventas" asp-action="Index">Ventas</a>
+                            </li>
+                            <li class="nav-item @(currentController == "DetalleVentas" ? "active" : "")">
+                                <a class="nav-link" asp-controller="DetalleVentas" asp-action="Index">DetalleVentas</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item @(currentController == "Home" && currentAction == "Index" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                            <li class="nav-item @(currentController == "menuu" ? "active" : "")">
+                                <a class="nav-link" asp-controller="menuu" asp-action="Index">Menu</a>
+                            </li>
+                            <li class="nav-item @(currentController == "Pages" && currentAction == "About" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Pages" asp-action="About">Acerca de</a>
+                            </li>
+                            <li class="nav-item @(currentController == "Pages" && currentAction == "Book" ? "active" : "")">
+                                <a class="nav-link" asp-controller="Pages" asp-action="Book">Reservas</a>
+                            </li>
+                        }
+                    </ul>
 
-                                <!-- User Options -->
-                            <div class="user_option d-flex align-items-center">
-                                @* Usuario: si está autenticado mostrar dropdown con perfil/cerrar sesión; si no, enlace a Login *@
-                                @if (User?.Identity?.IsAuthenticated == true)
-                                {
-                                    <div class="dropdown mr-3">
-                                        <a class="user_link dropdown-toggle d-inline-flex align-items-center" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fa fa-user" aria-hidden="true"></i>
-                                            <span class="ml-2">@User.Identity.Name</span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-
-                                            
-                                            <form method="post" asp-controller="Account" asp-action="Logout" class="px-3">
-                                                @Html.AntiForgeryToken()
-                                                <button type="submit" class="btn btn-link dropdown-item p-0">Cerrar sesión</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <a class="user_link mr-3" asp-controller="Account" asp-action="Login">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span class="ml-1">Iniciar sesión</span>
-                                    </a>
-                                }
+                    <!-- User Options -->
+                    <div class="user_option d-flex align-items-center">
+                        @* Usuario: si está autenticado mostrar dropdown con perfil/cerrar sesión; si no, enlace a Login *@
+                        @if (User?.Identity?.IsAuthenticated == true)
+                        {
+                            <div class="dropdown mr-3">
+                                <a class="user_link dropdown-toggle d-inline-flex align-items-center" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span class="ml-2">@User.Identity.Name</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                    <form method="post" asp-controller="Account" asp-action="Logout" class="px-3">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-link dropdown-item p-0">Cerrar sesión</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                    </nav>
+                        }
+                        else
+                        {
+                            <a class="user_link mr-3" asp-controller="Account" asp-action="Login">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <span class="ml-1">Iniciar sesión</span>
+                            </a>
+                        }
+                    </div>
                 </div>
-            </header>
-        <!-- end header section -->
-
-        <div class="container">
-            @RenderBody()
+            </nav>
         </div>
+    </header>
+    <!-- end header section -->
+
+    <div class="container">
+        @RenderBody()
+    </div>
 
     <!-- footer section -->
     <footer class="footer_section">
@@ -150,25 +137,25 @@
                 <div class="col-md-4 footer-col">
                     <div class="footer_contact">
                         <h4>
-                            Contact Us
+                            Contactanos
                         </h4>
                         <div class="contact_link_box">
                             <a href="">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 <span>
-                                    Location
+                                    Ubicacion
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 <span>
-                                    Call +01 1234567890
+                                    Telefono +591 75889636
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 <span>
-                                    demo@gmail.com
+                                    BenditaBurger@gmail.com
                                 </span>
                             </a>
                         </div>
@@ -177,11 +164,8 @@
                 <div class="col-md-4 footer-col">
                     <div class="footer_detail">
                         <a href="" class="footer-logo">
-                            Feane
+                            Bendita Burger
                         </a>
-                        <p>
-                            Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-                        </p>
                         <div class="footer_social">
                             <a href="">
                                 <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -203,22 +187,19 @@
                 </div>
                 <div class="col-md-4 footer-col">
                     <h4>
-                        Opening Hours
+                        Horario de Atencion
                     </h4>
                     <p>
-                        Everyday
+                        Todos los Dias
                     </p>
                     <p>
-                        10.00 Am -10.00 Pm
+                        10.00 Am - 10.00 Pm
                     </p>
                 </div>
             </div>
             <div class="footer-info">
                 <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By
-                    <a href="https://html.design/">Free Html Templates</a><br><br>
-                    &copy; <span id="displayYear"></span> Distributed By
-                    <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                    &copy; <span id="displayYear"></span> Todos los derechos reservados - Bendita Burger
                 </p>
             </div>
         </div>
@@ -247,6 +228,9 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <script>
+        // Actualizar año en el footer
+        document.getElementById('displayYear').innerHTML = new Date().getFullYear();
+
         // Ejemplo: actualizar badge del carrito desde localStorage / petición AJAX
         (function () {
             try {

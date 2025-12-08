@@ -51,10 +51,16 @@ namespace WebHamburgueseria.Controllers
         // POST: Empleados/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Empleados/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CedulaIdentidad,Nombres,PrimerApellido,SegundoApellido,Direccion,Celular,Cargo")] Empleado empleado)
+        public async Task<IActionResult> Create([Bind("CedulaIdentidad,Nombres,PrimerApellido,SegundoApellido,Direccion,Celular,Cargo")] Empleado empleado)
         {
+            // Remover validaciones de campos que se asignan automáticamente
+            ModelState.Remove("UsuarioRegistro");
+            ModelState.Remove("FechaRegistro");
+            ModelState.Remove("Estado");
+
             if (ModelState.IsValid)
             {
                 // Asignar automáticamente el usuario y fecha de registro
@@ -66,6 +72,14 @@ namespace WebHamburgueseria.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            // Para debugging: ver qué errores hay
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            foreach (var error in errors)
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+
             return View(empleado);
         }
 
